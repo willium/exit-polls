@@ -1,0 +1,34 @@
+id,electability,count,shares my values,name,party,state,tells it like it is,can bring change
+1,3,,1,Other/No Answer,R,IL,1,2
+2,10,,13,Marco Rubio,R,IL,3,6
+3,13,,30,John Kasich,R,IL,6,16
+4,37,,41,Ted Cruz,R,IL,11,26
+5,,,1,Ben Carson,R,IL,0,0
+6,37,,14,Donald Trump,R,IL,79,50
+7,11,1233,38,total,R,IL,17,31
+8,,,47,John Kasich,R,NY,9,18
+9,,,24,Donald Trump,R,NY,91,71
+10,,,29,Ted Cruz,R,NY,1,12
+11,11,957,26,total,R,NY,26,35
+12,2,,1,Other/No Answer,R,OK,1,
+13,45,,31,Marco Rubio,R,OK,3,22
+14,4,,4,John Kasich,R,OK,4,4
+15,31,,45,Ted Cruz,R,OK,8,30
+16,,,9,Ben Carson,R,OK,,7
+17,1,,0,Jeb Bush,R,OK,0,
+18,17,,10,Donald Trump,R,OK,84,37
+19,13,938,44,total,R,OK,15,27
+20,,,2,Other/No Answer,R,VT,,2
+21,,,24,Marco Rubio,R,VT,5,16
+22,,,44,John Kasich,R,VT,16,32
+23,,,13,Ted Cruz,R,VT,3,10
+24,,,7,Ben Carson,R,VT,2,5
+25,,,0,Jeb Bush,R,VT,,4
+26,,,10,Donald Trump,R,VT,74,31
+27,14,536,33,total,R,VT,22,29
+28,,,3,Other/No Answer,R,WI,1,3
+29,13,,20,John Kasich,R,WI,8,13
+30,20,,11,Donald Trump,R,WI,77,43
+31,,,0,Uninstructed,R,WI,0,0
+32,68,,66,Ted Cruz,R,WI,14,41
+33,11,1532,35,total,R,WI,18,34

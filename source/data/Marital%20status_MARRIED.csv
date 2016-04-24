@@ -1,0 +1,32 @@
+id,married,count,name,party,unmarried,state
+1,1,,Other/No Answer,D,,IL
+2,56,,Hillary Clinton,D,42,IL
+3,43,,Bernie Sanders,D,58,IL
+4,51,1521,total,D,49,IL
+5,1,,Other/No Answer,D,,MI
+6,49,,Hillary Clinton,D,44,MI
+7,0,,Uncommitted,D,4,MI
+8,50,,Bernie Sanders,D,53,MI
+9,54,1601,total,D,46,MI
+10,1,,Other/No Answer,D,,MO
+11,55,,Hillary Clinton,D,40,MO
+12,0,,Uncommitted,D,0,MO
+13,44,,Bernie Sanders,D,60,MO
+14,59,1168,total,D,41,MO
+15,63,,Hillary Clinton,D,51,NY
+16,37,,Bernie Sanders,D,49,NY
+17,52,1391,total,D,48,NY
+18,2,,Other/No Answer,D,,NC
+19,61,,Hillary Clinton,D,52,NC
+20,3,,No Preference,D,2,NC
+21,34,,Bernie Sanders,D,46,NC
+22,56,1867,total,D,44,NC
+23,1,,Other/No Answer,D,,OH
+24,58,,Hillary Clinton,D,54,OH
+25,41,,Bernie Sanders,D,46,OH
+26,56,1764,total,D,44,OH
+27,,,Other/No Answer,D,1,WI
+28,45,,Hillary Clinton,D,39,WI
+29,55,,Bernie Sanders,D,60,WI
+30,,,Uninstructed,D,0,WI
+31,54,1774,total,D,46,WI

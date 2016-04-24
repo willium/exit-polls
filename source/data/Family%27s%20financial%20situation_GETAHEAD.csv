@@ -1,0 +1,12 @@
+id,count,name,party,falling behind,state,getting ahead,holding steady
+1,,Other/No Answer,R,,IL,,1
+2,,Marco Rubio,R,9,IL,7,8
+3,,John Kasich,R,17,IL,27,18
+4,,Ted Cruz,R,28,IL,28,33
+5,,Ben Carson,R,,IL,0,2
+6,,Donald Trump,R,46,IL,38,38
+7,1233,total,R,16,IL,22,60
+8,,Hillary Clinton,D,37,WI,45,45
+9,,Bernie Sanders,D,63,WI,55,55
+10,,Uninstructed,D,0,WI,,0
+11,1774,total,D,18,WI,19,62

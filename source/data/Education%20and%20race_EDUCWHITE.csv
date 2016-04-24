@@ -1,0 +1,246 @@
+id,white college graduates,count,non to whites no degree,non to whites college grads,name,party,whites no degree,state
+1,,,,,Other/No Answer,R,1,AL
+2,23,,,,Marco Rubio,R,14,AL
+3,7,,,,John Kasich,R,3,AL
+4,1,,,,Uncommitted,R,1,AL
+5,22,,,,Ted Cruz,R,22,AL
+6,12,,,,Ben Carson,R,9,AL
+7,0,,,,Jeb Bush,R,0,AL
+8,35,,,,Donald Trump,R,50,AL
+9,41,1237,3,4,total,R,52,AL
+10,,,1,,Other/No Answer,D,,AL
+11,64,,91,89,Hillary Clinton,D,,AL
+12,1,,2,1,Uncommitted,D,,AL
+13,35,,6,10,Bernie Sanders,D,,AL
+14,26,865,35,26,total,D,14,AL
+15,,,,,Other/No Answer,R,3,AR
+16,32,,,,Marco Rubio,R,21,AR
+17,7,,,,John Kasich,R,2,AR
+18,28,,,,Ted Cruz,R,31,AR
+19,5,,,,Ben Carson,R,4,AR
+20,1,,,,Jeb Bush,R,0,AR
+21,27,,,,Donald Trump,R,39,AR
+22,43,1382,2,3,total,R,53,AR
+23,3,,1,,Other/No Answer,D,3,AR
+24,66,,83,81,Hillary Clinton,D,59,AR
+25,31,,16,19,Bernie Sanders,D,38,AR
+26,33,944,22,11,total,D,34,AR
+27,,,6,9,Other/No Answer,R,,FL
+28,23,,46,45,Marco Rubio,R,22,FL
+29,10,,2,6,John Kasich,R,6,FL
+30,18,,13,17,Ted Cruz,R,16,FL
+31,1,,0,0,Ben Carson,R,2,FL
+32,48,,33,23,Donald Trump,R,54,FL
+33,40,1907,9,13,total,R,39,FL
+34,3,,,1,Other/No Answer,D,4,FL
+35,57,,78,69,Hillary Clinton,D,49,FL
+36,40,,22,30,Bernie Sanders,D,47,FL
+37,24,1659,28,23,total,D,24,FL
+38,28,,,,Marco Rubio,R,20,GA
+39,7,,,,John Kasich,R,5,GA
+40,24,,,,Ted Cruz,R,22,GA
+41,5,,,,Ben Carson,R,5,GA
+42,1,,,,Jeb Bush,R,1,GA
+43,35,,,,Donald Trump,R,47,GA
+44,46,1704,5,7,total,R,42,GA
+45,1,,,1,Other/No Answer,D,1,GA
+46,59,,80,81,Hillary Clinton,D,55,GA
+47,40,,20,18,Bernie Sanders,D,44,GA
+48,25,1491,33,29,total,D,13,GA
+49,3,,,,Other/No Answer,R,,IL
+50,10,,,,Marco Rubio,R,8,IL
+51,25,,,,John Kasich,R,14,IL
+52,31,,,,Ted Cruz,R,31,IL
+53,0,,,,Ben Carson,R,0,IL
+54,31,,,,Donald Trump,R,47,IL
+55,47,1233,4,4,total,R,45,IL
+56,1,,1,1,Other/No Answer,D,1,IL
+57,42,,64,63,Hillary Clinton,D,43,IL
+58,57,,35,36,Bernie Sanders,D,56,IL
+59,34,1521,23,18,total,D,24,IL
+60,,,,,Other/No Answer,R,2,MA
+61,21,,,,Marco Rubio,R,13,MA
+62,1,,,,No Preference,R,0,MA
+63,24,,,,John Kasich,R,10,MA
+64,9,,,,Ted Cruz,R,9,MA
+65,3,,,,Ben Carson,R,2,MA
+66,1,,,,Jeb Bush,R,1,MA
+67,41,,,,Donald Trump,R,63,MA
+68,56,801,4,4,total,R,36,MA
+69,,,,1,Other/No Answer,D,,MA
+70,53,,,66,Hillary Clinton,D,40,MA
+71,1,,,1,No Preference,D,0,MA
+72,46,,,32,Bernie Sanders,D,60,MA
+73,58,1406,6,9,total,D,27,MA
+74,,,,,Other/No Answer,R,1,MI
+75,14,,,,Marco Rubio,R,6,MI
+76,30,,,,John Kasich,R,19,MI
+77,2,,,,Uncommitted,R,1,MI
+78,25,,,,Ted Cruz,R,25,MI
+79,2,,,,Ben Carson,R,2,MI
+80,28,,,,Donald Trump,R,46,MI
+81,44,1341,4,3,total,R,49,MI
+82,1,,,,Other/No Answer,D,,MI
+83,43,,63,61,Hillary Clinton,D,42,MI
+84,2,,3,4,Uncommitted,D,1,MI
+85,54,,34,35,Bernie Sanders,D,57,MI
+86,33,1601,18,13,total,D,36,MI
+87,1,,,,Other/No Answer,R,1,MS
+88,7,,,,Marco Rubio,R,4,MS
+89,9,,,,John Kasich,R,5,MS
+90,35,,,,Ted Cruz,R,39,MS
+91,2,,,,Ben Carson,R,1,MS
+92,46,,,,Donald Trump,R,50,MS
+93,40,1285,4,4,total,R,52,MS
+94,2,,,2,Other/No Answer,D,,MS
+95,62,,90,86,Hillary Clinton,D,,MS
+96,36,,10,12,Bernie Sanders,D,,MS
+97,15,1038,48,29,total,D,9,MS
+98,,,,,Other/No Answer,R,1,MO
+99,7,,,,Marco Rubio,R,4,MO
+100,16,,,,John Kasich,R,6,MO
+101,0,,,,Uncommitted,R,0,MO
+102,42,,,,Ted Cruz,R,40,MO
+103,1,,,,Ben Carson,R,1,MO
+104,34,,,,Donald Trump,R,48,MO
+105,42,1363,3,3,total,R,51,MO
+106,,,,,Other/No Answer,D,1,MO
+107,43,,59,62,Hillary Clinton,D,47,MO
+108,0,,2,0,Uncommitted,D,0,MO
+109,57,,39,38,Bernie Sanders,D,52,MO
+110,39,1168,15,13,total,D,33,MO
+111,,,,,Other/No Answer,R,1,NH
+112,,,,,Mike Huckabee,R,0,NH
+113,20,,,,John Kasich,R,12,NH
+114,12,,,,Jeb Bush,R,9,NH
+115,2,,,,Ben Carson,R,3,NH
+116,1,,,,Rand Paul,R,0,NH
+117,8,,,,Chris Christie,R,7,NH
+118,11,,,,Marco Rubio,R,10,NH
+119,11,,,,Ted Cruz,R,13,NH
+120,0,,,,Rick Santorum,R,,NH
+121,5,,,,Carly Fiorina,R,3,NH
+122,30,,,,Donald Trump,R,42,NH
+123,51,2036,2,2,total,R,45,NH
+124,1,,,,Other/No Answer,D,2,NH
+125,42,,,,Hillary Clinton,D,30,NH
+126,0,,,,Martin O'Malley,D,0,NH
+127,57,,,,Bernie Sanders,D,68,NH
+128,57,2222,3,4,total,D,37,NH
+129,,,,,Other/No Answer,R,1,NY
+130,31,,,,John Kasich,R,18,NY
+131,55,,,,Donald Trump,R,65,NY
+132,14,,,,Ted Cruz,R,16,NY
+133,46,957,4,4,total,R,45,NY
+134,53,,71,64,Hillary Clinton,D,45,NY
+135,47,,29,36,Bernie Sanders,D,55,NY
+136,40,1391,22,18,total,D,20,NY
+137,2,,,,Other/No Answer,R,,NC
+138,8,,,,Marco Rubio,R,6,NC
+139,0,,,,No Preference,R,1,NC
+140,18,,,,John Kasich,R,8,NC
+141,38,,,,Ted Cruz,R,37,NC
+142,1,,,,Ben Carson,R,1,NC
+143,33,,,,Donald Trump,R,47,NC
+144,48,1800,2,3,total,R,46,NC
+145,2,,,1,Other/No Answer,D,1,NC
+146,46,,79,68,Hillary Clinton,D,39,NC
+147,3,,2,1,No Preference,D,3,NC
+148,49,,20,30,Bernie Sanders,D,57,NC
+149,40,1867,20,18,total,D,22,NC
+150,1,,,,Other/No Answer,R,1,OH
+151,2,,,,Marco Rubio,R,3,OH
+152,55,,,,John Kasich,R,38,OH
+153,12,,,,Ted Cruz,R,14,OH
+154,1,,,,Ben Carson,R,0,OH
+155,29,,,,Donald Trump,R,44,OH
+156,48,2363,2,4,total,R,46,OH
+157,1,,2,,Other/No Answer,D,1,OH
+158,54,,64,70,Hillary Clinton,D,50,OH
+159,45,,34,30,Bernie Sanders,D,49,OH
+160,39,1764,15,10,total,D,36,OH
+161,1,,,,Other/No Answer,R,1,OK
+162,34,,,,Marco Rubio,R,19,OK
+163,4,,,,John Kasich,R,3,OK
+164,32,,,,Ted Cruz,R,38,OK
+165,4,,,,Ben Carson,R,7,OK
+166,0,,,,Jeb Bush,R,0,OK
+167,25,,,,Donald Trump,R,32,OK
+168,45,938,5,5,total,R,46,OK
+169,6,,8,,Other/No Answer,D,9,OK
+170,43,,55,,Hillary Clinton,D,28,OK
+171,51,,37,,Bernie Sanders,D,63,OK
+172,39,821,15,10,total,D,35,OK
+173,1,,,,Other/No Answer,R,1,SC
+174,27,,,,Marco Rubio,R,17,SC
+175,11,,,,John Kasich,R,4,SC
+176,19,,,,Ted Cruz,R,24,SC
+177,8,,,,Ben Carson,R,6,SC
+178,9,,,,Jeb Bush,R,6,SC
+179,25,,,,Donald Trump,R,42,SC
+180,52,2043,2,2,total,R,45,SC
+181,,,1,,Other/No Answer,D,,SC
+182,52,,83,89,Hillary Clinton,D,57,SC
+183,48,,16,11,Bernie Sanders,D,43,SC
+184,21,1461,44,20,total,D,15,SC
+185,1,,,,Other/No Answer,R,1,TN
+186,26,,,,Marco Rubio,R,17,TN
+187,7,,,,John Kasich,R,4,TN
+188,0,,,,Uncommitted,R,0,TN
+189,26,,,,Ted Cruz,R,24,TN
+190,5,,,,Ben Carson,R,6,TN
+191,0,,,,Jeb Bush,R,2,TN
+192,35,,,,Donald Trump,R,46,TN
+193,47,1435,2,4,total,R,47,TN
+194,1,,,1,Other/No Answer,D,,TN
+195,57,,86,82,Hillary Clinton,D,53,TN
+196,0,,1,0,Uncommitted,D,1,TN
+197,42,,13,17,Bernie Sanders,D,46,TN
+198,40,966,22,15,total,D,23,TN
+199,,,1,1,Other/No Answer,R,,TX
+200,21,,25,23,Marco Rubio,R,11,TX
+201,7,,1,5,John Kasich,R,2,TX
+202,0,,2,0,Uncommitted,R,2,TX
+203,42,,36,36,Ted Cruz,R,48,TX
+204,3,,9,3,Ben Carson,R,4,TX
+205,1,,5,3,Jeb Bush,R,1,TX
+206,26,,21,29,Donald Trump,R,32,TX
+207,44,1969,9,9,total,R,38,TX
+208,2,,1,1,Other/No Answer,D,1,TX
+209,59,,75,71,Hillary Clinton,D,53,TX
+210,39,,24,28,Bernie Sanders,D,46,TX
+211,26,1481,32,25,total,D,17,TX
+212,1,,,,Other/No Answer,R,3,VT
+213,20,,,,Marco Rubio,R,16,VT
+214,34,,,,John Kasich,R,26,VT
+215,8,,,,Ted Cruz,R,12,VT
+216,4,,,,Ben Carson,R,4,VT
+217,2,,,,Jeb Bush,R,0,VT
+218,31,,,,Donald Trump,R,39,VT
+219,57,536,1,2,total,R,41,VT
+220,,,,,Other/No Answer,D,1,VT
+221,15,,,,Hillary Clinton,D,10,VT
+222,85,,,,Bernie Sanders,D,89,VT
+223,68,1542,1,3,total,D,28,VT
+224,1,,,,Other/No Answer,R,1,VA
+225,38,,,,Marco Rubio,R,22,VA
+226,12,,,,John Kasich,R,5,VA
+227,16,,,,Ted Cruz,R,19,VA
+228,5,,,,Ben Carson,R,5,VA
+229,0,,,,Jeb Bush,R,1,VA
+230,28,,,,Donald Trump,R,47,VA
+231,53,1523,7,7,total,R,33,VA
+232,,,,,Other/No Answer,D,3,VA
+233,59,,75,76,Hillary Clinton,D,51,VA
+234,41,,25,24,Bernie Sanders,D,46,VA
+235,46,1413,17,18,total,D,18,VA
+236,3,,,,Other/No Answer,R,1,WI
+237,18,,,,John Kasich,R,12,WI
+238,30,,,,Donald Trump,R,38,WI
+239,0,,,,Uninstructed,R,0,WI
+240,49,,,,Ted Cruz,R,49,WI
+241,45,1532,2,2,total,R,51,WI
+242,40,,59,53,Hillary Clinton,D,41,WI
+243,60,,41,47,Bernie Sanders,D,59,WI
+244,0,,0,,Uninstructed,D,0,WI
+245,45,1774,10,7,total,D,38,WI

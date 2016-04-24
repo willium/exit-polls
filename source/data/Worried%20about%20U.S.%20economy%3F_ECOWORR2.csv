@@ -1,0 +1,38 @@
+id,no,yes,count,name,party,state
+1,,1,,Other/No Answer,R,IL
+2,,10,,Marco Rubio,R,IL
+3,,19,,John Kasich,R,IL
+4,,30,,Ted Cruz,R,IL
+5,,1,,Ben Carson,R,IL
+6,,39,,Donald Trump,R,IL
+7,6,93,1233,total,R,IL
+8,,25,,John Kasich,R,NY
+9,,60,,Donald Trump,R,NY
+10,,15,,Ted Cruz,R,NY
+11,8,92,957,total,R,NY
+12,,1,,Other/No Answer,R,OK
+13,,26,,Marco Rubio,R,OK
+14,,3,,John Kasich,R,OK
+15,,35,,Ted Cruz,R,OK
+16,,6,,Ben Carson,R,OK
+17,,0,,Jeb Bush,R,OK
+18,,29,,Donald Trump,R,OK
+19,4,96,938,total,R,OK
+20,,2,,Other/No Answer,R,VT
+21,,20,,Marco Rubio,R,VT
+22,,29,,John Kasich,R,VT
+23,,10,,Ted Cruz,R,VT
+24,,4,,Ben Carson,R,VT
+25,,2,,Jeb Bush,R,VT
+26,,33,,Donald Trump,R,VT
+27,6,94,536,total,R,VT
+28,,4,,Other/No Answer,R,WI
+29,,13,,John Kasich,R,WI
+30,,35,,Donald Trump,R,WI
+31,,0,,Uninstructed,R,WI
+32,,48,,Ted Cruz,R,WI
+33,6,94,1532,total,R,WI
+34,52,41,,Hillary Clinton,D,WI
+35,48,59,,Bernie Sanders,D,WI
+36,,0,,Uninstructed,D,WI
+37,22,77,1774,total,D,WI

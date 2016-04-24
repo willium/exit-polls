@@ -1,0 +1,30 @@
+id,unmarried women,unmarried men,married men,married women,name,party,state,count
+1,,,2,,Other/No Answer,D,IL,
+2,45,38,51,61,Hillary Clinton,D,IL,
+3,55,62,47,39,Bernie Sanders,D,IL,
+4,27,22,24,27,total,D,IL,1521
+5,1,,,,Other/No Answer,D,MI,
+6,43,44,46,53,Hillary Clinton,D,MI,
+7,6,,1,,Uncommitted,D,MI,
+8,50,56,53,47,Bernie Sanders,D,MI,
+9,26,20,27,26,total,D,MI,1601
+10,47,,51,59,Hillary Clinton,D,MO,
+11,1,,1,0,Uncommitted,D,MO,
+12,53,,48,41,Bernie Sanders,D,MO,
+13,25,16,28,31,total,D,MO,1168
+14,59,36,55,69,Hillary Clinton,D,NY,
+15,41,64,45,31,Bernie Sanders,D,NY,
+16,31,18,23,28,total,D,NY,1391
+17,,,3,,Other/No Answer,D,NC,
+18,58,43,55,66,Hillary Clinton,D,NC,
+19,2,2,4,3,No Preference,D,NC,
+20,41,55,38,31,Bernie Sanders,D,NC,
+21,27,17,25,32,total,D,NC,1867
+22,,,2,1,Other/No Answer,D,OH,
+23,61,45,50,65,Hillary Clinton,D,OH,
+24,39,55,48,34,Bernie Sanders,D,OH,
+25,25,18,26,30,total,D,OH,1764
+26,43,33,38,51,Hillary Clinton,D,WI,
+27,56,67,62,49,Bernie Sanders,D,WI,
+28,1,,,,Uninstructed,D,WI,
+29,28,18,24,30,total,D,WI,1774

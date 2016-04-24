@@ -1,0 +1,21 @@
+id,no,yes,count,name,party,state
+1,1,,,Other/No Answer,D,MI
+2,46,46,,Hillary Clinton,D,MI
+3,0,5,,Uncommitted,D,MI
+4,53,49,,Bernie Sanders,D,MI
+5,67,33,1601,total,D,MI
+6,50,45,,Hillary Clinton,D,MO
+7,1,1,,Uncommitted,D,MO
+8,49,54,,Bernie Sanders,D,MO
+9,79,21,1168,total,D,MO
+10,57,58,,Hillary Clinton,D,NY
+11,43,42,,Bernie Sanders,D,NY
+12,65,35,1391,total,D,NY
+13,2,,,Other/No Answer,D,OH
+14,54,55,,Hillary Clinton,D,OH
+15,44,45,,Bernie Sanders,D,OH
+16,76,24,1764,total,D,OH
+17,42,46,,Hillary Clinton,D,WI
+18,58,54,,Bernie Sanders,D,WI
+19,0,,,Uninstructed,D,WI
+20,75,25,1774,total,D,WI

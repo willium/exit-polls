@@ -1,0 +1,19 @@
+id,no,yes,count,name,party,state
+1,2,2,,Other/No Answer,R,NH
+2,,0,,Mike Huckabee,R,NH
+3,8,17,,John Kasich,R,NH
+4,11,11,,Jeb Bush,R,NH
+5,1,2,,Ben Carson,R,NH
+6,0,1,,Rand Paul,R,NH
+7,7,8,,Chris Christie,R,NH
+8,8,11,,Marco Rubio,R,NH
+9,13,11,,Ted Cruz,R,NH
+10,,0,,Rick Santorum,R,NH
+11,3,4,,Carly Fiorina,R,NH
+12,47,33,,Donald Trump,R,NH
+13,16,84,2036,total,R,NH
+14,2,1,,Other/No Answer,D,NH
+15,34,39,,Hillary Clinton,D,NH
+16,0,0,,Martin O'Malley,D,NH
+17,64,60,,Bernie Sanders,D,NH
+18,12,88,2222,total,D,NH

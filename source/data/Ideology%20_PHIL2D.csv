@@ -1,0 +1,36 @@
+id,count,name,moderate/conservative,party,liberal,state
+1,,Other/No Answer,4,D,,FL
+2,,Hillary Clinton,70,D,59,FL
+3,,Bernie Sanders,26,D,41,FL
+4,1659,total,46,D,54,FL
+5,,Other/No Answer,1,D,,IL
+6,,Hillary Clinton,56,D,48,IL
+7,,Bernie Sanders,43,D,52,IL
+8,1521,total,36,D,64,IL
+9,,Other/No Answer,1,D,,MI
+10,,Hillary Clinton,52,D,46,MI
+11,,Uncommitted,4,D,0,MI
+12,,Bernie Sanders,43,D,54,MI
+13,1601,total,43,D,57,MI
+14,,Other/No Answer,,D,1,MO
+15,,Hillary Clinton,55,D,46,MO
+16,,Uncommitted,1,D,0,MO
+17,,Bernie Sanders,44,D,53,MO
+18,1168,total,34,D,66,MO
+19,,Hillary Clinton,66,D,52,NY
+20,,Bernie Sanders,34,D,48,NY
+21,1391,total,34,D,66,NY
+22,,Other/No Answer,2,D,,NC
+23,,Hillary Clinton,58,D,52,NC
+24,,No Preference,5,D,1,NC
+25,,Bernie Sanders,35,D,47,NC
+26,1867,total,44,D,56,NC
+27,,Other/No Answer,2,D,1,OH
+28,,Hillary Clinton,62,D,51,OH
+29,,Bernie Sanders,36,D,48,OH
+30,1764,total,41,D,59,OH
+31,,Other/No Answer,,D,1,WI
+32,,Hillary Clinton,49,D,40,WI
+33,,Bernie Sanders,51,D,59,WI
+34,,Uninstructed,0,D,0,WI
+35,1774,total,33,D,67,WI

@@ -1,0 +1,147 @@
+id,conservative,count,name,party,state,moderate/liberal
+1,1,,Other/No Answer,R,AL,
+2,17,,Marco Rubio,R,AL,24
+3,3,,John Kasich,R,AL,8
+4,1,,Uncommitted,R,AL,2
+5,23,,Ted Cruz,R,AL,14
+6,11,,Ben Carson,R,AL,9
+7,1,,Jeb Bush,R,AL,0
+8,43,,Donald Trump,R,AL,43
+9,78,1237,total,R,AL,22
+10,2,,Other/No Answer,R,AR,2
+11,25,,Marco Rubio,R,AR,29
+12,3,,John Kasich,R,AR,10
+13,32,,Ted Cruz,R,AR,16
+14,5,,Ben Carson,R,AR,3
+15,0,,Jeb Bush,R,AR,1
+16,33,,Donald Trump,R,AR,39
+17,82,1382,total,R,AR,18
+18,1,,Other/No Answer,R,FL,6
+19,27,,Marco Rubio,R,FL,28
+20,4,,John Kasich,R,FL,13
+21,19,,Ted Cruz,R,FL,12
+22,1,,Ben Carson,R,FL,1
+23,48,,Donald Trump,R,FL,40
+24,70,1907,total,R,FL,30
+25,1,,Other/No Answer,R,GA,
+26,23,,Marco Rubio,R,GA,31
+27,4,,John Kasich,R,GA,11
+28,26,,Ted Cruz,R,GA,11
+29,6,,Ben Carson,R,GA,6
+30,1,,Jeb Bush,R,GA,0
+31,39,,Donald Trump,R,GA,41
+32,79,1704,total,R,GA,21
+33,1,,Other/No Answer,R,IL,1
+34,9,,Marco Rubio,R,IL,9
+35,14,,John Kasich,R,IL,34
+36,36,,Ted Cruz,R,IL,16
+37,1,,Ben Carson,R,IL,1
+38,39,,Donald Trump,R,IL,39
+39,72,1233,total,R,IL,28
+40,1,,Other/No Answer,R,MA,1
+41,20,,Marco Rubio,R,MA,15
+42,,,No Preference,R,MA,1
+43,11,,John Kasich,R,MA,31
+44,13,,Ted Cruz,R,MA,3
+45,4,,Ben Carson,R,MA,1
+46,1,,Jeb Bush,R,MA,1
+47,50,,Donald Trump,R,MA,47
+48,62,801,total,R,MA,38
+49,1,,Other/No Answer,R,MI,1
+50,11,,Marco Rubio,R,MI,8
+51,20,,John Kasich,R,MI,34
+52,1,,Uncommitted,R,MI,3
+53,29,,Ted Cruz,R,MI,13
+54,2,,Ben Carson,R,MI,2
+55,36,,Donald Trump,R,MI,39
+56,75,1341,total,R,MI,25
+57,2,,Other/No Answer,R,MS,
+58,5,,Marco Rubio,R,MS,6
+59,6,,John Kasich,R,MS,15
+60,40,,Ted Cruz,R,MS,21
+61,1,,Ben Carson,R,MS,3
+62,46,,Donald Trump,R,MS,55
+63,84,1285,total,R,MS,16
+64,2,,Other/No Answer,R,MO,1
+65,5,,Marco Rubio,R,MO,9
+66,7,,John Kasich,R,MO,21
+67,0,,Uncommitted,R,MO,1
+68,46,,Ted Cruz,R,MO,24
+69,1,,Ben Carson,R,MO,2
+70,39,,Donald Trump,R,MO,42
+71,78,1363,total,R,MO,22
+72,19,,John Kasich,R,NY,41
+73,65,,Donald Trump,R,NY,47
+74,16,,Ted Cruz,R,NY,13
+75,71,957,total,R,NY,29
+76,2,,Other/No Answer,R,NC,2
+77,6,,Marco Rubio,R,NC,9
+78,0,,No Preference,R,NC,1
+79,9,,John Kasich,R,NC,27
+80,42,,Ted Cruz,R,NC,20
+81,1,,Ben Carson,R,NC,2
+82,40,,Donald Trump,R,NC,39
+83,79,1800,total,R,NC,21
+84,1,,Other/No Answer,R,OH,2
+85,2,,Marco Rubio,R,OH,4
+86,42,,John Kasich,R,OH,59
+87,17,,Ted Cruz,R,OH,4
+88,1,,Ben Carson,R,OH,0
+89,37,,Donald Trump,R,OH,31
+90,72,2363,total,R,OH,28
+91,1,,Other/No Answer,R,OK,2
+92,26,,Marco Rubio,R,OK,30
+93,2,,John Kasich,R,OK,10
+94,37,,Ted Cruz,R,OK,17
+95,6,,Ben Carson,R,OK,6
+96,1,,Jeb Bush,R,OK,
+97,27,,Donald Trump,R,OK,35
+98,81,938,total,R,OK,19
+99,,,Other/No Answer,R,SC,1
+100,22,,Marco Rubio,R,SC,22
+101,5,,John Kasich,R,SC,20
+102,26,,Ted Cruz,R,SC,7
+103,8,,Ben Carson,R,SC,5
+104,7,,Jeb Bush,R,SC,10
+105,32,,Donald Trump,R,SC,35
+106,81,2043,total,R,SC,19
+107,1,,Other/No Answer,R,TN,1
+108,21,,Marco Rubio,R,TN,21
+109,4,,John Kasich,R,TN,11
+110,0,,Uncommitted,R,TN,1
+111,28,,Ted Cruz,R,TN,11
+112,6,,Ben Carson,R,TN,6
+113,1,,Jeb Bush,R,TN,5
+114,39,,Donald Trump,R,TN,44
+115,82,1435,total,R,TN,18
+116,,,Other/No Answer,R,TX,1
+117,17,,Marco Rubio,R,TX,24
+118,3,,John Kasich,R,TX,8
+119,1,,Uncommitted,R,TX,1
+120,47,,Ted Cruz,R,TX,27
+121,4,,Ben Carson,R,TX,5
+122,2,,Jeb Bush,R,TX,2
+123,27,,Donald Trump,R,TX,32
+124,82,1969,total,R,TX,18
+125,3,,Other/No Answer,R,VT,3
+126,22,,Marco Rubio,R,VT,14
+127,25,,John Kasich,R,VT,41
+128,12,,Ted Cruz,R,VT,4
+129,5,,Ben Carson,R,VT,2
+130,1,,Jeb Bush,R,VT,2
+131,32,,Donald Trump,R,VT,34
+132,67,536,total,R,VT,33
+133,1,,Other/No Answer,R,VA,
+134,29,,Marco Rubio,R,VA,40
+135,5,,John Kasich,R,VA,21
+136,20,,Ted Cruz,R,VA,8
+137,6,,Ben Carson,R,VA,6
+138,1,,Jeb Bush,R,VA,2
+139,38,,Donald Trump,R,VA,23
+140,72,1523,total,R,VA,28
+141,2,,Other/No Answer,R,WI,2
+142,11,,John Kasich,R,WI,26
+143,33,,Donald Trump,R,WI,40
+144,0,,Uninstructed,R,WI,1
+145,54,,Ted Cruz,R,WI,31
+146,74,1532,total,R,WI,26
