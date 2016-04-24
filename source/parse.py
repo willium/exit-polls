@@ -15,6 +15,13 @@ def buildURL(state, party):
 db = dataset.connect('sqlite:///:memory:')
 # db = dataset.connect('postgresql://willium@localhost:5432/polls')
 index = 0
+
+def percent_to_count(pct, whole):
+    try:
+        return round(pct*0.01*whole) or 0
+    except:
+        return 0
+
 for state in STATES:
     for party in PARTIES:
         try:
@@ -33,6 +40,7 @@ for state in STATES:
                     print('Question: {}'.format(question['question']))
                     if question['pollname'].startswith('X'):
                         question['pollname'] = question['pollname'][1:]
+                    question['pollname'] = question['pollname'].replace('REP', '').replace('DEM', '')
                     table_name = urllib.parse.quote('{}_{}'.format(question['question'], question['pollname']))
                     print('Table name: {}'.format(table_name))
 
@@ -44,14 +52,14 @@ for state in STATES:
                     default_row = {
                         'party': party,
                         'state': state,
-                        'count': None
+                        'count': 0
                     }
 
                     candidates = { c['id']: { **{ 'name': '{} {}'.format(c['fname'], c['lname']).strip() }, **default_row } for c in question['candidates'] }
 
                     total_row = {**default_row, **{
                         'name': 'total',
-                        'count': question['numrespondents']
+                        'count': question['numrespondents'] or 0
                     }}
 
                     for answer in question['answers']:
@@ -60,16 +68,20 @@ for state in STATES:
                         try:
                             pct = int(answer['pct'])
                         except ValueError as verr:
-                            pct = None
+                            pct = 0
 
-                        total_row[col] = pct
+                        total_row[col] = pct or 0
+                        total_row['{}:count'.format(col)] = percent_to_count(total_row[col], question['numrespondents'])
 
                         for candidate_answer in answer['candidateanswers']:
                             try:
                                 ca_pct = int(candidate_answer['pct'])
                             except ValueError as verr:
-                                ca_pct = None
-                            candidates[candidate_answer['id']][col] = ca_pct
+                                ca_pct = 0
+                            candidates[candidate_answer['id']][col] = ca_pct or 0
+                            ca_count = percent_to_count(candidates[candidate_answer['id']][col], total_row['{}:count'.format(col)])
+                            candidates[candidate_answer['id']]['{}:count'.format(col)] = ca_count
+                            candidates[candidate_answer['id']]['count'] = candidates[candidate_answer['id']]['count'] + ca_count
 
                     table.insert_many(candidates.values())
                     table.insert(total_row)

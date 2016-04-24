@@ -1,14 +1,14 @@
-id,be more liberal,continue obama's policies,count,name,party,state,be less liberal
-1,,1,,Other/No Answer,D,IL,
-2,28,64,,Hillary Clinton,D,IL,
-3,72,35,,Bernie Sanders,D,IL,
-4,32,55,1521,total,D,IL,9
-5,1,,,Other/No Answer,D,OH,5
-6,28,74,,Hillary Clinton,D,OH,48
-7,71,26,,Bernie Sanders,D,OH,47
-8,32,51,1764,total,D,OH,12
-9,,,,Other/No Answer,D,WI,1
-10,20,61,,Hillary Clinton,D,WI,32
-11,80,39,,Bernie Sanders,D,WI,67
-12,0,,,Uninstructed,D,WI,
-13,34,52,1774,total,D,WI,11
+id,be less liberal,count,continue obama's policies,party,continue obama's policies:count,be less liberal:count,be more liberal,state,be more liberal:count,name
+1,0,8,1,D,8,0,0,IL,0,Other/No Answer
+2,0,672,64,D,536,0,28,IL,136,Hillary Clinton
+3,0,644,35,D,293,0,72,IL,351,Bernie Sanders
+4,9,1521,55,D,837,137,32,IL,487,total
+5,5,17,0,D,0,11,1,OH,6,Other/No Answer
+6,48,926,74,D,666,102,28,OH,158,Hillary Clinton
+7,47,734,26,D,234,100,71,OH,400,Bernie Sanders
+8,12,1764,51,D,900,212,32,OH,564,total
+9,1,2,0,D,0,2,0,WI,0,Other/No Answer
+10,32,745,61,D,562,62,20,WI,121,Hillary Clinton
+11,67,973,39,D,360,131,80,WI,482,Bernie Sanders
+12,0,0,0,D,0,0,0,WI,0,Uninstructed
+13,11,1774,52,D,922,195,34,WI,603,total

@@ -1,5 +1,5 @@
-id,hurt the economy,help the economy,name,party,state,count
-1,25,24,John Kasich,R,NY,
-2,60,61,Donald Trump,R,NY,
-3,15,15,Ted Cruz,R,NY,
-4,48,43,total,R,NY,957
+id,count,help the economy,hurt the economy:count,help the economy:count,party,state,hurt the economy,name
+1,214,24,115,99,R,NY,25,John Kasich
+2,526,61,275,251,R,NY,60,Donald Trump
+3,131,15,69,62,R,NY,15,Ted Cruz
+4,957,43,459,412,R,NY,48,total

@@ -1,32 +1,32 @@
-id,married,count,name,party,unmarried,state
-1,1,,Other/No Answer,D,,IL
-2,56,,Hillary Clinton,D,42,IL
-3,43,,Bernie Sanders,D,58,IL
-4,51,1521,total,D,49,IL
-5,1,,Other/No Answer,D,,MI
-6,49,,Hillary Clinton,D,44,MI
-7,0,,Uncommitted,D,4,MI
-8,50,,Bernie Sanders,D,53,MI
-9,54,1601,total,D,46,MI
-10,1,,Other/No Answer,D,,MO
-11,55,,Hillary Clinton,D,40,MO
-12,0,,Uncommitted,D,0,MO
-13,44,,Bernie Sanders,D,60,MO
-14,59,1168,total,D,41,MO
-15,63,,Hillary Clinton,D,51,NY
-16,37,,Bernie Sanders,D,49,NY
-17,52,1391,total,D,48,NY
-18,2,,Other/No Answer,D,,NC
-19,61,,Hillary Clinton,D,52,NC
-20,3,,No Preference,D,2,NC
-21,34,,Bernie Sanders,D,46,NC
-22,56,1867,total,D,44,NC
-23,1,,Other/No Answer,D,,OH
-24,58,,Hillary Clinton,D,54,OH
-25,41,,Bernie Sanders,D,46,OH
-26,56,1764,total,D,44,OH
-27,,,Other/No Answer,D,1,WI
-28,45,,Hillary Clinton,D,39,WI
-29,55,,Bernie Sanders,D,60,WI
-30,,,Uninstructed,D,0,WI
-31,54,1774,total,D,46,WI
+id,unmarried,unmarried:count,count,party,married,state,married:count,name
+1,0,0,8,D,1,IL,8,Other/No Answer
+2,42,313,748,D,56,IL,435,Hillary Clinton
+3,58,432,766,D,43,IL,334,Bernie Sanders
+4,49,745,1521,D,51,IL,776,total
+5,0,0,9,D,1,MI,9,Other/No Answer
+6,44,324,748,D,49,MI,424,Hillary Clinton
+7,4,29,29,D,0,MI,0,Uncommitted
+8,53,390,822,D,50,MI,432,Bernie Sanders
+9,46,736,1601,D,54,MI,865,total
+10,0,0,7,D,1,MO,7,Other/No Answer
+11,40,192,571,D,55,MO,379,Hillary Clinton
+12,0,0,0,D,0,MO,0,Uncommitted
+13,60,287,590,D,44,MO,303,Bernie Sanders
+14,41,479,1168,D,59,MO,689,total
+15,51,341,796,D,63,NY,455,Hillary Clinton
+16,49,327,595,D,37,NY,268,Bernie Sanders
+17,48,668,1391,D,52,NY,723,total
+18,0,0,21,D,2,NC,21,Other/No Answer
+19,52,427,1065,D,61,NC,638,Hillary Clinton
+20,2,16,47,D,3,NC,31,No Preference
+21,46,378,734,D,34,NC,356,Bernie Sanders
+22,44,821,1867,D,56,NC,1046,total
+23,0,0,10,D,1,OH,10,Other/No Answer
+24,54,419,992,D,58,OH,573,Hillary Clinton
+25,46,357,762,D,41,OH,405,Bernie Sanders
+26,44,776,1764,D,56,OH,988,total
+27,1,8,8,D,0,WI,0,Other/No Answer
+28,39,318,749,D,45,WI,431,Hillary Clinton
+29,60,490,1017,D,55,WI,527,Bernie Sanders
+30,0,0,0,D,0,WI,0,Uninstructed
+31,46,816,1774,D,54,WI,958,total

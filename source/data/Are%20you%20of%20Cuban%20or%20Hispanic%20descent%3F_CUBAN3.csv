@@ -1,12 +1,12 @@
-id,cuban,other hispanic,count,not hispanic,name,party,state
-1,4,5,,1,Other/No Answer,R,FL
-2,63,40,,23,Marco Rubio,R,FL
-3,2,2,,8,John Kasich,R,FL
-4,13,15,,18,Ted Cruz,R,FL
-5,1,,,1,Ben Carson,R,FL
-6,17,38,,49,Donald Trump,R,FL
-7,9,6,1907,85,total,R,FL
-8,,1,,3,Other/No Answer,D,FL
-9,,70,,63,Hillary Clinton,D,FL
-10,,29,,34,Bernie Sanders,D,FL
-11,3,13,1659,83,total,D,FL
+id,not hispanic,other hispanic:count,count,party,cuban,not hispanic:count,state,cuban:count,other hispanic,name
+1,1,6,29,R,4,16,FL,7,5,Other/No Answer
+2,23,46,527,R,63,373,FL,108,40,Marco Rubio
+3,8,2,135,R,2,130,FL,3,2,John Kasich
+4,18,17,331,R,13,292,FL,22,15,Ted Cruz
+5,1,0,18,R,1,16,FL,2,0,Ben Carson
+6,49,43,866,R,17,794,FL,29,38,Donald Trump
+7,85,114,1907,R,9,1621,FL,172,6,total
+8,3,2,43,D,0,41,FL,0,1,Other/No Answer
+9,63,151,1019,D,0,868,FL,0,70,Hillary Clinton
+10,34,63,531,D,0,468,FL,0,29,Bernie Sanders
+11,83,216,1659,D,3,1377,FL,50,13,total

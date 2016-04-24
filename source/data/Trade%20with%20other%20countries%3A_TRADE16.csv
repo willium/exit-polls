@@ -1,24 +1,24 @@
-id,creates us jobs,does not affect jobs,count,name,party,takes away us jobs,state
-1,,,,Other/No Answer,R,3,IL
-2,14,,,Marco Rubio,R,7,IL
-3,26,,,John Kasich,R,14,IL
-4,33,,,Ted Cruz,R,26,IL
-5,,,,Ben Carson,R,1,IL
-6,28,,,Donald Trump,R,49,IL
-7,36,6,1233,total,R,51,IL
-8,,,,Other/No Answer,D,1,MI
-9,54,,,Hillary Clinton,D,41,MI
-10,2,,,Uncommitted,D,2,MI
-11,44,,,Bernie Sanders,D,56,MI
-12,30,8,1601,total,D,57,MI
-13,,,,Other/No Answer,R,3,WI
-14,18,,,John Kasich,R,12,WI
-15,28,,,Donald Trump,R,43,WI
-16,,,,Uninstructed,R,0,WI
-17,54,,,Ted Cruz,R,42,WI
-18,33,9,1532,total,R,54,WI
-19,,,,Other/No Answer,D,1,WI
-20,45,48,,Hillary Clinton,D,39,WI
-21,55,52,,Bernie Sanders,D,60,WI
-22,0,,,Uninstructed,D,,WI
-23,41,12,1774,total,D,42,WI
+id,takes away us jobs:count,creates us jobs:count,count,party,takes away us jobs,does not affect jobs:count,state,does not affect jobs,name,creates us jobs
+1,19,0,19,R,3,0,IL,0,Other/No Answer,0
+2,44,62,106,R,7,0,IL,0,Marco Rubio,14
+3,88,115,203,R,14,0,IL,0,John Kasich,26
+4,164,147,311,R,26,0,IL,0,Ted Cruz,33
+5,6,0,6,R,1,0,IL,0,Ben Carson,0
+6,308,124,432,R,49,0,IL,0,Donald Trump,28
+7,629,444,1233,R,51,74,IL,6,total,36
+8,9,0,9,D,1,0,MI,0,Other/No Answer,0
+9,374,259,633,D,41,0,MI,0,Hillary Clinton,54
+10,18,10,28,D,2,0,MI,0,Uncommitted,2
+11,511,211,722,D,56,0,MI,0,Bernie Sanders,44
+12,913,480,1601,D,57,128,MI,8,total,30
+13,25,0,25,R,3,0,WI,0,Other/No Answer,0
+14,99,91,190,R,12,0,WI,0,John Kasich,18
+15,356,142,498,R,43,0,WI,0,Donald Trump,28
+16,0,0,0,R,0,0,WI,0,Uninstructed,0
+17,347,273,620,R,42,0,WI,0,Ted Cruz,54
+18,827,506,1532,R,54,138,WI,9,total,33
+19,7,0,7,D,1,0,WI,0,Other/No Answer,0
+20,291,327,720,D,39,102,WI,48,Hillary Clinton,45
+21,447,400,958,D,60,111,WI,52,Bernie Sanders,55
+22,0,0,0,D,0,0,WI,0,Uninstructed,0
+23,745,727,1774,D,42,213,WI,12,total,41

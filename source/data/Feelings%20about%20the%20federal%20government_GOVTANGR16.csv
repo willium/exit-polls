@@ -1,9 +1,9 @@
-id,enthusiastic,dissatisfied,count,name,party,satisfied,state,angry
-1,,2,,Other/No Answer,R,,VT,2
-2,,22,,Marco Rubio,R,,VT,15
-3,,35,,John Kasich,R,,VT,23
-4,,8,,Ted Cruz,R,,VT,11
-5,,5,,Ben Carson,R,,VT,4
-6,,1,,Jeb Bush,R,,VT,2
-7,,27,,Donald Trump,R,,VT,43
-8,1,54,536,total,R,8,VT,36
+id,satisfied:count,angry:count,count,satisfied,angry,enthusiastic,dissatisfied,enthusiastic:count,state,party,dissatisfied:count,name
+1,0,4,10,0,2,0,2,0,VT,R,6,Other/No Answer
+2,0,29,93,0,15,0,22,0,VT,R,64,Marco Rubio
+3,0,44,145,0,23,0,35,0,VT,R,101,John Kasich
+4,0,21,44,0,11,0,8,0,VT,R,23,Ted Cruz
+5,0,8,22,0,4,0,5,0,VT,R,14,Ben Carson
+6,0,4,7,0,2,0,1,0,VT,R,3,Jeb Bush
+7,0,83,161,0,43,0,27,0,VT,R,78,Donald Trump
+8,43,193,536,8,36,1,54,5,VT,R,289,total

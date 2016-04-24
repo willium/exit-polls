@@ -1,8 +1,8 @@
-id,stayed the same,gotten better,gotten worse,name,party,state,count
-1,53,,48,Hillary Clinton,D,IL,
-2,47,,52,Bernie Sanders,D,IL,
-3,35,9,54,total,D,IL,1521
-4,1,,,Other/No Answer,D,OH,
-5,57,,57,Hillary Clinton,D,OH,
-6,42,,43,Bernie Sanders,D,OH,
-7,30,12,56,total,D,OH,1764
+id,gotten better,gotten worse,count,party,stayed the same:count,gotten worse:count,state,stayed the same,gotten better:count,name
+1,0,48,676,D,282,394,IL,53,0,Hillary Clinton
+2,0,52,677,D,250,427,IL,47,0,Bernie Sanders
+3,9,54,1521,D,532,821,IL,35,137,total
+4,0,0,5,D,5,0,OH,1,0,Other/No Answer
+5,0,57,865,D,302,563,OH,57,0,Hillary Clinton
+6,0,43,647,D,222,425,OH,42,0,Bernie Sanders
+7,12,56,1764,D,529,988,OH,30,212,total

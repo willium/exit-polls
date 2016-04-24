@@ -1,9 +1,9 @@
-id,experienced in politics,count,outside the establishment,name,party,state
-1,1,,2,Other/No Answer,R,VT
-2,28,,11,Marco Rubio,R,VT
-3,47,,14,John Kasich,R,VT
-4,11,,9,Ted Cruz,R,VT
-5,1,,7,Ben Carson,R,VT
-6,4,,,Jeb Bush,R,VT
-7,8,,57,Donald Trump,R,VT
-8,46,536,49,total,R,VT
+id,experienced in politics,outside the establishment:count,count,party,experienced in politics:count,state,outside the establishment,name
+1,1,5,7,R,2,VT,2,Other/No Answer
+2,28,29,98,R,69,VT,11,Marco Rubio
+3,47,37,153,R,116,VT,14,John Kasich
+4,11,24,51,R,27,VT,9,Ted Cruz
+5,1,18,20,R,2,VT,7,Ben Carson
+6,4,0,10,R,10,VT,0,Jeb Bush
+7,8,150,170,R,20,VT,57,Donald Trump
+8,46,263,536,R,247,VT,49,total

@@ -1,9 +1,9 @@
-id,never,a few times a month,once a week,more than once a week,name,party,state,a few times a year,count
-1,,,1,1,Other/No Answer,R,MO,1,
-2,,,7,2,Marco Rubio,R,MO,5,
-3,,,9,10,John Kasich,R,MO,14,
-4,,,,,Uncommitted,R,MO,2,
-5,,,50,56,Ted Cruz,R,MO,29,
-6,,,0,1,Ben Carson,R,MO,1,
-7,,,33,30,Donald Trump,R,MO,48,
-8,9,11,33,24,total,R,MO,22,1363
+id,once a week:count,more than once a week:count,count,state,a few times a year:count,never,never:count,more than once a week,a few times a year,a few times a month:count,a few times a month,party,once a week,name
+1,4,3,10,MO,3,0,0,1,1,0,0,R,1,Other/No Answer
+2,32,7,54,MO,15,0,0,2,5,0,0,R,7,Marco Rubio
+3,40,33,115,MO,42,0,0,10,14,0,0,R,9,John Kasich
+4,0,0,6,MO,6,0,0,0,2,0,0,R,0,Uncommitted
+5,225,183,495,MO,87,0,0,56,29,0,0,R,50,Ted Cruz
+6,0,3,6,MO,3,0,0,1,1,0,0,R,0,Ben Carson
+7,148,98,390,MO,144,0,0,30,48,0,0,R,33,Donald Trump
+8,450,327,1363,MO,300,9,123,24,22,150,11,R,33,total

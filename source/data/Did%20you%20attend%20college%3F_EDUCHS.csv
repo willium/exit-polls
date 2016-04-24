@@ -1,19 +1,19 @@
-id,no,yes,count,name,party,state
-1,2,2,,Other/No Answer,R,NH
-2,,0,,Mike Huckabee,R,NH
-3,8,17,,John Kasich,R,NH
-4,11,11,,Jeb Bush,R,NH
-5,1,2,,Ben Carson,R,NH
-6,0,1,,Rand Paul,R,NH
-7,7,8,,Chris Christie,R,NH
-8,8,11,,Marco Rubio,R,NH
-9,13,11,,Ted Cruz,R,NH
-10,,0,,Rick Santorum,R,NH
-11,3,4,,Carly Fiorina,R,NH
-12,47,33,,Donald Trump,R,NH
-13,16,84,2036,total,R,NH
-14,2,1,,Other/No Answer,D,NH
-15,34,39,,Hillary Clinton,D,NH
-16,0,0,,Martin O'Malley,D,NH
-17,64,60,,Bernie Sanders,D,NH
-18,12,88,2222,total,D,NH
+id,yes:count,no:count,count,yes,party,no,state,name
+1,34,7,41,2,R,2,NH,Other/No Answer
+2,0,0,0,0,R,0,NH,Mike Huckabee
+3,291,26,317,17,R,8,NH,John Kasich
+4,188,36,224,11,R,11,NH,Jeb Bush
+5,34,3,37,2,R,1,NH,Ben Carson
+6,17,0,17,1,R,0,NH,Rand Paul
+7,137,23,160,8,R,7,NH,Chris Christie
+8,188,26,214,11,R,8,NH,Marco Rubio
+9,188,42,230,11,R,13,NH,Ted Cruz
+10,0,0,0,0,R,0,NH,Rick Santorum
+11,68,10,78,4,R,3,NH,Carly Fiorina
+12,564,153,717,33,R,47,NH,Donald Trump
+13,1710,326,2036,84,R,16,NH,total
+14,20,5,25,1,D,2,NH,Other/No Answer
+15,762,91,853,39,D,34,NH,Hillary Clinton
+16,0,0,0,0,D,0,NH,Martin O'Malley
+17,1173,171,1344,60,D,64,NH,Bernie Sanders
+18,1955,267,2222,88,D,12,NH,total

@@ -1,0 +1,4 @@
+.DS_Store
+*.pyb
+parts
+node_modules

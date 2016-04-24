@@ -1,0 +1,53 @@
+id,terrorism,count,terrorism:count,state,govt spending,economy/jobs,party,economy/jobs:count,immigration:count,govt spending:count,name,immigration,income inequality:count,health care:count,income inequality,health care
+1,0,18,0,IL,0,3,R,15,3,0,Other/No Answer,3,,,,
+2,11,107,22,IL,10,9,R,44,1,40,Marco Rubio,1,,,,
+3,17,236,33,IL,21,23,R,113,7,83,John Kasich,6,,,,
+4,32,365,63,IL,37,27,R,133,23,146,Ted Cruz,21,,,,
+5,0,9,0,IL,1,1,R,5,0,4,Ben Carson,0,,,,
+6,40,460,79,IL,31,37,R,182,77,122,Donald Trump,69,,,,
+7,16,1233,197,IL,32,40,R,493,111,395,total,9,,,,
+8,0,12,0,IL,,1,D,7,,,Other/No Answer,,0,5,0,2
+9,68,746,93,IL,,52,D,372,,,Hillary Clinton,,130,151,37,55
+10,32,718,44,IL,,47,D,336,,,Bernie Sanders,,220,118,63,43
+11,9,1521,137,IL,,47,D,715,,,total,,350,274,23,18
+12,1,1,1,MI,,0,D,0,,,Other/No Answer,,0,0,0,0
+13,69,756,88,MI,,52,D,358,,,Hillary Clinton,,164,146,38,48
+14,0,32,0,MI,,2,D,14,,,Uncommitted,,9,9,2,3
+15,30,762,38,MI,,46,D,316,,,Bernie Sanders,,259,149,60,49
+16,8,1601,128,MI,,43,D,688,,,total,,432,304,27,19
+17,0,3,0,NY,1,0,R,0,0,3,Other/No Answer,0,,,,
+18,22,222,48,NY,24,32,R,110,0,64,John Kasich,0,,,,
+19,63,478,139,NY,57,54,R,186,0,153,Donald Trump,0,,,,
+20,15,129,33,NY,18,14,R,48,0,48,Ted Cruz,0,,,,
+21,23,957,220,NY,28,36,R,345,86,268,total,9,,,,
+22,0,14,0,OH,,2,D,14,,,Other/No Answer,,0,0,0,0
+23,79,968,139,OH,,59,D,417,,,Hillary Clinton,,172,240,39,59
+24,21,747,37,OH,,39,D,275,,,Bernie Sanders,,269,166,61,41
+25,10,1764,176,OH,,40,D,706,,,total,,441,406,25,23
+26,1,8,2,OK,1,1,R,3,0,3,Other/No Answer,0,,,,
+27,24,226,52,OK,25,31,R,99,0,75,Marco Rubio,0,,,,
+28,1,33,2,OK,4,6,R,19,0,12,John Kasich,0,,,,
+29,34,270,73,OK,39,25,R,80,0,117,Ted Cruz,0,,,,
+30,5,54,11,OK,7,7,R,22,0,21,Ben Carson,0,,,,
+31,1,2,2,OK,0,0,R,0,0,0,Jeb Bush,0,,,,
+32,34,241,73,OK,24,30,R,96,0,72,Donald Trump,0,,,,
+33,23,938,216,OK,32,34,R,319,84,300,total,9,,,,
+34,3,9,4,VT,1,2,R,4,0,1,Other/No Answer,0,,,,
+35,23,92,27,VT,18,20,R,40,0,25,Marco Rubio,0,,,,
+36,18,155,21,VT,37,42,R,83,0,51,John Kasich,0,,,,
+37,8,39,9,VT,13,6,R,12,0,18,Ted Cruz,0,,,,
+38,5,20,6,VT,4,4,R,8,0,6,Ben Carson,0,,,,
+39,0,6,0,VT,0,3,R,6,0,0,Jeb Bush,0,,,,
+40,43,135,51,VT,27,23,R,46,0,38,Donald Trump,0,,,,
+41,22,536,118,VT,26,37,R,198,59,139,total,11,,,,
+42,2,39,9,WI,2,4,R,20,0,10,Other/No Answer,0,,,,
+43,12,215,55,WI,13,20,R,98,0,62,John Kasich,0,,,,
+44,36,475,166,WI,34,30,R,147,0,162,Donald Trump,0,,,,
+45,0,0,0,WI,0,0,R,0,0,0,Uninstructed,0,,,,
+46,50,697,230,WI,51,46,R,225,0,242,Ted Cruz,0,,,,
+47,30,1532,460,WI,31,32,R,490,92,475,total,6,,,,
+48,1,2,2,WI,,0,D,0,,,Other/No Answer,,0,0,0,0
+49,56,756,90,WI,,46,D,302,,,Hillary Clinton,,181,183,34,47
+50,42,979,67,WI,,54,D,354,,,Bernie Sanders,,351,207,66,53
+51,1,2,2,WI,,0,D,0,,,Uninstructed,,0,0,0,0
+52,9,1774,160,WI,,37,D,656,,,total,,532,390,30,22

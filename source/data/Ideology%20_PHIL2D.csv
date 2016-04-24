@@ -1,36 +1,36 @@
-id,count,name,moderate/conservative,party,liberal,state
-1,,Other/No Answer,4,D,,FL
-2,,Hillary Clinton,70,D,59,FL
-3,,Bernie Sanders,26,D,41,FL
-4,1659,total,46,D,54,FL
-5,,Other/No Answer,1,D,,IL
-6,,Hillary Clinton,56,D,48,IL
-7,,Bernie Sanders,43,D,52,IL
-8,1521,total,36,D,64,IL
-9,,Other/No Answer,1,D,,MI
-10,,Hillary Clinton,52,D,46,MI
-11,,Uncommitted,4,D,0,MI
-12,,Bernie Sanders,43,D,54,MI
-13,1601,total,43,D,57,MI
-14,,Other/No Answer,,D,1,MO
-15,,Hillary Clinton,55,D,46,MO
-16,,Uncommitted,1,D,0,MO
-17,,Bernie Sanders,44,D,53,MO
-18,1168,total,34,D,66,MO
-19,,Hillary Clinton,66,D,52,NY
-20,,Bernie Sanders,34,D,48,NY
-21,1391,total,34,D,66,NY
-22,,Other/No Answer,2,D,,NC
-23,,Hillary Clinton,58,D,52,NC
-24,,No Preference,5,D,1,NC
-25,,Bernie Sanders,35,D,47,NC
-26,1867,total,44,D,56,NC
-27,,Other/No Answer,2,D,1,OH
-28,,Hillary Clinton,62,D,51,OH
-29,,Bernie Sanders,36,D,48,OH
-30,1764,total,41,D,59,OH
-31,,Other/No Answer,,D,1,WI
-32,,Hillary Clinton,49,D,40,WI
-33,,Bernie Sanders,51,D,59,WI
-34,,Uninstructed,0,D,0,WI
-35,1774,total,33,D,67,WI
+id,moderate/conservative:count,count,party,liberal,liberal:count,state,moderate/conservative,name
+1,31,31,D,0,0,FL,4,Other/No Answer
+2,534,1063,D,59,529,FL,70,Hillary Clinton
+3,198,565,D,41,367,FL,26,Bernie Sanders
+4,763,1659,D,54,896,FL,46,total
+5,5,5,D,0,0,IL,1,Other/No Answer
+6,307,774,D,48,467,IL,56,Hillary Clinton
+7,236,742,D,52,506,IL,43,Bernie Sanders
+8,548,1521,D,64,973,IL,36,total
+9,7,7,D,0,0,MI,1,Other/No Answer
+10,358,778,D,46,420,MI,52,Hillary Clinton
+11,28,28,D,0,0,MI,4,Uncommitted
+12,296,789,D,54,493,MI,43,Bernie Sanders
+13,688,1601,D,57,913,MI,43,total
+14,0,8,D,1,8,MO,0,Other/No Answer
+15,218,573,D,46,355,MO,55,Hillary Clinton
+16,4,4,D,0,0,MO,1,Uncommitted
+17,175,584,D,53,409,MO,44,Bernie Sanders
+18,397,1168,D,66,771,MO,34,total
+19,312,789,D,52,477,NY,66,Hillary Clinton
+20,161,602,D,48,441,NY,34,Bernie Sanders
+21,473,1391,D,66,918,NY,34,total
+22,16,16,D,0,0,NC,2,Other/No Answer
+23,476,1020,D,52,544,NC,58,Hillary Clinton
+24,41,51,D,1,10,NC,5,No Preference
+25,287,779,D,47,492,NC,35,Bernie Sanders
+26,821,1867,D,56,1046,NC,44,total
+27,14,24,D,1,10,OH,2,Other/No Answer
+28,448,979,D,51,531,OH,62,Hillary Clinton
+29,260,760,D,48,500,OH,36,Bernie Sanders
+30,723,1764,D,59,1041,OH,41,total
+31,0,12,D,1,12,WI,0,Other/No Answer
+32,287,763,D,40,476,WI,49,Hillary Clinton
+33,298,1000,D,59,702,WI,51,Bernie Sanders
+34,0,0,D,0,0,WI,0,Uninstructed
+35,585,1774,D,67,1189,WI,33,total
