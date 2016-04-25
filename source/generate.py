@@ -25,9 +25,11 @@ def source_poll(state, party):
         # e.code
         return None
 
-def save(data, fn='data.min.json'):
+def save(data, fn='data.json'):
     with open(fn, 'w') as outfile:
         json.dump(data, outfile)
+
+    print('wrote JSON to file: {}'.format(fn))
 
 def clean_poll_name(pn):
     pn = pn.upper()
@@ -52,33 +54,44 @@ def cast(num):
         return 0
 
 def main():
+    meta = { 'questions': [], 'candidates': [], 'parties': PARTIES, 'states': STATES }
     data = { p: {} for p in PARTIES }
 
     for state in STATES:
         for party in PARTIES:
-            poll = source_poll(state, party)
+            result = source_poll(state, party)
 
-            if poll and poll is not None:
+            if result and result is not None:
 
-                questions = poll['polls']
+                questions = result['polls']
                 for question in questions:
-                    if clean_poll_name(question['pollname']) not in data[party]:
-                        data[party][clean_poll_name(question['pollname'])] = {
+                    poll_name = clean_poll_name(question['pollname'])
+
+                    if poll_name not in data[party]:
+                        data[party][poll_name] = {
                             'question': question['question'],
                             'count': question['numrespondents'],
                             'answers': [],
                             'candidates': {}
                         }
 
-                    q = data[party][clean_poll_name(question['pollname'])]
+                    q = data[party][poll_name]
+
+                    if len([pl for pl in meta['questions'] if pl['id'] == poll_name]) is 0:
+                        meta['questions'].append({ 'id': poll_name, 'question': question['question'] })
 
                     candidates = question['candidates']
                     for candidate in candidates:
+                        candidate_name = '{} {}'.format(candidate['fname'], candidate['lname']).strip()
+
                         if candidate['id'] not in q['candidates']:
                             q['candidates'][candidate['id']] = {
-                                'name': '{} {}'.format(candidate['fname'], candidate['lname']).strip(),
+                                'name': candidate_name,
                                 'party': candidate['party']
                             }
+
+                        if len([cd for cd in meta['candidates'] if cd['id'] == candidate['id']]) is 0:
+                            meta['candidates'].append({ 'id': candidate['id'], 'name': candidate_name, 'party': candidate['party'] })
 
                     answers = question['answers']
                     for answer in answers:
@@ -90,12 +103,15 @@ def main():
                             candidate_answer_value = pct_of(candidate_answer_pct, answer_count)
                             candidate_name = q['candidates'][candidate_answer['id']]['name']
 
-                            q['answers'].append({
-                                **{ 'state': state, 'candidate_id': candidate_answer['id'] },
-                                **create_relationship(source=answer['answer'], target=candidate_name, value=candidate_answer_value)
-                            })
+                            if candidate_answer_value is not 0:
 
-    save(data)
+                                q['answers'].append({
+                                    **{ 'state': state, 'candidate_id': candidate_answer['id'], 'election_date': result['electiondate'] },
+                                    **create_relationship(source=answer['answer'], target=candidate_name, value=candidate_answer_value)
+                                })
+
+    save(data, 'data.json')
+    save(meta, 'meta.json')
 
 
 if __name__ == "__main__":
