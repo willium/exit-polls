@@ -3,9 +3,9 @@ import urllib.request, urllib.parse
 
 SOURCE = 'http://data.cnn.com/ELECTION/2016primary/{}/xpoll/{}full.json'
 
-STATES = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+STATES = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ]
 
-PARTIES = ['R', 'D']
+PARTIES = [ 'R', 'D' ]
 
 def build_url(state, party):
     return SOURCE.format(state, party)
@@ -25,7 +25,7 @@ def source_poll(state, party):
         # e.code
         return None
 
-def save_JSON(j, fn='data.json'):
+def save(data, fn='data.json'):
     with open(fn, 'w') as outfile:
         json.dump(j, outfile)
 
@@ -55,7 +55,6 @@ def main():
     data = {}
 
     for state in STATES:
-
         for party in PARTIES:
             poll = source_poll(state, party)
 
@@ -75,7 +74,9 @@ def main():
                     'answers': [],
                     'candidates': {
                         c['id']: {
-                            'name': '{} {}'.format(c['fname'], c['lname']).strip(), 'party': c['party']
+                            'id':
+                            'name': '{} {}'.format(c['fname'], c['lname']).strip(),
+                            'party': c['party']
                         } for c in question['candidates']
                     }
                 })
@@ -98,8 +99,7 @@ def main():
                             **create_relationship(source=answer['answer'], target=candidate_name, value=candidate_answer_value)
                         })
 
-    print(json.dumps(data))
-    save_JSON(data)
+    save(data)
 
 
 if __name__ == "__main__":
