@@ -96,7 +96,7 @@ def main():
                             meta['candidates'].append({ 'id': candidate['id'], 'name': candidate_name, 'party': candidate['party'] })
 
                     answers = question['answers']
-                    for answer in answers:
+                    for i, answer in enumerate(answers):
                         answer_pct = cast(answer['pct'])
                         answer_count = pct_of(answer_pct, q['count'])
 
@@ -109,7 +109,8 @@ def main():
                                 **{
                                     'state': state,
                                     'target_id': candidate_answer['id'],
-                                    'election_date': result['electiondate']
+                                    'election_date': result['electiondate'],
+                                    'source_rank': i
                                 },
                                 **create_relationship(
                                     source=answer['answer'],
