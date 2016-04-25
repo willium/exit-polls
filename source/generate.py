@@ -74,7 +74,6 @@ def main():
                     'answers': [],
                     'candidates': {
                         c['id']: {
-                            'id':
                             'name': '{} {}'.format(c['fname'], c['lname']).strip(),
                             'party': c['party']
                         } for c in question['candidates']
