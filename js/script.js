@@ -12,7 +12,7 @@ var color = d3.scale.category20();
 
 // Select and initialize the size of the chart
 var svg = d3.select('#canvas')
-  .append("svg")
+  .append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
   .append('g')
@@ -27,16 +27,21 @@ var sankey = d3.sankey()
 var path = sankey.link();
 
 // Load csv file, and use it inside the function
-d3.json('../source/data.min.json', function(error, data) {
+d3.json('../source/data.json', function(error, data) {
   if (error) return console.warn(error);
 
   // testing constants
-  var party = 'D';
-  var question = 'race';
+  var party = 'R';
+  var question_id = 'age65';
+  // var states = [ 'AL', 'AR', 'FL', 'GA', 'IL', 'MA', 'MI', 'MS', 'MO', 'NH', 'NY', 'NC', 'OH', 'OK', 'SC', 'TN', 'TX', 'VT', 'VA', 'WI' ]
+  var states = [ 'NY', 'AL', 'WY' ];
+
+  var question = data[party][question_id]['question'];
+  console.log('Answering the question: ' + question + ' for ' + party + ' in ', states);
 
   // basic filtering
-  answers = data[party][question]['answers'].filter(function(d) {
-    return d.value > LOWER_BOUND;
+  answers = data[party][question_id]['answers'].filter(function(d) {
+    return states.indexOf(d.state) != -1;
   });
 
   // roll up data
@@ -46,16 +51,34 @@ d3.json('../source/data.min.json', function(error, data) {
   graph  = {'nodes': [], 'links': []};
 
   // Add all the data to graph
+  var zeros = []
   answers.forEach(function(d) {
-    graph.nodes.push({ 'name': d.source });
-    graph.nodes.push({ 'name': d.target });
-    graph.links.push({ 'source': d.source, 'target': d.target, 'value': +d.value });
+    if(d.value < LOWER_BOUND) {
+      zeros.push({ 'name': d.source })
+    } else {
+      graph.nodes.push({ 'name': d.source });
+      graph.nodes.push({ 'name': d.target });
+      graph.links.push({ 'source': d.source, 'target': d.target, 'value': +d.value });
+    }
+  });
+
+  var nulls = []
+  zeros.forEach(function(zr) {
+    existing = graph.nodes.filter(function(d){
+      return d.name === zr.name
+    });
+    if (!existing.length && nulls.indexOf(zr.name) == -1) {
+      nulls.push(zr.name)
+    }
   });
 
   // remove duplicate nodes
   graph.nodes = d3.keys(d3.nest()
     .key(function(d) {return d.name; })
     .map(graph.nodes));
+
+  console.log('nodes', graph.nodes);
+  console.log('nulls', nulls);
 
   // Switch links source/target from data to index in the nodes
   graph.links.forEach(function(d, i) {
@@ -66,7 +89,7 @@ d3.json('../source/data.min.json', function(error, data) {
   // now loop through each nodes to make nodes an array of objects
   // rather than an array of strings
   graph.nodes.forEach(function (d, i) {
-    graph.nodes[i] = { "name": d };
+    graph.nodes[i] = { 'name': d };
   });
 
   sankey
@@ -96,7 +119,7 @@ d3.json('../source/data.min.json', function(error, data) {
   node.append('rect')
       .attr('height', function(d) { return d.dy; })
       .attr('width', sankey.nodeWidth())
-      .style('fill', function(d) {return d.color = color(d.name.replace(/ .*/, "")); })
+      .style('fill', function(d) {return d.color = color(d.name.replace(/ .*/, '')); })
       .style('stroke', function(d) {return d3.rgb(d.color).darker(2); })
     .append('title')
       .text(function(d) {
@@ -104,16 +127,16 @@ d3.json('../source/data.min.json', function(error, data) {
       });
 
   // add in the title for the nodes
-    node.append("text")
-      .attr("x", -6)
-      .attr("y", function(d) { return d.dy / 2; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", "end")
-      .attr("transform", null)
+    node.append('text')
+      .attr('x', -6)
+      .attr('y', function(d) { return d.dy / 2; })
+      .attr('dy', '.35em')
+      .attr('text-anchor', 'end')
+      .attr('transform', null)
       .text(function(d) { return d.name; })
     .filter(function(d) { return d.x < width / 2; })
-      .attr("x", 6 + sankey.nodeWidth())
-      .attr("text-anchor", "start");
+      .attr('x', 6 + sankey.nodeWidth())
+      .attr('text-anchor', 'start');
 });
 
 // rolls up duplicate values for source/target pairs

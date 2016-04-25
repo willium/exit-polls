@@ -54,7 +54,7 @@ def cast(num):
         return 0
 
 def main():
-    meta = { 'questions': [], 'candidates': [], 'parties': PARTIES, 'states': STATES }
+    meta = { 'questions': [], 'candidates': [], 'parties': PARTIES, 'states': [] }
     data = { p: {} for p in PARTIES }
 
     for state in STATES:
@@ -62,6 +62,8 @@ def main():
             result = source_poll(state, party)
 
             if result and result is not None:
+                if state not in meta['states']:
+                    meta['states'].append(state)
 
                 questions = result['polls']
                 for question in questions:
@@ -103,20 +105,18 @@ def main():
                             candidate_answer_value = pct_of(candidate_answer_pct, answer_count)
                             candidate_name = q['candidates'][candidate_answer['id']]['name']
 
-                            if candidate_answer_value is not 0:
-
-                                q['answers'].append({
-                                    **{
-                                        'state': state,
-                                        'target_id': candidate_answer['id'],
-                                        'election_date': result['electiondate']
-                                    },
-                                    **create_relationship(
-                                        source=answer['answer'],
-                                        target=candidate_name,
-                                        value=candidate_answer_value
-                                    )
-                                })
+                            q['answers'].append({
+                                **{
+                                    'state': state,
+                                    'target_id': candidate_answer['id'],
+                                    'election_date': result['electiondate']
+                                },
+                                **create_relationship(
+                                    source=answer['answer'],
+                                    target=candidate_name,
+                                    value=candidate_answer_value
+                                )
+                            })
 
     save(data, 'data.json')
     save(meta, 'meta.json')
