@@ -31,9 +31,9 @@ d3.json('../source/data.json', function(error, data) {
   if (error) return console.warn(error);
 
   // testing constants
-  var party = 'R';
-  var question_id = 'age65';
-  // var states = [ 'AL', 'AR', 'FL', 'GA', 'IL', 'MA', 'MI', 'MS', 'MO', 'NH', 'NY', 'NC', 'OH', 'OK', 'SC', 'TN', 'TX', 'VT', 'VA', 'WI' ]
+  // see source/meta.json for all possible values
+  var party = 'D';
+  var question_id = 'income16';
   var states = [ 'NY', 'AL', 'WY' ];
 
   var question = data[party][question_id]['question'];
