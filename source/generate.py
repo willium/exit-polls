@@ -27,7 +27,7 @@ def source_poll(state, party):
 
 def save(data, fn='data.json'):
     with open(fn, 'w') as outfile:
-        json.dump(j, outfile)
+        json.dump(data, outfile)
 
 def clean_poll_name(pn):
     pn = pn.upper()
