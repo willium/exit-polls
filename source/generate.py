@@ -90,7 +90,7 @@ def main():
 
                     for candidate_answer in answer['candidateanswers']:
                         candidate_answer_pct = cast(candidate_answer['pct'])
-                        candidate_answer_value = candidate_answer_pct * answer_count
+                        candidate_answer_value = pct_of(candidate_answer_pct, answer_count)
                         candidate_name = q['candidates'][candidate_answer['id']]['name']
 
                         q['answers'].append({
