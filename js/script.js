@@ -17,14 +17,14 @@ var sankey = d3.sankey()
   .nodeWidth(36)
   .nodePadding(40)
   .size([width, height]);
-  
+
 var path = sankey.link();
 
 // Load csv file, and use it inside the function
-d3.csv('data/gender.csv', function(error, data) {
+d3.csv('../source/data.json', function(error, data) {
   // initialize the graph object
   graph  = {'nodes': [], 'links': []};
-  console.log(data);  
+  console.log(data);
   // Add all the data to graph
   data.forEach(function(d) {
     graph.nodes.push({ 'name': d.source });
@@ -41,18 +41,18 @@ d3.csv('data/gender.csv', function(error, data) {
     graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
     graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
   });
-  
+
   // now loop through each nodes to make nodes an array of objects
   // rather than an array of strings
   graph.nodes.forEach(function (d, i) {
     graph.nodes[i] = { "name": d };
   });
-  
+
   sankey
     .nodes(graph.nodes)
     .links(graph.links)
     .layout(32);
-  
+
   // add links to the chart
   var link = svg.append('g').selectAll('.link')
       .data(graph.links)
@@ -61,9 +61,9 @@ d3.csv('data/gender.csv', function(error, data) {
       .attr('d', path)
       .style('stroke-width', function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) {return b.dy - a.dy });
-      
+
   // TODO: add the link title
-  
+
   // Add nodes to the chart
   var node = svg.append('g').selectAll('.node')
       .data(graph.nodes)
@@ -72,7 +72,7 @@ d3.csv('data/gender.csv', function(error, data) {
       .attr('transform', function(d){
         return 'translate(' + d.x + ',' + d.y + ')';
       });
-  
+
   // Add rectangles to the nodes
   node.append('rect')
       .attr('height', function(d) { console.log(d); return d.dy; })

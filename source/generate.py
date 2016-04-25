@@ -25,7 +25,7 @@ def source_poll(state, party):
         # e.code
         return None
 
-def save(data, fn='data.json'):
+def save(data, fn='data.min.json'):
     with open(fn, 'w') as outfile:
         json.dump(data, outfile)
 
@@ -52,51 +52,48 @@ def cast(num):
         return 0
 
 def main():
-    data = {}
+    data = { p: {} for p in PARTIES }
 
     for state in STATES:
         for party in PARTIES:
             poll = source_poll(state, party)
 
-            if not poll or poll is None:
-                break
+            if poll and poll is not None:
 
-            data[party] = []
+                questions = poll['polls']
+                for question in questions:
+                    if clean_poll_name(question['pollname']) not in data[party]:
+                        data[party][clean_poll_name(question['pollname'])] = {
+                            'question': question['question'],
+                            'count': question['numrespondents'],
+                            'answers': [],
+                            'candidates': {}
+                        }
 
-            questions = poll['polls']
+                    q = data[party][clean_poll_name(question['pollname'])]
 
-            for question in questions:
+                    candidates = question['candidates']
+                    for candidate in candidates:
+                        if candidate['id'] not in q['candidates']:
+                            q['candidates'][candidate['id']] = {
+                                'name': '{} {}'.format(candidate['fname'], candidate['lname']).strip(),
+                                'party': candidate['party']
+                            }
 
-                data[party].append({
-                    'id': clean_poll_name(question['pollname']),
-                    'question': question['question'],
-                    'count': question['numrespondents'],
-                    'answers': [],
-                    'candidates': {
-                        c['id']: {
-                            'name': '{} {}'.format(c['fname'], c['lname']).strip(),
-                            'party': c['party']
-                        } for c in question['candidates']
-                    }
-                })
+                    answers = question['answers']
+                    for answer in answers:
+                        answer_pct = cast(answer['pct'])
+                        answer_count = pct_of(answer_pct, q['count'])
 
-                q = data[party][-1]
+                        for candidate_answer in answer['candidateanswers']:
+                            candidate_answer_pct = cast(candidate_answer['pct'])
+                            candidate_answer_value = pct_of(candidate_answer_pct, answer_count)
+                            candidate_name = q['candidates'][candidate_answer['id']]['name']
 
-                answers = question['answers']
-
-                for answer in answers:
-                    answer_pct = cast(answer['pct'])
-                    answer_count = pct_of(answer_pct, q['count'])
-
-                    for candidate_answer in answer['candidateanswers']:
-                        candidate_answer_pct = cast(candidate_answer['pct'])
-                        candidate_answer_value = pct_of(candidate_answer_pct, answer_count)
-                        candidate_name = q['candidates'][candidate_answer['id']]['name']
-
-                        q['answers'].append({
-                            **{ 'state': state, 'candidate_id': candidate_answer['id'] },
-                            **create_relationship(source=answer['answer'], target=candidate_name, value=candidate_answer_value)
-                        })
+                            q['answers'].append({
+                                **{ 'state': state, 'candidate_id': candidate_answer['id'] },
+                                **create_relationship(source=answer['answer'], target=candidate_name, value=candidate_answer_value)
+                            })
 
     save(data)
 
