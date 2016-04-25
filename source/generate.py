@@ -106,8 +106,16 @@ def main():
                             if candidate_answer_value is not 0:
 
                                 q['answers'].append({
-                                    **{ 'state': state, 'candidate_id': candidate_answer['id'], 'election_date': result['electiondate'] },
-                                    **create_relationship(source=answer['answer'], target=candidate_name, value=candidate_answer_value)
+                                    **{
+                                        'state': state,
+                                        'target_id': candidate_answer['id'],
+                                        'election_date': result['electiondate']
+                                    },
+                                    **create_relationship(
+                                        source=answer['answer'],
+                                        target=candidate_name,
+                                        value=candidate_answer_value
+                                    )
                                 })
 
     save(data, 'data.json')
