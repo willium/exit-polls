@@ -1,21 +1,83 @@
-d3.json('../source/meta.json', function(error, meta) {
-  var parties = d3.keys(meta);
-  var partyChoice = createChoice('parties', parties);
-  partyChoice.on('change', updateParty);
-  updateParty();
-
-  function updateParty(v) {
-    var party = which(this.value, d3.select('input[name="parties"]:checked').node().value);
-    generateUI(party);
-    updateChart({});
+d3.json('../source/data.json', function(error, data) {
+  if (error) return console.warn(error);
+  
+  var partial = {};
+  var filters = {'candidates':[], 'states':[]};
+  
+  loadUI();
+  
+  function loadUI() {
+    var parties = d3.keys(data);
+    
+    var partyChoice = createChoice('parties', parties);
+    partyChoice.on('change', updateParty);
+    updateParty();
   }
 
-  function generateUI(party) {
-    console.log('generating UI for:' + party);
+  function updateParty(d) {
+    var party = which(this.value, d3.select('input[name="parties"]:checked').node().value);
+    partial = data[party];
     
-    createOptions('candidates', meta[party]['candidates']);    
-    createChoice('questions', meta[party]['questions']);    
-    createOptions('states', meta[party]['states']);    
+    var questionChoice = createChoice('questions', loadQuestions(partial)); 
+    questionChoice.on('change', updateQuestion);
+    updateQuestion();
+  }
+  
+  function updateQuestion(d) {
+    var question = which(this.value, d3.select('input[name="questions"]:checked').node().value);
+    partial = partial[question];
+    
+    var candidateOptions = createOptions('candidates', partial['candidates']); 
+    candidateOptions.on('change', updateCandidates);
+    updateCandidates();
+    
+    var stateOptions = createOptions('states', loadStates(partial)); 
+    stateOptions.on('change', updateStates);
+    updateStates();
+    
+    console.log('question', rollup(partial['answers']));
+  }
+  
+  function updateCandidates(d) {
+    var unChecked = d3.select('input[name="candidates"]:not(:checked)').each(function() {
+      partial['answers'] = partial['answers'].filter(function(d){
+        return d.target_id !== d3.select(this).attr('id');
+      })
+    });
+  }
+  
+  function updateStates(d) {
+    var unChecked = d3.select('input[name="states"]:not(:checked)').each(function() {
+      partial['answers'] = partial['answers'].filter(function(d){
+        return d.state !== d3.select(this).attr('id');
+      })
+    });
+   }
+
+  function loadQuestions(data) {
+    var qs = [];
+    keys = d3.keys(data);
+    
+    for(var i=0; i < keys.length; i++) {
+      qs.push({
+        'id': keys[i],
+        'question': data[keys[i]]['question']
+      })
+    }
+   
+    return qs;
+  }
+  
+  function loadStates(data) {
+    var states = [];
+    
+    data['answers'].forEach(function(value, index, arr) {
+      if(states.indexOf(value.state) === -1) {
+        states.push(value.state);
+      }
+    });
+    
+    return states;
   }
   
   function triggerChange(d, i) {
@@ -64,7 +126,7 @@ d3.json('../source/meta.json', function(error, meta) {
       .on('change', triggerChange);
      
     labels.append('br');
-     
+    
     return inputs;  
   }
   
@@ -100,7 +162,7 @@ d3.json('../source/meta.json', function(error, meta) {
       .on('change', triggerChange);
     
     labels.append('br');
-     
+    
     return inputs;
   }
 

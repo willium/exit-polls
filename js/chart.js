@@ -31,9 +31,7 @@ var updateChart = function dataUpdate(filter) {
 }
 
 // Load JSON file, and use it inside the function
-d3.json('../source/data.json', function(error, data) {
-  if (error) return console.warn(error);
-
+var renderChart = function render(data) {
   // testing constants
   // see source/meta.json for all possible values
   var party = 'D';
@@ -141,7 +139,7 @@ d3.json('../source/data.json', function(error, data) {
     .filter(function(d) { return d.x < width / 2; })
       .attr('x', 6 + sankey.nodeWidth())
       .attr('text-anchor', 'start');
-});
+};
 
 // rolls up duplicate values for source/target pairs
 var rollup = function rollup(data) {

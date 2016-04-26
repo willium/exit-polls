@@ -97,7 +97,7 @@ def main():
                         'question': question['question'],
                         'count': question['numrespondents'],
                         'answers': [],
-                        'candidates': {}
+                        'candidates': []
                     }
 
                 poll = data[party][poll_name]
@@ -112,13 +112,14 @@ def main():
                 for candidate in candidates:
                     candidate_name = '{} {}'.format(candidate['fname'], candidate['lname']).strip()
 
-                    if candidate['id'] not in poll['candidates']:
-                        poll['candidates'][candidate['id']] = {
+                    if not [c for c in poll['candidates'] if c['id'] == candidate['id']]:
+                        poll['candidates'].append({
+                            'id': candidate['id'],
                             'name': candidate_name,
                             'party': candidate['party']
-                        }
+                        })
 
-                    if not [cd for cd in meta[party]['candidates'] if cd['id'] == candidate['id']]:
+                    if not [c for c in meta[party]['candidates'] if c['id'] == candidate['id']]:
                         meta[party]['candidates'].append({
                             'id': candidate['id'],
                             'name': candidate_name,
@@ -130,15 +131,17 @@ def main():
                     answer_pct = cast(answer['pct'])
                     answer_count = pct_of(answer_pct, poll['count'])
 
-                    for candidate_answer in answer['candidateanswers']:
-                        candidate_answer_pct = cast(candidate_answer['pct'])
+                    for cda in answer['candidateanswers']:
+                        candidate_answer_pct = cast(cda['pct'])
                         candidate_answer_value = pct_of(candidate_answer_pct, answer_count)
-                        candidate_name = poll['candidates'][candidate_answer['id']]['name']
+
+                        match = [c['name'] for c in poll['candidates'] if c['id'] == cda['id']]
+                        candidate_name = match[0]
 
                         poll['answers'].append({
                             **{
                                 'state': state,
-                                'target_id': candidate_answer['id'],
+                                'target_id': cda['id'],
                                 'election_date': result['electiondate'],
                                 'source_rank': i
                             },
