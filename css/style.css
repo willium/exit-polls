@@ -20,8 +20,10 @@
 
 #filters .filter {
  margin: 20px;
+ padding: 20px;
  display: inline-block;
- float: left; 
+ float: left;
+ border: 3px dashed #aaa;
 }
 
 label {
