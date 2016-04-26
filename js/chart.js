@@ -32,29 +32,16 @@ var updateChart = function dataUpdate(filter) {
 
 // Load JSON file, and use it inside the function
 var renderChart = function render(data) {
-  // testing constants
-  // see source/meta.json for all possible values
-  var party = 'D';
-  var question_id = 'income16';
-  var states = [ 'NY', 'AL', 'WY' ];
-
-  var question = data[party][question_id]['question'];
-  console.log('Answering the question: ' + question + ' for ' + party + ' in ', states);
-
-  // basic filtering
-  answers = data[party][question_id]['answers'].filter(function(d) {
-    return states.indexOf(d.state) != -1;
-  });
-
   // roll up data
-  answers = rollup(answers);
+  data = rollup(data);
+  console.log(data);
 
   // initialize the graph object
   graph  = {'nodes': [], 'links': []};
 
   // Add all the data to graph
   var zeros = []
-  answers.forEach(function(d) {
+  data.forEach(function(d) {
     if(d.value < LOWER_BOUND) {
       zeros.push({ 'name': d.source })
     } else {
@@ -151,9 +138,15 @@ var rollup = function rollup(data) {
     })
     if (existing.length) {
       var index = output.indexOf(existing[0]);
-      var currentValue = output[index].value;
-      output[index].value = parseInt(currentValue + row.value, 10);
+      
+      var currentValue = output[index]['value'];
+      output[index]['value'] = parseInt(currentValue + row['value'], 10);
+      
+      if (output[index]['state'].indexOf(row['state']) === -1) {
+        output[index]['state'].push(row['state']);
+      }
     } else {
+      row['state'] = [row['state']]
       output.push(row);
     }
   });
