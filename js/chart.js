@@ -26,7 +26,11 @@ var sankey = d3.sankey()
 
 var path = sankey.link();
 
-// Load csv file, and use it inside the function
+var updateChart = function dataUpdate(filter) {
+  console.log('update', filter);
+}
+
+// Load JSON file, and use it inside the function
 d3.json('../source/data.json', function(error, data) {
   if (error) return console.warn(error);
 

@@ -17,3 +17,13 @@
 .link:hover {
   stroke-opacity: .5;
 }
+
+#filters .filter {
+ margin: 20px;
+ display: inline-block;
+ float: left; 
+}
+
+label {
+  display: block;
+}
