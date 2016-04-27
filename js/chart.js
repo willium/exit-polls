@@ -9,19 +9,21 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
   width = 700 - margin.left - margin.right,
   height = 500 - margin.top - margin.bottom;
 
+// set color scale
 var color = d3.scale.category20();
 
 // Select and initialize the size of the chart
-var svg = d3.select("#canvas").append("svg")
+var svg = d3.select('#canvas').append('svg')
   .attr({
     width: width + margin.left + margin.right,
     height: height + margin.top + margin.bottom
   })
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .append('g')
+  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-var linksGroup = svg.append("g").attr('class', 'links');
-var nodesGroup = svg.append("g").attr('class', 'nodes');
+// create groups for links and nodes
+var linksGroup = svg.append('g').attr('class', 'links');
+var nodesGroup = svg.append('g').attr('class', 'nodes');
 
 // Create a sanky diagram with these properties
 var sankey = d3.sankey()
@@ -29,23 +31,22 @@ var sankey = d3.sankey()
   .nodePadding(NODE_PADDING)
   .size([width, height]);
 
+// Get path data generator
 var path = sankey.link();
 
-var graph, data, link, node, zeros, nulls;
-
-// Load JSON file, and use it inside the function
+// render the chart, also updates if passed different data
 function render(original) {
   // roll up data
-  data = rollup(original);
+  var data = rollup(original);
+  // var data = original; // to see all tracks (basically all states data)
 
   // initialize the graph object
-  graph = {
-    'nodes': [],
-    'links': []
-  };
+  var graph = {};
+  graph.nodes = [];
+  graph.links = [];
 
   // Add all the data to graph
-  nulls = []
+  var nulls = [] // all data points with a value below LOWER_BOUND
   data.forEach(function(d) {
     if(d.value < LOWER_BOUND) {
       nulls.push(d)
@@ -77,50 +78,51 @@ function render(original) {
     .nodes(graph.nodes)
     .links(graph.links)
     .layout(ITERATIONS);
-
+  
+  // Draw the links
   var links = linksGroup.selectAll('.link').data(graph.links);
   // Enter
   links.enter()
-    .append("path")
+    .append('path')
     .attr('class', 'link');
   // Enter + Update
   links.attr('d', path)
-    .style("stroke-width", function (d) {
+    .style('stroke-width', function (d) {
       return Math.max(1, d.dy);
     });
-  links.append("title")
+  links.append('title')
     .text(function (d) {
-      return d.source.name + " to " + d.target.name + " = " + d.value;
+      return d.source.name + ' to ' + d.target.name + ' = ' + d.value;
     });
   // Exit
   links.exit().remove();
   
-  // Draw the nodes.
+  // Draw the nodes
   var nodes = nodesGroup.selectAll('.node').data(graph.nodes);
   // Enter
   var nodesEnterSelection = nodes.enter()
-    .append("g")
+    .append('g')
     .attr('class', 'node');
-  nodesEnterSelection.append("rect")
+  nodesEnterSelection.append('rect')
     .attr('width', sankey.nodeWidth())
-    .append("title");
-  nodesEnterSelection.append("text")
+    .append('title');
+  nodesEnterSelection.append('text')
     .attr('x', sankey.nodeWidth() / 2)
-    .attr('dy', ".35em")
-    .attr("text-anchor", "middle")
+    .attr('dy', '.35em')
+    .attr('text-anchor', 'middle')
     .attr('transform', null);
 
   // Enter + Update
   nodes
     .attr('transform', function (d) {
-      return "translate(" + d.x + "," + d.y + ")";
+      return 'translate(' + d.x + ',' + d.y + ')';
     });
   nodes.select('rect')
     .attr('height', function (d) {
       return d.dy;
     })
     .style('fill', function (d) {
-      return d.color = color(d.name.replace(/ .*/, ""));
+      return d.color = color(d.name.replace(/ .*/, ''));
     })
     .style('stroke', function (d) {
       return d3.rgb(d.color).darker(2);
@@ -139,12 +141,13 @@ function render(original) {
   // Exit
   nodes.exit().remove();
   
+  // return original (pre-rollup to make sure we don't lose data)
   return original;
 };
 
 // rolls up duplicate values for source/target pairs
 var rollup = function rollup(data) {
-  var cloned = _.cloneDeep(data);
+  var cloned = _.cloneDeep(data); // slow, but makes sure that 
   var output = [];
 
   cloned.forEach(function(row) {
@@ -155,8 +158,10 @@ var rollup = function rollup(data) {
       var index = output.indexOf(existing[0]);
       
       var currentValue = output[index]['value'];
+      // add values of duplicate links
       output[index]['value'] = parseInt(currentValue + row['value'], 10);
       
+      // keep track of states for reference later
       output[index]['state'] = _.union(output[index]['state'], [row['state']]);
     } else {
       output.push(row);

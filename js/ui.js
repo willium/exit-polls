@@ -1,6 +1,8 @@
+// load data from JSON
 d3.json('../source/data.json', function(error, data) {
   if (error) return console.warn(error);
   
+  // for tracking throughout
   var partial = {
     'party': {},
     'question': {}
@@ -8,12 +10,13 @@ d3.json('../source/data.json', function(error, data) {
     
   loadUI();
   
+  // start the UI render
   function loadUI() {
     var parties = d3.keys(data);
     
     var partyChoice = createChoice('parties', parties);
     partyChoice.on('change', updateParty);
-    updateParty();
+    updateParty(); // on first render, use default party
   }
 
   function updateParty(el) {
@@ -22,7 +25,7 @@ d3.json('../source/data.json', function(error, data) {
    
     var questionChoice = createChoice('questions', loadQuestions(partial['party'])); 
     questionChoice.on('change', updateQuestion);
-    updateQuestion();
+    updateQuestion(); // on first render, use default question (i=0)
   }
   
   function updateQuestion(el) {
@@ -31,40 +34,46 @@ d3.json('../source/data.json', function(error, data) {
     
     var candidateOptions = createOptions('candidates', partial['question']['candidates']); 
     candidateOptions.on('change', updateCandidates);
-    updateCandidates();
+    updateCandidates(); // on first render, use default candidates (all)
     
     var stateOptions = createOptions('states', loadStates(partial['question'])); 
     stateOptions.on('change', updateStates);
-    updateStates();
+    updateStates(); // on first render, use default states (all)
     
     partial['question']['answers'] = render(partial['question']['answers']);
   }
   
   function updateCandidates(el) {
-    console.log(partial['question']['answers']);
+    // iterate through all unchecked candidate checkboxes
     d3.select('input[name^="candidates"]:not(:checked)').each(function(selection) {
+      // filter data based on unchecked checkboxes
       partial['question']['answers'] = partial['question']['answers'].filter(function(d) {
         return d.target_id !== selection.id;
       })
     });
     
+    // if not first render, trigger re-render
     if (typeof el !== 'undefined') {
       partial['question']['answers'] = render(partial['question']['answers']);
     }
   }
   
   function updateStates(el) {
+    // iterate through all unchecked states checkboxes
     d3.select('input[name^="states"]:not(:checked)').each(function(selection) {
-      partial['question']['answers'] = partial['question']['answers'].filter(function(d) {
+     // filter data based on unchecked checkboxes
+     partial['question']['answers'] = partial['question']['answers'].filter(function(d) {
         return d.state !== selection;
       })
     });
-
+    
+    // if not first render, trigger re-render
     if (typeof el !== 'undefined') {
       partial['question']['answers'] = render(partial['question']['answers']);
     }
   }
-
+  
+  // returns questions from data in friendly form
   function loadQuestions(data) {
     var qs = [];
     keys = d3.keys(data);
@@ -79,6 +88,7 @@ d3.json('../source/data.json', function(error, data) {
     return qs;
   }
   
+  // returns questions from data as array with no duplicates
   function loadStates(data) {
     var states = [];
     
@@ -91,11 +101,7 @@ d3.json('../source/data.json', function(error, data) {
     return states;
   }
   
-  function triggerChange(d, i) {
-    console.log('trigger', this, d, i);
-  }
-  
-  // radio button
+  // create radio buttons
   function createChoice(name, data) {
     var div = d3.select('#' + name);
     div.select('form').remove();
@@ -125,14 +131,13 @@ d3.json('../source/data.json', function(error, data) {
           },
       })
       .property('checked', function(d, i) {return i===0;})
-      .on('change', triggerChange);
      
     labels.append('br');
     
     return inputs;  
   }
   
-  // checkboxes
+  // create checkboxes
   function createOptions(name, data) {
     var div = d3.select('#' + name);
     div.select('form').remove();
@@ -166,7 +171,6 @@ d3.json('../source/data.json', function(error, data) {
           },
       })
       .property('checked', true)
-      .on('change', triggerChange);
     
     labels.append('br');
     
