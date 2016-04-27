@@ -40,6 +40,10 @@ d3.json('../source/data.json', function(error, data) {
     stateOptions.on('change', updateStates);
     updateStates(); // on first render, use default states (all)
     
+    var answerOptions = createOptions('answers', loadAnswers(partial['question'])); 
+    answerOptions.on('change', updateAnswers);
+    updateAnswers(); // on first render, use default answers (all)
+    
     partial['question']['answers'] = render(partial['question']['answers']);
   }
   
@@ -73,6 +77,21 @@ d3.json('../source/data.json', function(error, data) {
     }
   }
   
+  function updateAnswers(el) {
+    // iterate through all unchecked answers checkboxes
+    d3.select('input[name^="answers"]:not(:checked)').each(function(selection) {
+     // filter data based on unchecked checkboxes
+     partial['question']['answers'] = partial['question']['answers'].filter(function(d) {
+        return d.source_rank !== selection.id;
+      })
+    });
+    
+    // if not first render, trigger re-render
+    if (typeof el !== 'undefined') {
+      partial['question']['answers'] = render(partial['question']['answers']);
+    }
+  }
+  
   // returns questions from data in friendly form
   function loadQuestions(data) {
     var qs = [];
@@ -81,14 +100,14 @@ d3.json('../source/data.json', function(error, data) {
     for(var i=0; i < keys.length; i++) {
       qs.push({
         'id': keys[i],
-        'question': data[keys[i]]['question']
+        'name': data[keys[i]]['question']
       })
     }
    
     return qs;
   }
   
-  // returns questions from data as array with no duplicates
+  // returns states from data as array with no duplicates
   function loadStates(data) {
     var states = [];
     
@@ -99,6 +118,22 @@ d3.json('../source/data.json', function(error, data) {
     });
     
     return states;
+  }
+  
+  // returns answers from data as array with no duplicates
+  function loadAnswers(data) {
+    var answers = [];
+    
+    data['answers'].forEach(function(value, index, arr) {
+      if(_.findIndex(answers, function(o) { return o.id == value.source_rank && o.name == value.source_rank; }) === -1) {
+        answers.push({
+          'id': value.source_rank,
+          'name': value.source
+        });
+      }
+    });
+    
+    return answers;
   }
   
   // create radio buttons
@@ -113,7 +148,7 @@ d3.json('../source/data.json', function(error, data) {
       .enter()
       .append('label')
         .text(function(d) {
-            return which(d.name, d.question, d) + ' ['+which(d.id, d)+']';
+            return which(d.name, d) + ' ['+which(d.id, d)+']';
           })
         .attr('class', 'label-'+name)
         .attr('name', name)
@@ -149,7 +184,7 @@ d3.json('../source/data.json', function(error, data) {
       .enter()
       .append('label')
         .text(function(d) {
-            return which(d.name, d.question, d) + ' ['+which(d.id, d)+']';
+            return which(d.name, d) + ' ['+which(d.id, d)+']';
           })
         .attr('class', 'label-'+name)
         .attr('name', function(d) {
