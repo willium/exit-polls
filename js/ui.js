@@ -5,7 +5,7 @@ d3.json('../source/data.json', function(error, data) {
     'party': {},
     'question': {}
   };
-  
+    
   loadUI();
   
   function loadUI() {
@@ -17,7 +17,7 @@ d3.json('../source/data.json', function(error, data) {
   }
 
   function updateParty(el) {
-    var party = which(this.value, d3.select('input[name="parties"]:checked').node().value);
+    var party = which(this.value, d3.select('input[name^="parties"]:checked').node().value);
     partial['party'] = data[party];
    
     var questionChoice = createChoice('questions', loadQuestions(partial['party'])); 
@@ -26,7 +26,7 @@ d3.json('../source/data.json', function(error, data) {
   }
   
   function updateQuestion(el) {
-    var question = which(this.value, d3.select('input[name="questions"]:checked').node().value);
+    var question = which(this.value, d3.select('input[name^="questions"]:checked').node().value);
     partial['question'] = partial['party'][question];
     
     var candidateOptions = createOptions('candidates', partial['question']['candidates']); 
@@ -37,34 +37,33 @@ d3.json('../source/data.json', function(error, data) {
     stateOptions.on('change', updateStates);
     updateStates();
     
-    renderChart(partial['question']['answers']);
+    partial['question']['answers'] = render(partial['question']['answers']);
   }
   
   function updateCandidates(el) {
-    d3.select('input[name="candidates"]:not(:checked)').each(function() {
-      var input = this;
-      partial['question']['answers'] = partial['question']['answers'].filter(function(d){
-        return d.target_id !== which(el.id, input.id);
+    console.log(partial['question']['answers']);
+    d3.select('input[name^="candidates"]:not(:checked)').each(function(selection) {
+      partial['question']['answers'] = partial['question']['answers'].filter(function(d) {
+        return d.target_id !== selection.id;
       })
     });
     
-    if (typeof el != 'undefined') {
-      renderChart(partial['question']['answers']);
+    if (typeof el !== 'undefined') {
+      partial['question']['answers'] = render(partial['question']['answers']);
     }
   }
   
   function updateStates(el) {
-    d3.select('input[name="states"]:not(:checked)').each(function() {
-      var input = this;
-      partial['question']['answers'] = partial['question']['answers'].filter(function(d){
-        return d.state !== which(el.id, input.id);
+    d3.select('input[name^="states"]:not(:checked)').each(function(selection) {
+      partial['question']['answers'] = partial['question']['answers'].filter(function(d) {
+        return d.state !== selection;
       })
     });
-    
-    if (typeof el != 'undefined') {
-      renderChart(partial['question']['answers']);
+
+    if (typeof el !== 'undefined') {
+      partial['question']['answers'] = render(partial['question']['answers']);
     }
-   }
+  }
 
   function loadQuestions(data) {
     var qs = [];
@@ -95,16 +94,6 @@ d3.json('../source/data.json', function(error, data) {
   function triggerChange(d, i) {
     console.log('trigger', this, d, i);
   }
-
-  function which() {
-    for (var i=0; i < arguments.length; i++) {
-      if (typeof arguments[i] != 'undefined') {
-        return arguments[i];
-      }
-    }
-    
-    return null;
-  }
   
   // radio button
   function createChoice(name, data) {
@@ -120,7 +109,8 @@ d3.json('../source/data.json', function(error, data) {
         .text(function(d) {
             return which(d.name, d.question, d) + ' ['+which(d.id, d)+']';
           })
-        .attr('class', 'label-'+name);
+        .attr('class', 'label-'+name)
+        .attr('name', name)
               
     inputs = labels.insert('input')
       .attr({
@@ -157,12 +147,17 @@ d3.json('../source/data.json', function(error, data) {
             return which(d.name, d.question, d) + ' ['+which(d.id, d)+']';
           })
         .attr('class', 'label-'+name)
+        .attr('name', function(d) {
+          return name+'-'+which(d.id, d);
+        })
         
     var inputs = labels.insert('input')
       .attr({
           type: 'checkbox',
           class: name,
-          name: name,
+          name: function(d) {
+            return name+'-'+which(d.id, d);
+          },
           id: function(d) {
             return which(d.id, d);
           },

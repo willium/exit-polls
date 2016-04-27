@@ -77,6 +77,8 @@ def main():
     } for p in PARTIES}
 
     data = {p: {} for p in PARTIES}
+    
+    answer_id = 0
 
     for state in STATES:
         for party in PARTIES:
@@ -143,7 +145,8 @@ def main():
                                 'state': state,
                                 'target_id': cda['id'],
                                 'election_date': result['electiondate'],
-                                'source_rank': i
+                                'source_rank': i,
+                                'id': answer_id
                             },
                             **create_relationship(
                                 source=answer['answer'],
@@ -151,6 +154,8 @@ def main():
                                 value=candidate_answer_value
                             )
                         })
+
+                        answer_id += 1
 
     save(data, 'data.json')
     save(meta, 'meta.json')
