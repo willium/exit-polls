@@ -1,6 +1,24 @@
 # a3-willium-ayush29feb
+===============
 
-### Initial setup
+## Team Members
+
+1. Will Strimling (willium)
+2. Ayush Saraf (ayush29f)
+
+## Exit Poll Exploration
+
+<!--
+![Thumbnail](thumbnail.png)
+
+(Put your a brief description of your final interactive visualization application and your dataset here.)
+-->
+
+## Running Instructions
+
+Live here: http://example.com
+
+#### Run Locally
 
 ```bash
 # Install dependencies
@@ -10,7 +28,7 @@ npm install
 npm install -g gulp
 ```
 
-### Running in the browser
+#### Running in the browser
 Runs an initial build, listens on your files changes, rebuilds them when necessary
 and automagically reloads the browser!
 
@@ -18,26 +36,26 @@ and automagically reloads the browser!
 gulp watch
 ```
 
-### What are all the pieces involved?
+Put your running instructions here. (Tell us how to run your visualization.)
 
-#### [Babel](http://babeljs.io/)
-Transpiles ES6 code into regular ES5 (today's JavaScript) so that it can be run in a today browser. Like traceur but doesn't need a runtime to work. Formerly known as 6to5.
+If your visualization is web-based,  it would be great if your submission can be opened online. [Github Pages](http://pages.github.com/) is a good and easy way to put your visualization online so you can put your link here.  For example:
 
-#### [CommonJS](http://wiki.commonjs.org/wiki/CommonJS)
-Babel is configured to transpile ES6 modules into CommonJS syntax and we use browserify to bundle the code into one file to deliver it to the browser.
+Access our visualization at http://cse512-16s.github.io/a3-jheer-mcorrell-jhoffs/ or download this repository and run `python -m SimpleHTTPServer 9000` and access this from http://localhost:9000/.
 
-#### [Browserify](http://browserify.org/)
-Browserify walks through all files and traces down all `require()`s to bundle all files together.
+If you put your work online, please also write a [one-line description and add a link to your final work](http://note.io/1n3u46s) so people can access it directly from the CSE512-16S page.
 
-#### [Watchify](https://github.com/substack/watchify)
-Makes faster consecutive browserify builds, and emit events on files changes.
+## Story Board
 
-#### [Gulp](http://gulpjs.com/)
-Task runner to make defining and running the tasks simpler.
+Put either your storyboard content or a [link to your storyboard pdf file](storyboard.pdf?raw=true) here. Just like A2, you can use any software to create a *reasonable* pdf storyboard.
 
-#### [BrowserSync](http://www.browsersync.io/)
-Automatically reload the browser on HTML and JS changes, injects CSS transparently.
-Also synchronizes all your open browsers on the same page (scrolling, clicking, etc).
+### Changes between Storyboard and the Final Implementation
 
-#### [SASS](http://sass-lang.com/)
-Syntactically Awesome Style Sheets: Sass is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more.
+A paragraph explaining changes between the storyboard and the final implementation.
+
+## Development Process
+
+Include:
+- Breakdown of how the work was split among the group members.
+- A commentary on the development process, including answers to the following questions:
+  - Roughly how much time did you spend developing your application?
+  - What aspects took the most time?
