@@ -53,8 +53,8 @@ function generateGraph(data) {
 
   // Add all the data to graph
   data.forEach(function(d) {
-    graph.nodes.push({ 'name': d.source, 'meta': d });
-    graph.nodes.push({ 'name': d.target, 'meta': d });
+    graph.nodes.push({ 'name': d.source, 'type': 'source', 'meta': d });
+    graph.nodes.push({ 'name': d.target, 'type': 'target', 'meta': d });
     graph.links.push({ 'source': d.source, 'target': d.target, 'value': +d.value, 'meta': d });
   });
 

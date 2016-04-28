@@ -3,7 +3,7 @@ import config from './config';
 import { Sankey } from './sankey';
 
 // Basic chart constants
-var margin = {top: config.chart.margin, right: config.chart.margin, bottom: config.chart.margin, left: config.chart.margin},
+var margin = { top: config.chart.margin.top, right: config.chart.margin.right, bottom: config.chart.margin.bottom, left: config.chart.margin.left },
   width = config.chart.width - margin.left - margin.right,
   height = config.chart.height - margin.top - margin.bottom;
 
@@ -67,9 +67,13 @@ export function draw(graph) {
     .attr('width', sankey.nodeWidth())
     .append('title');
   nodesEnterSelection.append('text')
-    .attr('x', sankey.nodeWidth() / 2)
+    .attr('x', function(d) {
+      return _.isEqual(d.type, 'source') ? -config.chart.node.margin : (sankey.nodeWidth() + config.chart.node.margin);
+    })
     .attr('dy', '.35em')
-    .attr('text-anchor', 'middle')
+    .attr('text-anchor', function(d) {
+      return _.isEqual(d.type, 'source') ? 'end' : 'start';
+    })
     .attr('transform', null);
   // Enter + Update
   nodes

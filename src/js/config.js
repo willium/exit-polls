@@ -2,12 +2,18 @@ const config = {
   chart: {
     node: {
       width: 40,
-      padding: 40
+      padding: 40,
+      margin: 10
     },
     iterations: 32,
-    width: 700,
-    height: 500,
-    margin: 0
+    width: 960,
+    height: 620,
+    margin: {
+      top: 20,
+      bottom: 20,
+      left: 150,
+      right: 150
+    }
   },
   data: {
     current_candidates: [
