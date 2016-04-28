@@ -14,9 +14,9 @@ function filterData(data, filter) {
   
   partial = _.filter(partial, function(o) {
     const notNull = o['value'] !== 0;
-    const stateMatch = _.indexOf(filter['states'], o['state']) !== -1;
-    const candidateMatch = _.indexOf(filter['candidates'], o['target_id']) !== -1;
-    const answerMatch = _.indexOf(filter['answers'], o['source_rank']) !== -1;
+    const stateMatch = _.includes(filter['states'], o['state']);
+    const candidateMatch = _.includes(filter['candidates'], o['target_id']);
+    const answerMatch = _.includes(filter['answers'], o['source_rank']);
     return notNull && stateMatch && candidateMatch && answerMatch;
   });
   
@@ -26,7 +26,7 @@ function filterData(data, filter) {
 function rollup(data) {
   var output = [];
 
-  data.forEach(function(row) {
+  _.forEach(data, function(row) {
     var existing = output.filter(function(d){
       return (d.source === row.source) && (d.target === row.target)
     })
@@ -40,7 +40,7 @@ function rollup(data) {
       // keep track of states for reference later
       output[index]['state'] = _.union(output[index]['state'], [row['state']]);
     } else {
-      output.push(row);
+      output.push(_.cloneDeep(row));
     }
   });
 

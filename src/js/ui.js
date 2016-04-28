@@ -104,7 +104,7 @@ function loadQuestions(data) {
 // returns states from data as array with no duplicates
 function loadStates(data) {
   var states = [];
-  
+
   data['answers'].forEach(function(value, index, arr) {
     if(states.indexOf(value.state) === -1) {
       states.push(value.state);
@@ -119,7 +119,7 @@ function loadAnswers(data) {
   var answers = [];
   
   data['answers'].forEach(function(value, index, arr) {
-    if(_.findIndex(answers, function(o) { return o.id == value.source_rank && o.name == value.source_rank; }) === -1) {
+    if(_.findIndex(answers, function(o) { return o.id == value.source_rank && o.name == value.source; }) === -1) {
       answers.push({
         'id': value.source_rank,
         'name': value.source
