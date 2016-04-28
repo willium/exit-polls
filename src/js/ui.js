@@ -134,9 +134,7 @@ function loadQuestions(data) {
   qs = d3.nest()
     .key(function(d) {return d.name; })
     .map(qs);
-    
-  console.log(qs);
-  
+      
   return qs;
 }
 

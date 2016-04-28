@@ -40,7 +40,7 @@ export function draw(graph) {
     .layout(config.chart.iterations);
     
   // Draw the links
-  var links = linksGroup.selectAll('.link').data(graph.links);
+  var links = linksGroup.selectAll('.link').data(graph.links, function(o) { return o.meta.id; });
   // Enter
   links.enter()
     .append('path')
@@ -56,7 +56,7 @@ export function draw(graph) {
     });
   // Exit
   links.exit().remove();
-  
+
   // Draw the nodes
   var nodes = nodesGroup.selectAll('.node').data(graph.nodes);
   // Enter
@@ -71,7 +71,6 @@ export function draw(graph) {
     .attr('dy', '.35em')
     .attr('text-anchor', 'middle')
     .attr('transform', null);
-
   // Enter + Update
   nodes
     .attr('transform', function (d) {

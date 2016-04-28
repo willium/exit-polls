@@ -60,22 +60,16 @@ function generateGraph(data) {
     graph.links.push({ 'source': d.source, 'target': d.target, 'value': +d.value, 'meta': d });
   });
 
-  // remove duplicate nodes
-  graph.nodes = d3.keys(d3.nest()
-    .key(function(d) {return d.name; })
-    .map(graph.nodes));
+  graph.nodes = _.uniqWith(graph.nodes, function(a, b) { return a.name === b.name; })
 
   // Switch links source/target from data to index in the nodes
-  graph.links.forEach(function(d, i) {
-    graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
-    graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
-  });
-
-  // now loop through each nodes to make nodes an array of objects
-  // rather than an array of strings
-  graph.nodes.forEach(function (d, i) {
-    graph.nodes[i] = { 'name': d };
+  _.forEach(graph.links, function(d, i) {
+    graph.links[i].source = _.findIndex(graph.nodes, function(n) { return n.name === graph.links[i].source; });
+    graph.links[i].target = _.findIndex(graph.nodes, function(n) { return n.name === graph.links[i].target; });
   });
   
+  graph.nodes = _.sortBy(graph.nodes, function(o) { return o.meta.source_rank; });
+    
+  // return graph
   return graph;
 }
