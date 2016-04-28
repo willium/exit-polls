@@ -4,6 +4,7 @@ import { which } from './util';
 
 let data, render;
 let filter = {'states': [], 'candidates': [], 'answers': []};
+let questions, bin;
 
 // start the UI render
 export function load(d, r) {
@@ -19,29 +20,61 @@ export function load(d, r) {
 }
 
 function updateParty(el) {
-  var party = d3.select('input[name^="parties"]:checked').node().value;  
+  var party = d3.select('input[name^="parties"]:checked').node().value;
   filter.party = party;
   
-  var questionChoice = createChoice('questions', loadQuestions(data[party])); 
-  questionChoice.on('change', updateQuestion);
+  questions = loadQuestions(data[party]);
+  var topLevel = d3.keys(questions);
+  var questionChoice = createChoice('questions', topLevel); 
+  questionChoice.on('change', updateBins);
   
   // on first render, use default question (i=0)
+  updateBins();
+}
+
+function updateBins(el) {
+  var question = d3.select('input[name^="questions"]:checked').node().value;
+  var bins = questions[question];
+  
+  if (bins.length === 1) {
+    bin = bins[0]['id'];
+    showBins(false);
+  } else {
+    bin = null;
+    showBins(true);
+    bins = _.forEach(questions[question], function(o, i) { o.name = 'Version ' + i; });
+    var binChoice = createChoice('bins', bins);
+    binChoice.on('change', updateQuestion);
+  }
   updateQuestion();
 }
 
+function showBins(show) {
+  var filters = d3.select('#filters');
+  var bins = filters.select('#bins');
+  if (show && bins.empty()) {
+    filters
+      .insert('div', '#questions + *') // after questions
+      .attr('id', 'bins')
+      .attr('class', 'filter');
+  } else if (!show) {
+    bins.remove();
+  }
+}
+
 function updateQuestion(el) {
-  var question = d3.select('input[name^="questions"]:checked').node().value;    
-  filter.question = question;
-  
-  var candidateOptions = createOptions('candidates', data[filter.party][question]['candidates']); 
+  var b = bin || d3.select('input[name^="bins"]:checked').node().value;
+  filter.question = b;
+
+  var candidateOptions = createOptions('candidates', data[filter.party][filter.question]['candidates']); 
   candidateOptions.on('change', updateCandidates);
   updateCandidates(); // on first render, use default candidates (all)
   
-  var stateOptions = createOptions('states', loadStates(data[filter.party][question])); 
+  var stateOptions = createOptions('states', loadStates(data[filter.party][filter.question])); 
   stateOptions.on('change', updateStates);
   updateStates(); // on first render, use default states (all)
   
-  var answerOptions = createOptions('answers', loadAnswers(data[filter.party][question])); 
+  var answerOptions = createOptions('answers', loadAnswers(data[filter.party][filter.question])); 
   answerOptions.on('change', updateAnswers);
   updateAnswers(); // on first render, use default answers (all)
   
@@ -99,6 +132,12 @@ function loadQuestions(data) {
     })
   }
   
+  qs = d3.nest()
+    .key(function(d) {return d.name; })
+    .map(qs);
+    
+  console.log(qs);
+  
   return qs;
 }
 
@@ -143,7 +182,7 @@ function createChoice(name, data) {
     .enter()
     .append('label')
       .text(function(d) {
-          return which(d.name, d) + ' ['+which(d.id, d)+']';
+          return which(d.name, d);
         })
       .attr('class', 'label-'+name)
       .attr('name', name)
@@ -179,7 +218,7 @@ function createOptions(name, data) {
     .enter()
     .append('label')
       .text(function(d) {
-          return which(d.name, d) + ' ['+which(d.id, d)+']';
+          return which(d.name, d);
         })
       .attr('class', 'label-'+name)
       .attr('name', function(d) {
