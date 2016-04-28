@@ -1,5 +1,6 @@
-import d3 from 'd3'
-import { which } from './util'
+import d3 from 'd3';
+import config from './config';
+import { which } from './util';
 
 let data, render;
 let filter = {'states': [], 'candidates': [], 'answers': []};
@@ -199,7 +200,9 @@ function createOptions(name, data) {
           return which(d.id, d);
         },
     })
-    .property('checked', true)
+    .property('checked', function(d) {
+      return (name === 'candidates') ? (_.includes(config.data.current_candidates, d.id)) : true;
+    })
   
   labels.append('br');
   

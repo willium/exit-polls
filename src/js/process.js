@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash';
 
 export function process(data, filter) {
   let processedData = filterData(data, filter);
@@ -54,7 +54,6 @@ function generateGraph(data) {
   graph.links = [];
 
   // Add all the data to graph
-  var nulls = [] // all data points with a value below LOWER_BOUND
   data.forEach(function(d) {
     graph.nodes.push({ 'name': d.source, 'meta': d });
     graph.nodes.push({ 'name': d.target, 'meta': d });

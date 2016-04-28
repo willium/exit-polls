@@ -1,15 +1,11 @@
-import d3 from 'd3'
+import d3 from 'd3';
+import config from './config';
 import { Sankey } from './sankey';
 
-// Global constants
-var NODE_WIDTH   = 40,
-    NODE_PADDING = 40,
-    ITERATIONS   = 32;
-
 // Basic chart constants
-var margin = {top: 10, right: 10, bottom: 10, left: 10},
-  width = 700 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+var margin = {top: config.chart.margin, right: config.chart.margin, bottom: config.chart.margin, left: config.chart.margin},
+  width = config.chart.width - margin.left - margin.right,
+  height = config.chart.height - margin.top - margin.bottom;
 
 // set color scale
 var color = d3.scale.category20();
@@ -29,8 +25,8 @@ var nodesGroup = svg.append('g').attr('class', 'nodes');
 
 // Create a sanky diagram with these properties
 var sankey = Sankey()
-  .nodeWidth(NODE_WIDTH)
-  .nodePadding(NODE_PADDING)
+  .nodeWidth(config.chart.node.width)
+  .nodePadding(config.chart.node.padding)
   .size([width, height]);
 
 // Get path data generator
@@ -41,7 +37,7 @@ export function draw(graph) {
   sankey
     .nodes(graph.nodes)
     .links(graph.links)
-    .layout(ITERATIONS);
+    .layout(config.chart.iterations);
     
   // Draw the links
   var links = linksGroup.selectAll('.link').data(graph.links);
