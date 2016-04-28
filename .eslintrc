@@ -1,0 +1,18 @@
+{
+  "parser": "babel-eslint",
+  "extends": "standard",
+  "rules": {
+    "comma-dangle": [1, "always-multiline"], // if transpiled!
+    "space-before-function-paren": [1, {"anonymous": "always", "named": "never"}],
+    "key-spacing": [2, {"beforeColon": false, "afterColon": true, "mode": "minimum"}],
+    "no-multi-spaces": [2, { "exceptions": {
+      "ImportDeclaration":  true,
+      "VariableDeclarator": true,
+      "BinaryExpression":   true
+    } }],
+  },
+  "plugins": [
+    "react",
+    "standard"
+  ]
+}

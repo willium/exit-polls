@@ -2,3 +2,5 @@
 *.pyb
 parts
 node_modules
+build
+.idea
