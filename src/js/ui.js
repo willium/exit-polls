@@ -4,7 +4,7 @@ import { which } from './util';
 
 let data, render;
 let filter = {'states': [], 'candidates': [], 'answers': []};
-let questions, bin;
+let questions, bin; // TODO: make these less global
 
 // start the UI render
 export function load(d, r) {
@@ -63,8 +63,7 @@ function showBins(show) {
 }
 
 function updateQuestion(el) {
-  var b = bin || d3.select('input[name^="bins"]:checked').node().value;
-  filter.question = b;
+  filter.question = bin || d3.select('input[name^="bins"]:checked').node().value;
 
   var candidateOptions = createOptions('candidates', data[filter.party][filter.question]['candidates']); 
   candidateOptions.on('change', updateCandidates);
