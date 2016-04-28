@@ -42,7 +42,7 @@ function updateBins(el) {
   } else {
     bin = null;
     showBins(true);
-    bins = _.forEach(questions[question], function(o, i) { o.name = 'Version ' + i; });
+    bins = _.forEach(questions[question], function(o, i) { o.name = 'Version ' + _.add(1,i) });
     var binChoice = createChoice('bins', bins);
     binChoice.on('change', updateQuestion);
   }
