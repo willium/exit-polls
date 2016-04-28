@@ -28,7 +28,7 @@ function rollup(data) {
 
   _.forEach(data, function(row) {
     var existing = output.filter(function(d){
-      return (d.source === row.source) && (d.target === row.target)
+      return _.isEqual(d.source, row.source) && _.isEqual(d.target, row.target)
     })
     if (existing.length) {
       var index = output.indexOf(existing[0]);
@@ -49,9 +49,7 @@ function rollup(data) {
 
 function generateGraph(data) {
   // initialize the graph object
-  var graph = {};
-  graph.nodes = [];
-  graph.links = [];
+  var graph = { 'nodes': [], 'links': [] };
 
   // Add all the data to graph
   data.forEach(function(d) {
@@ -60,15 +58,13 @@ function generateGraph(data) {
     graph.links.push({ 'source': d.source, 'target': d.target, 'value': +d.value, 'meta': d });
   });
 
-  graph.nodes = _.uniqWith(graph.nodes, function(a, b) { return a.name === b.name; })
+  graph.nodes = _.uniqWith(graph.nodes, function(a, b) { return _.isEqual(a.name, b.name); })
 
   // Switch links source/target from data to index in the nodes
   _.forEach(graph.links, function(d, i) {
-    graph.links[i].source = _.findIndex(graph.nodes, function(n) { return n.name === graph.links[i].source; });
-    graph.links[i].target = _.findIndex(graph.nodes, function(n) { return n.name === graph.links[i].target; });
-  });
-  
-  graph.nodes = _.sortBy(graph.nodes, function(o) { return o.meta.source_rank; });
+    d.source = _.findIndex(graph.nodes, function(n) { return _.isEqual(n.name, d.source); });
+    d.target = _.findIndex(graph.nodes, function(n) { return _.isEqual(n.name, d.target); });
+  });  
     
   // return graph
   return graph;

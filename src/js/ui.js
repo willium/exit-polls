@@ -36,7 +36,7 @@ function updateBins(el) {
   var question = d3.select('input[name^="questions"]:checked').node().value;
   var bins = questions[question];
   
-  if (bins.length === 1) {
+  if (_.isEqual(bins.length, 1)) {
     bin = bins[0]['id'];
     showBins(false);
   } else {
@@ -88,7 +88,7 @@ function updateCandidates(el) {
   });
   
   // if not first render, trigger re-render
-  if (typeof el !== 'undefined') {
+  if (!_.isUndefined(el)) {
     render(filter);
   }
 }
@@ -101,7 +101,7 @@ function updateStates(el) {
   });
   
   // if not first render, trigger re-render
-  if (typeof el !== 'undefined') {
+  if (!_.isUndefined(el)) {
     render(filter);
   }
 }
@@ -114,7 +114,7 @@ function updateAnswers(el) {
   });
   
   // if not first render, trigger re-render
-  if (typeof el !== 'undefined') {
+  if (!_.isUndefined(el)) {
     render(filter);
   }
 }
@@ -122,14 +122,13 @@ function updateAnswers(el) {
 // returns questions from data in friendly form
 function loadQuestions(data) {
   var qs = [];
-  var keys = d3.keys(data);
   
-  for(var i=0; i < keys.length; i++) {
+  _.forEach(d3.keys(data), function (key, i) {
     qs.push({
-      'id': keys[i],
-      'name': data[keys[i]]['question']
+      'id': key,
+      'name': data[key]['question']
     })
-  }
+  });
   
   qs = d3.nest()
     .key(function(d) {return d.name; })
@@ -143,7 +142,7 @@ function loadStates(data) {
   var states = [];
 
   data['answers'].forEach(function(value, index, arr) {
-    if(states.indexOf(value.state) === -1) {
+    if(!_.includes(states, value.state)) {
       states.push(value.state);
     }
   });
@@ -156,7 +155,7 @@ function loadAnswers(data) {
   var answers = [];
   
   data['answers'].forEach(function(value, index, arr) {
-    if(_.findIndex(answers, function(o) { return o.id == value.source_rank && o.name == value.source; }) === -1) {
+    if(_.findIndex(answers, function(o) { return _.isEqual(o.id, value.source_rank) && _.isEqual(o.name, value.source); }) === -1) {
       answers.push({
         'id': value.source_rank,
         'name': value.source
@@ -181,7 +180,7 @@ function createChoice(name, data) {
       .text(function(d) {
           return which(d.name, d);
         })
-      .attr('class', 'label-'+name)
+      .attr('class', 'label-' + name)
       .attr('name', name)
             
   var inputs = labels.insert('input')
@@ -196,7 +195,7 @@ function createChoice(name, data) {
           return which(d.id, d);
         },
     })
-    .property('checked', function(d, i) {return i===0;})
+    .property('checked', function(d, i) { return _.isEqual(i,0); })
     
   labels.append('br');
   
@@ -217,9 +216,9 @@ function createOptions(name, data) {
       .text(function(d) {
           return which(d.name, d);
         })
-      .attr('class', 'label-'+name)
+      .attr('class', 'label-' + name)
       .attr('name', function(d) {
-        return name+'-'+which(d.id, d);
+        return name +  '-' + which(d.id, d);
       })
       
   var inputs = labels.insert('input')
@@ -227,7 +226,7 @@ function createOptions(name, data) {
         type: 'checkbox',
         class: name,
         name: function(d) {
-          return name+'-'+which(d.id, d);
+          return name + '-' + which(d.id, d);
         },
         id: function(d) {
           return which(d.id, d);
@@ -237,7 +236,7 @@ function createOptions(name, data) {
         },
     })
     .property('checked', function(d) {
-      return (name === 'candidates') ? (_.includes(config.data.current_candidates, d.id)) : true;
+      return _.isEqual(name, 'candidates') ? (_.includes(config.data.current_candidates, d.id)) : true;
     })
   
   labels.append('br');

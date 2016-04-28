@@ -58,7 +58,7 @@ export function draw(graph) {
   links.exit().remove();
 
   // Draw the nodes
-  var nodes = nodesGroup.selectAll('.node').data(graph.nodes);
+  var nodes = nodesGroup.selectAll('.node').data(graph.nodes, function(o) { return o.meta.target_id + '.' + o.meta.source_rank + '.' + o.value; });
   // Enter
   var nodesEnterSelection = nodes.enter()
     .append('g')
