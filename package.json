@@ -22,12 +22,12 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.1.1",
     "gulp-util": "^3.0.7",
-    "lodash": "^4.11.1",
     "rimraf": "^2.5.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "d3": "^3.5.16"
+    "d3": "^3.5.16",
+    "lodash": "^4.11.1"
   }
 }
