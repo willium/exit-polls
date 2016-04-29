@@ -5,6 +5,7 @@ import json
 import os
 import urllib.request
 import urllib.parse
+from titlecase import titlecase
 
 __dir__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -46,6 +47,10 @@ def save(data, filename='data.json'):
 
     print('wrote {} to {}'.format(filename, location))
 
+def clean_source(src):
+    """prunes"""
+    return titlecase(src.replace('17-24', '18-24'))
+
 def clean_poll_name(poll_name):
     """clean up poll name"""
     poll_name = poll_name.upper()
@@ -56,7 +61,7 @@ def clean_poll_name(poll_name):
 def create_relationship(source, target, value):
     """generate object describing relationship for export"""
     return {
-        'source': source,
+        'source': clean_source(source),
         'target': target,
         'value': round(value)
     }

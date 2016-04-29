@@ -155,7 +155,7 @@ function loadAnswers(data) {
   var answers = [];
   
   data['answers'].forEach(function(value, index, arr) {
-    if(_.findIndex(answers, function(o) { return _.isEqual(o.id, value.source_rank) && _.isEqual(o.name, value.source); }) === -1) {
+    if(_.findIndex(answers, function(o) { return _.isEqual(o.name, value.source); }) === -1) {
       answers.push({
         'id': value.source_rank,
         'name': value.source
