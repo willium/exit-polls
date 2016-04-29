@@ -168,6 +168,10 @@ function loadAnswers(data) {
 
 // create radio buttons
 function createChoice(name, data) {
+  data = _.orderBy(data, function(d) {
+    return which(d.name, d.id, d);
+  });
+  
   var div = d3.select('#' + name);
   div.select('form').remove();
   var form = div.append('form');
@@ -204,6 +208,8 @@ function createChoice(name, data) {
 
 // create checkboxes
 function createOptions(name, data) {
+  data = _.orderBy(data, [function(d) { return _.isEqual(name, 'candidates') ? (!_.includes(config.data.current_candidates, d.id)) : which(d.name, d.id, d); }, 'name']);
+
   var div = d3.select('#' + name);
   div.select('form').remove();
   var form = div.append('form');
