@@ -54,6 +54,9 @@ export function draw(graph) {
     .text(function (d) {
       return d.source.name + ' to ' + d.target.name + ' = ' + d.value;
     });
+  links.on('mouseover', function(d) {
+    d3.select(this).moveToFront();
+  });
   // Exit
   links.exit().remove();
 
