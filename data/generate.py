@@ -82,7 +82,7 @@ def main():
     } for p in PARTIES}
 
     data = {p: {} for p in PARTIES}
-    
+
     answer_id = 0
 
     for state in STATES:
@@ -101,7 +101,7 @@ def main():
 
                 if poll_name not in data[party]:
                     data[party][poll_name] = {
-                        'question': question['question'],
+                        'question': question['question'].strip(),
                         'count': question['numrespondents'],
                         'answers': [],
                         'candidates': []
@@ -112,7 +112,7 @@ def main():
                 if not [pl for pl in meta[party]['questions'] if pl['id'] == poll_name]:
                     meta[party]['questions'].append({
                         'id': poll_name,
-                        'question': question['question']
+                        'question': question['question'].strip()
                     })
 
                 candidates = question['candidates']
@@ -130,7 +130,7 @@ def main():
                         meta[party]['candidates'].append({
                             'id': candidate['id'],
                             'name': candidate_name,
-                            'party': candidate['party']
+                            'party': candidate['party'].strip()
                         })
 
                 answers = question['answers']
@@ -149,7 +149,7 @@ def main():
                             **{
                                 'state': state,
                                 'target_id': cda['id'],
-                                'election_date': result['electiondate'],
+                                'election_date': result['electiondate'].strip(),
                                 'source_rank': i,
                                 'id': answer_id
                             },
