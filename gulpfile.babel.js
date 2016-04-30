@@ -9,6 +9,7 @@ import browserSyncModule from 'browser-sync'
 import autoprefixer from 'gulp-autoprefixer'
 import gutil from 'gulp-util'
 import shell from 'gulp-shell'
+import ghPages from 'gulp-gh-pages'
 
 let browserSync = browserSyncModule.create()
 
@@ -67,6 +68,11 @@ gulp.task('server', function () {
     host: '0.0.0.0',
     port: 8080,
   })
+})
+
+gulp.task('deploy', function() {
+  return gulp.src(config.outDir + '**/*')
+    .pipe(ghPages());
 })
 
 gulp.task('data', function () {
