@@ -156,6 +156,7 @@ def main():
                                 'target_id': cda['id'],
                                 'election_date': result['electiondate'].strip(),
                                 'source_rank': i,
+                                'party': party,
                                 'id': answer_id
                             },
                             **create_relationship(

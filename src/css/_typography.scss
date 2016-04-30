@@ -1,0 +1,181 @@
+$FONT__serif: 'charterregular', 'Georgia', serif;
+$FONT__serif-italic: 'charteritalic', 'Georgia', serif;
+$FONT__serif--bold: 'charterbold', 'Georgia', serif;
+$FONT__serif--bold-italic: 'charterbold_italic', 'Georgia', serif;
+
+$FONT__sans: 'gothambookregular', 'Georgia', sans-serif;
+$FONT__sans-italic: 'gothambookitalic', 'Georgia', sans-serif;
+$FONT__sans--bold: 'gothamboldregular', 'Georgia', sans-serif;
+$FONT__sans--bold-italic: 'gothambolditalic', 'Georgia', sans-serif;
+
+$FONT__mono: 'meslo_lg_sregular', 'Menlo', 'Source Code Pro', monospace;
+$FONT__mono-italic: 'meslo_lg_sitalic', 'Menlo', 'Source Code Pro', monospace;
+$FONT__mono--bold: 'meslo_lg_sbold', 'Menlo', 'Source Code Pro', monospace;
+$FONT__mono--bold-italic: 'meslo_lg_sbold_italic', 'Menlo', 'Source Code Pro', monospace;
+
+// charter
+@font-face {
+    font-family: 'charterbold_italic';
+    src: url('./fonts/charter/charter_bold_italic-webfont.eot');
+    src: url('./fonts/charter/charter_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/charter/charter_bold_italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'charterbold';
+    src: url('./fonts/charter/charter_bold-webfont.eot');
+    src: url('./fonts/charter/charter_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/charter/charter_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'charteritalic';
+    src: url('./fonts/charter/charter_italic-webfont.eot');
+    src: url('./fonts/charter/charter_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/charter/charter_italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'charterregular';
+    src: url('./fonts/charter/charter_regular-webfont.eot');
+    src: url('./fonts/charter/charter_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/charter/charter_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+// gotham
+@font-face {
+    font-family: 'gothambolditalic';
+    src: url('./fonts/gotham/gothambold-italic-webfont.eot');
+    src: url('./fonts/gotham/gothambold-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/gotham/gothambold-italic-webfont.woff2') format('woff2'),
+         url('./fonts/gotham/gothambold-italic-webfont.woff') format('woff'),
+         url('./fonts/gotham/gothambold-italic-webfont.ttf') format('truetype'),
+         url('./fonts/gotham/gothambold-italic-webfont.svg#gothambolditalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothamboldregular';
+    src: url('./fonts/gotham/gothambold-webfont.eot');
+    src: url('./fonts/gotham/gothambold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/gotham/gothambold-webfont.woff2') format('woff2'),
+         url('./fonts/gotham/gothambold-webfont.woff') format('woff'),
+         url('./fonts/gotham/gothambold-webfont.ttf') format('truetype'),
+         url('./fonts/gotham/gothambold-webfont.svg#gothamboldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothambookitalic';
+    src: url('./fonts/gotham/gothambook-italic-webfont.eot');
+    src: url('./fonts/gotham/gothambook-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/gotham/gothambook-italic-webfont.woff2') format('woff2'),
+         url('./fonts/gotham/gothambook-italic-webfont.woff') format('woff'),
+         url('./fonts/gotham/gothambook-italic-webfont.ttf') format('truetype'),
+         url('./fonts/gotham/gothambook-italic-webfont.svg#gothambookitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothambookregular';
+    src: url('./fonts/gotham/gothambook-webfont.eot');
+    src: url('./fonts/gotham/gothambook-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/gotham/gothambook-webfont.woff2') format('woff2'),
+         url('./fonts/gotham/gothambook-webfont.woff') format('woff'),
+         url('./fonts/gotham/gothambook-webfont.ttf') format('truetype'),
+         url('./fonts/gotham/gothambook-webfont.svg#gothambookregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+// meslo
+@font-face {
+    font-family: 'meslo_lg_sregular';
+    src: url('./fonts/meslo/meslolgs-regular-webfont.eot');
+    src: url('./fonts/meslo/meslolgs-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/meslo/meslolgs-regular-webfont.woff2') format('woff2'),
+         url('./fonts/meslo/meslolgs-regular-webfont.woff') format('woff'),
+         url('./fonts/meslo/meslolgs-regular-webfont.ttf') format('truetype'),
+         url('./fonts/meslo/meslolgs-regular-webfont.svg#meslo_lg_sregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'meslo_lg_sitalic';
+    src: url('./fonts/meslo/meslolgs-italic-webfont.eot');
+    src: url('./fonts/meslo/meslolgs-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/meslo/meslolgs-italic-webfont.woff2') format('woff2'),
+         url('./fonts/meslo/meslolgs-italic-webfont.woff') format('woff'),
+         url('./fonts/meslo/meslolgs-italic-webfont.ttf') format('truetype'),
+         url('./fonts/meslo/meslolgs-italic-webfont.svg#meslo_lg_sitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'meslo_lg_sbold_italic';
+    src: url('./fonts/meslo/meslolgs-bolditalic-webfont.eot');
+    src: url('./fonts/meslo/meslolgs-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/meslo/meslolgs-bolditalic-webfont.woff2') format('woff2'),
+         url('./fonts/meslo/meslolgs-bolditalic-webfont.woff') format('woff'),
+         url('./fonts/meslo/meslolgs-bolditalic-webfont.ttf') format('truetype'),
+         url('./fonts/meslo/meslolgs-bolditalic-webfont.svg#meslo_lg_sbold_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'meslo_lg_sbold';
+    src: url('./fonts/meslo/meslolgs-bold-webfont.eot');
+    src: url('./fonts/meslo/meslolgs-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/meslo/meslolgs-bold-webfont.woff2') format('woff2'),
+         url('./fonts/meslo/meslolgs-bold-webfont.woff') format('woff'),
+         url('./fonts/meslo/meslolgs-bold-webfont.ttf') format('truetype'),
+         url('./fonts/meslo/meslolgs-bold-webfont.svg#meslo_lg_sbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

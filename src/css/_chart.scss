@@ -1,0 +1,39 @@
+#chart {
+  padding-top: 30px;  
+  font-family: $FONT__serif;
+}
+
+.node rect {
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+  
+  &.source {
+    fill: $COLOR__royal;
+  }
+  &.target {
+    &.r {
+      fill: $COLOR__chestnut;
+    }
+    &.d {
+      fill: $COLOR__marino;
+    }
+  }
+}
+
+.node text {
+  font-size: 20px;
+}
+
+.link {
+  fill: none;
+  stroke: $COLOR__royal;
+  stroke-opacity: .20;
+}
+
+.link:hover {
+  stroke-opacity: .50;
+}
+
+label {
+  display: block;
+}

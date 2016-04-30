@@ -27,7 +27,7 @@ function app() {
     if (error) return console.warn(error);
     
     const render = function render(filter) {
-      chart.draw(process(data, filter))
+      chart.draw(process(data, filter), data)
     }
     
     UI.load(data, render);

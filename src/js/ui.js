@@ -3,8 +3,13 @@ import config from './config';
 import { which } from './util';
 
 let data, render;
-let filter = {'states': [], 'candidates': [], 'answers': []};
-let questions, bin; // TODO: make these less global
+let defaultFilter = {'states': [], 'candidates': [], 'answers': []}
+let filter = _.clone(defaultFilter);
+let questions;
+
+export function addToShelf(shelfFilter) {
+  // shelf filter should kind of be of this form: {'states': [], 'candidates': [], 'answers': []}
+}
 
 // start the UI render
 export function load(d, r) {
@@ -12,111 +17,15 @@ export function load(d, r) {
   data = d;
   
   var parties = d3.keys(data); 
-  var partyChoice = createChoice('parties', parties);
-  partyChoice.on('change', updateParty);
-  
-  // on first render, use default party
-  updateParty();
+  renderParties(parties, updateParty);
 }
 
 function updateParty(el) {
-  var party = d3.select('input[name^="parties"]:checked').node().value;
+  var party = el || d3.select('input[name^="parties"]:checked').node().value;
   filter.party = party;
   
   questions = loadQuestions(data[party]);
-  var topLevel = d3.keys(questions);
-  var questionChoice = createChoice('questions', topLevel); 
-  questionChoice.on('change', updateBins);
-  
-  // on first render, use default question (i=0)
-  updateBins();
-}
-
-function updateBins(el) {
-  var question = d3.select('input[name^="questions"]:checked').node().value;
-  var bins = questions[question];
-  
-  if (_.isEqual(bins.length, 1)) {
-    bin = bins[0]['id'];
-    showBins(false);
-  } else {
-    bin = null;
-    showBins(true);
-    bins = _.forEach(questions[question], function(o, i) { o.name = 'Option ' + _.add(1,i) });
-    var binChoice = createChoice('bins', bins);
-    binChoice.on('change', updateQuestion);
-  }
-  updateQuestion();
-}
-
-function showBins(show) {
-  var filters = d3.select('#filters');
-  var bins = filters.select('#bins');
-  if (show && bins.empty()) {
-    filters
-      .insert('div', '#questions + *') // after questions
-      .attr('id', 'bins')
-      .attr('class', 'filter');
-  } else if (!show) {
-    bins.remove();
-  }
-}
-
-function updateQuestion(el) {
-  filter.question = bin || d3.select('input[name^="bins"]:checked').node().value;
-
-  var candidateOptions = createOptions('candidates', data[filter.party][filter.question]['candidates']); 
-  candidateOptions.on('change', updateCandidates);
-  updateCandidates(); // on first render, use default candidates (all)
-  
-  var stateOptions = createOptions('states', loadStates(data[filter.party][filter.question])); 
-  stateOptions.on('change', updateStates);
-  updateStates(); // on first render, use default states (all)
-  
-  var answerOptions = createOptions('answers', loadAnswers(data[filter.party][filter.question])); 
-  answerOptions.on('change', updateAnswers);
-  updateAnswers(); // on first render, use default answers (all)
-  
-  render(filter);
-}
-
-function updateCandidates(el) {
-  filter.candidates = [];
-  // iterate through all unchecked candidate checkboxes
-  d3.selectAll('input[name^="candidates"]:checked').each(function(selection) {
-    filter.candidates.push(selection.id);
-  });
-  
-  // if not first render, trigger re-render
-  if (!_.isUndefined(el)) {
-    render(filter);
-  }
-}
-
-function updateStates(el) {
-  filter.states = [];
-  // iterate through all unchecked states checkboxes
-  d3.selectAll('input[name^="states"]:checked').each(function(selection) {
-    filter.states.push(selection);
-  });
-  
-  // if not first render, trigger re-render
-  if (!_.isUndefined(el)) {
-    render(filter);
-  }
-}
-
-function updateAnswers(el) {
-  filter.answers = [];
-  // iterate through all unchecked answers checkboxes
-  d3.selectAll('input[name^="answers"]:checked').each(function(selection) {
-    filter.answers.push(selection.id);
-  });
-  
-  // if not first render, trigger re-render
-  if (!_.isUndefined(el)) {
-    render(filter);
-  }
+  renderQuestions(d3.keys(questions), updateBins); 
 }
 
 // returns questions from data in friendly form
@@ -137,115 +46,128 @@ function loadQuestions(data) {
   return qs;
 }
 
-// returns states from data as array with no duplicates
-function loadStates(data) {
-  var states = [];
-
-  data['answers'].forEach(function(value, index, arr) {
-    if(!_.includes(states, value.state)) {
-      states.push(value.state);
-    }
-  });
+function updateBins(el) {
+  var question = d3.select('#questions-select').property('value');
+  var bins = questions[question];
   
-  return states;
+  renderBins(bins, updateQuestion);
 }
 
-// returns answers from data as array with no duplicates
-function loadAnswers(data) {
-  var answers = [];
+function updateQuestion(el, idx, bin) {
+  filter.question = bin || d3.select('input[name^="bins"]:checked').node().value;
+
+  // render shelf with all candidates not checked who are available(default all candidates not still running)
+  // update state filter to remove all non available states
+  // render shelf with available states without states in filter
   
-  data['answers'].forEach(function(value, index, arr) {
-    if(_.findIndex(answers, function(o) { return _.isEqual(o.name, value.source); }) === -1) {
-      answers.push({
-        'id': value.source_rank,
-        'name': value.source
-      });
-    }
+  let shelf = _.clone(defaultFilter);
+  
+  let availableCandidates = _.uniq(_.map(data[filter.party][filter.question]['answers'], 'target_id'));
+  
+  let candidateIntersect = _.intersection(filter.candidates, availableCandidates);
+  filter.candidates = !_.isEqual(candidateIntersect.length, 0) ? candidateIntersect : config.data.current_candidates; 
+  shelf.candidates = _.without(availableCandidates, filter.candidates);
+  
+  let availableAnswers = _.filter(data[filter.party][filter.question]['answers'], function(o) {
+    return _.includes(filter.candidates, o.target_id);
   });
   
-  return answers;
+  let availableStates = _.uniq(_.map(availableAnswers, 'state'));
+  
+  let stateIntersect = _.intersection(availableStates, filter.states);
+  filter.states = !_.isEqual(stateIntersect.length, 0) ? stateIntersect : availableStates;
+  let shelfStates = _.without(availableStates, filter.states); 
+  
+  filter.answers = _.uniq(_.map(availableAnswers, 'source_rank'));
+
+  logger.log('Pre-render', 'Shelf', shelf);
+  logger.log('Pre-render', 'Filter', filter);
+  render(filter);
 }
 
-// create radio buttons
-function createChoice(name, data) {
-  data = _.orderBy(data, function(d) {
-    return which(d.name, d.id, d);
-  });
+function renderParties(partiesData, fn) {
+  partiesData = _.orderBy(partiesData, ['name']);
+
+  var partiesSwitch = d3.select('#parties-switch')
   
-  var div = d3.select('#' + name);
-  div.select('form').remove();
-  var form = div.append('form');
-  var labels = form.selectAll('label')
-    .data(data, function(d) {
-      return which(d.id, d);
-    })
+  var party = partiesSwitch.selectAll('.party')
+    .data(partiesData, function(d) { return d; })
     .enter()
-    .append('label')
-      .text(function(d) {
-          return which(d.name, d);
-        })
-      .attr('class', 'label-' + name)
-      .attr('name', name)
-            
-  var inputs = labels.insert('input')
-    .attr({
-        type: 'radio',
-        class: name,
-        name: name,
-        id: function(d) {
-          return which(d.id, d);
-        },
-        value: function(d) {
-          return which(d.id, d);
-        },
-    })
-    .property('checked', function(d, i) { return _.isEqual(i,0); })
+    .append('div')
+      .attr('class', 'party')
+      .attr('id', function(d) { return d.toLowerCase(); })
+  
+  var inputs = party.append('input')
+    .attr('type', 'radio')
+    .attr('id', function(d) { return 'party-' + d.toLowerCase(); })
+    .attr('name', 'parties')
+    .attr('value', function(d) { return d; })
+    .property('checked', function(d, i) { return _.isEqual(i, 0); })
+    .on('change', fn);
+  
+  party.append('label')
+    .attr('for', function(d) { return 'party-' + d.toLowerCase(); })
+    .text(function(d) { return _.isEqual(d, 'R') ? 'Republicans' : 'Democrats'; })
+  
+  fn();
+  return partiesData;
+}
+
+function renderQuestions(questionsData, fn) {
+  questionsData = questionsData.sort();
+  
+  var dropdown = d3.select('#questions-select').on('change', fn);
+  
+  var options = dropdown.selectAll('option')
+    .data(questionsData, function(d) { return d; })
+   
+  options.enter()
+    .append('option')    
+      .text(function(d) { return d; })
+      .attr('value', function(d) { return d; })
+      .property('selected', function(d, i) { return _.isEqual(i, 0); })
+
+  options.exit().remove();
+  
+  fn();
+  return questionsData;
+}
+
+function renderBins(binsData, fn) {
+  var bins = d3.select('#bins');
+  if (binsData.length <= 1) {
+    bins.attr('class', 'hidden');
+    if (!_.isUndefined(binsData[0])) {
+      fn(undefined, undefined, binsData[0].id);
+    }
+  } else {
+    bins.attr('class', null);
+  
+    var binsSwitch = bins.select('#bins-switch');
     
-  labels.append('br');
+    var bin = binsSwitch.selectAll('.bin')
+      .data(binsData, function(d) { return d.id; })
+    
+    var binEnter = bin.enter()
+      .append('span')
+        .attr('class', 'bin')
+    
+    var inputs = binEnter.append('input')
+      .attr('type', 'radio')
+      .attr('id', function(d, i) { return 'v' + i; })
+      .attr('name', 'bins')
+      .attr('value', function(d) { return d.id; })
+      .property('checked', function(d, i) { return _.isEqual(i, 0); })
+      .on('change', fn);
+    
+    binEnter.append('label')
+      .attr('for', function(d, i) { return 'v' + i; })
+      .text(function(d, i) { return i + 1; });
+    
+    bin.exit().remove();
+    
+    fn(undefined, undefined, false);    
+  }
   
-  return inputs;  
-}
-
-// create checkboxes
-function createOptions(name, data) {
-  data = _.orderBy(data, [function(d) { return _.isEqual(name, 'candidates') ? (!_.includes(config.data.current_candidates, d.id)) : which(d.name, d.id, d); }, 'name']);
-
-  var div = d3.select('#' + name);
-  div.select('form').remove();
-  var form = div.append('form');
-  var labels = form.selectAll('label')
-    .data(data, function(d) {
-      return which(d.id, d);
-    })
-    .enter()
-    .append('label')
-      .text(function(d) {
-          return which(d.name, d);
-        })
-      .attr('class', 'label-' + name)
-      .attr('name', function(d) {
-        return name +  '-' + which(d.id, d);
-      })
-      
-  var inputs = labels.insert('input')
-    .attr({
-        type: 'checkbox',
-        class: name,
-        name: function(d) {
-          return name + '-' + which(d.id, d);
-        },
-        id: function(d) {
-          return which(d.id, d);
-        },
-        value: function(d) {
-          return which(d.id, d);
-        },
-    })
-    .property('checked', function(d) {
-      return _.isEqual(name, 'candidates') ? (_.includes(config.data.current_candidates, d.id)) : true;
-    })
-  
-  labels.append('br');
-  
-  return inputs;
+  return binsData;
 }

@@ -8,15 +8,18 @@ import sass from 'gulp-sass'
 import browserSyncModule from 'browser-sync'
 import autoprefixer from 'gulp-autoprefixer'
 import gutil from 'gulp-util'
+import shell from 'gulp-shell'
 
 let browserSync = browserSyncModule.create()
 
 const config = {
   inFiles: {
     html: 'src/*.html',
-    js:   ['src/source.js'],
-    css:  'src/style.{sass,scss,css}',
-    data: 'data/data.json'
+    js: ['src/source.js'],
+    styles: 'src/css/*.scss',
+    css: 'src/css/style.scss',
+    data: 'data/*.json',
+    fonts: 'src/fonts/**/*.*'
   },
   outDir: 'build/',
   outFiles: {
@@ -52,6 +55,10 @@ gulp.task('clean', function (cb) {
   return rimraf(config.outDir, cb)
 })
 
+gulp.task('remove', shell.task([
+  'rm -r build'
+]))
+
 gulp.task('server', function () {
   return browserSync.init({
     server: {baseDir: config.outDir},
@@ -76,6 +83,13 @@ gulp.task('js', function () {
     .pipe(browserSync.stream())
 })
 
+gulp.task('fonts', function () {
+  return gulp.src(config.inFiles.fonts, { base: './src' })
+    .pipe(gulp.dest(config.outDir))
+    .pipe(browserSync.stream())
+});
+
+
 gulp.task('sass', function () {
   return gulp.src(config.inFiles.css)
     .pipe(sass()).on('error', logError)
@@ -90,10 +104,10 @@ gulp.task('html', function () {
     .pipe(browserSync.stream())
 })
 
-gulp.task('watch', ['clean', 'server', 'js', 'sass', 'data', 'html'], function () {
+gulp.task('watch', ['clean', 'remove', 'server', 'js', 'fonts', 'sass', 'data', 'html'], function () {
   // FIXME: initial build is done two times
   getBundler().on('update', () => gulp.start('js'))
   gulp.watch(config.inFiles.data, ['data'])
-  gulp.watch(config.inFiles.css, ['sass'])
+  gulp.watch(config.inFiles.styles, ['sass'])
   gulp.watch(config.inFiles.html, ['html'])
 })

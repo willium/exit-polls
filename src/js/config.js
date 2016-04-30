@@ -1,7 +1,7 @@
 const config = {
   chart: {
     node: {
-      width: 40,
+      width: 50,
       padding: 40,
       margin: 10
     },
@@ -22,7 +22,7 @@ const config = {
       8639, // trump
       1746, // clinton
       1445 // sanders
-    ]
+    ],
   }
 };
 

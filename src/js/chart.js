@@ -7,11 +7,8 @@ var margin = { top: config.chart.margin.top, right: config.chart.margin.right, b
   width = config.chart.width - margin.left - margin.right,
   height = config.chart.height - margin.top - margin.bottom;
 
-// set color scale
-var color = d3.scale.category20();
-
 // Select and initialize the size of the chart
-var svg = d3.select('#canvas').append('svg')
+var svg = d3.select('#chart').append('svg')
   .attr({
     width: width + margin.left + margin.right,
     height: height + margin.top + margin.bottom
@@ -33,7 +30,7 @@ var sankey = Sankey()
 var path = sankey.link();
 
 // draw chart
-export function draw(graph) {
+export function draw(graph, rawData) {
   sankey
     .nodes(graph.nodes)
     .links(graph.links)
@@ -68,6 +65,9 @@ export function draw(graph) {
     .attr('class', 'node');
   nodesEnterSelection.append('rect')
     .attr('width', sankey.nodeWidth())
+    .attr('class', function (d) {
+      return d.type + ' ' + d.meta.party.toLowerCase();
+    })
     .append('title');
   nodesEnterSelection.append('text')
     .attr('x', function(d) {
@@ -87,12 +87,6 @@ export function draw(graph) {
     .attr('height', function (d) {
       return d.dy;
     })
-    .style('fill', function (d) {
-      return d.color = color(d.name.replace(/ .*/, ''));
-    })
-    .style('stroke', function (d) {
-      return d3.rgb(d.color).darker(2);
-    });
   nodes.select('rect').select('title')
     .text(function (d) {
       return d.name;
