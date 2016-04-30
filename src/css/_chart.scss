@@ -3,19 +3,27 @@
   font-family: $FONT__serif;
 }
 
-.node rect {
-  fill-opacity: .9;
-  shape-rendering: crispEdges;
+.node {
+  rect {
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+  }
   
   &.source {
-    fill: $COLOR__royal;
+    rect {
+      fill: $COLOR__royal;
+    }
   }
   &.target {
     &.r {
-      fill: $COLOR__chestnut;
+      rect {
+        fill: $COLOR__chestnut;
+      }
     }
     &.d {
-      fill: $COLOR__marino;
+      rect {
+        fill: $COLOR__marino;
+      }
     }
   }
 }
@@ -28,10 +36,12 @@
   fill: none;
   stroke: $COLOR__royal;
   stroke-opacity: .20;
+  @include transition(all 0.1s linear);
 }
 
 .link:hover {
-  stroke-opacity: .50;
+  stroke: $COLOR__wine;
+  stroke-opacity: .60;
 }
 
 label {

@@ -1,5 +1,6 @@
 import d3 from 'd3';
 import config from './config';
+import UI from './ui';
 import { Sankey } from './sankey';
 
 // Basic chart constants
@@ -30,25 +31,25 @@ var sankey = Sankey()
 var path = sankey.link();
 
 // draw chart
-export function draw(graph, rawData) {
+export function draw(graph, options, callback) {
   sankey
     .nodes(graph.nodes)
     .links(graph.links)
     .layout(config.chart.iterations);
     
   // Draw the links
-  var links = linksGroup.selectAll('.link').data(graph.links, function(o) { return o.meta.id; });
+  var links = linksGroup.selectAll('.link').data(graph.links, function(d) { return d.meta.id; });
   // Enter
   links.enter()
     .append('path')
     .attr('class', 'link');
   // Enter + Update
   links.attr('d', path)
-    .style('stroke-width', function (d) {
+    .style('stroke-width', function(d) {
       return Math.max(1, d.dy);
     });
   links.append('title')
-    .text(function (d) {
+    .text(function(d) {
       return d.source.name + ' to ' + d.target.name + ' = ' + d.value;
     });
   links.on('mouseover', function(d) {
@@ -58,16 +59,16 @@ export function draw(graph, rawData) {
   links.exit().remove();
 
   // Draw the nodes
-  var nodes = nodesGroup.selectAll('.node').data(graph.nodes, function(o) { return o.meta.target_id + '.' + o.meta.source_rank + '.' + o.value; });
+  var nodes = nodesGroup.selectAll('.node').data(graph.nodes, function(d) { return d.meta.target_id + '.' + d.meta.source_rank + '.' + d.value; });
   // Enter
   var nodesEnterSelection = nodes.enter()
     .append('g')
-    .attr('class', 'node');
+    .attr('class', function(d) {
+      return 'node ' + d.type + ' ' + d.meta.party.toLowerCase();
+    })
+    .attr('id', function(d) { return 'node' + d.meta.id; })
   nodesEnterSelection.append('rect')
     .attr('width', sankey.nodeWidth())
-    .attr('class', function (d) {
-      return d.type + ' ' + d.meta.party.toLowerCase();
-    })
     .append('title');
   nodesEnterSelection.append('text')
     .attr('x', function(d) {
@@ -78,26 +79,35 @@ export function draw(graph, rawData) {
       return _.isEqual(d.type, 'source') ? 'end' : 'start';
     })
     .attr('transform', null);
+  nodesEnterSelection.on("contextmenu", function(d, i) {
+    d3.event.preventDefault();
+    callback(d3.select('.node.' + d.type + '#node' + d.meta.id), d.type, options);
+  }).on("click", function(d, i) {
+    d3.event.preventDefault();
+    callback(d3.selectAll('.node.' + d.type + ':not(#node' + d.meta.id + ')'), d.type, options);
+  });
   // Enter + Update
   nodes
-    .attr('transform', function (d) {
+    .attr('transform', function(d) {
       return 'translate(' + d.x + ',' + d.y + ')';
     });
   nodes.select('rect')
-    .attr('height', function (d) {
+    .attr('height', function(d) {
       return d.dy;
     })
   nodes.select('rect').select('title')
-    .text(function (d) {
+    .text(function(d) {
       return d.name;
     });
   nodes.select('text')
-    .attr('y', function (d) {
+    .attr('y', function(d) {
       return d.dy / 2;
     })
-    .text(function (d) {
+    .text(function(d) {
       return d.name;
     });
   // Exit
   nodes.exit().remove();
+  
+  return shelf;
 };

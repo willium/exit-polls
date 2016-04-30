@@ -2,19 +2,15 @@ import d3 from 'd3';
 import config from './config';
 import { which } from './util';
 
-let data, render;
-let defaultFilter = {'states': [], 'candidates': [], 'answers': []}
-let filter = _.clone(defaultFilter);
+let filter, shelf, data, render;
 let questions;
 
-export function addToShelf(shelfFilter) {
-  // shelf filter should kind of be of this form: {'states': [], 'candidates': [], 'answers': []}
-}
-
 // start the UI render
-export function load(d, r) {
-  render = r;
+export function load(d, r, options) {
   data = d;
+  render = r;
+  filter = !_.isUndefined(options) ? options.filter : _.clone(config.defaultFilter);
+  shelf = !_.isUndefined(options) ? options.shelf : _.clone(config.defaultFilter);
   
   var parties = d3.keys(data); 
   renderParties(parties, updateParty);
@@ -59,30 +55,31 @@ function updateQuestion(el, idx, bin) {
   // render shelf with all candidates not checked who are available(default all candidates not still running)
   // update state filter to remove all non available states
   // render shelf with available states without states in filter
-  
-  let shelf = _.clone(defaultFilter);
-  
+    
   let availableCandidates = _.uniq(_.map(data[filter.party][filter.question]['answers'], 'target_id'));
   
   let candidateIntersect = _.intersection(filter.candidates, availableCandidates);
-  filter.candidates = !_.isEqual(candidateIntersect.length, 0) ? candidateIntersect : config.data.current_candidates; 
+  filter.candidates = !_.isEqual(candidateIntersect.length, 0) ? candidateIntersect : config.data.currentCandidates; 
   shelf.candidates = _.without(availableCandidates, filter.candidates);
   
-  let availableAnswers = _.filter(data[filter.party][filter.question]['answers'], function(o) {
-    return _.includes(filter.candidates, o.target_id);
+  let rows = _.filter(data[filter.party][filter.question]['answers'], function(d) {
+    return _.includes(filter.candidates, d.target_id);
   });
   
-  let availableStates = _.uniq(_.map(availableAnswers, 'state'));
+  let availableStates = _.uniq(_.map(rows, 'state'));
   
   let stateIntersect = _.intersection(availableStates, filter.states);
   filter.states = !_.isEqual(stateIntersect.length, 0) ? stateIntersect : availableStates;
-  let shelfStates = _.without(availableStates, filter.states); 
+  shelf.states = _.without(availableStates, filter.states); 
   
-  filter.answers = _.uniq(_.map(availableAnswers, 'source_rank'));
+  let availableAnswers = _.uniq(_.map(rows, 'source_rank'));
+  let answerIntersect = _.intersection(availableAnswers, filter.answers);
+  filter.answers = !_.isEqual(answerIntersect.length, 0) ? answerIntersect : availableAnswers;
+  shelf.answers = _.without(availableAnswers, filter.answers); 
 
   logger.log('Pre-render', 'Shelf', shelf);
   logger.log('Pre-render', 'Filter', filter);
-  render(filter);
+  render({'filter': filter, 'shelf': shelf});
 }
 
 function renderParties(partiesData, fn) {

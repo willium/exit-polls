@@ -44,7 +44,7 @@ $width: 960px;
         font-size: 17px;
         @include size(100%);
         display: block;
-        @include transition(all 0.1s linear);
+        @include transition(all 0.2s linear);
       }
       
       &#r > input[type="radio"]:checked + label {

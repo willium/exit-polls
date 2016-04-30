@@ -1,4 +1,5 @@
 const config = {
+  defaultFilter: {states: [], candidates: [], answers: []},
   chart: {
     node: {
       width: 50,
@@ -16,7 +17,7 @@ const config = {
     }
   },
   data: {
-    current_candidates: [
+    currentCandidates: [
       61815, // cruz
       36679, // kasich
       8639, // trump
