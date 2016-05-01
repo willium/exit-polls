@@ -1,6 +1,5 @@
 import d3 from 'd3';
 import config from './config';
-import { which } from './util';
 
 let filter, shelf, data, render, options;
 let questions;

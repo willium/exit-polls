@@ -6,7 +6,7 @@ const config = {
       padding: 30,
       margin: 10
     },
-    iterations: 100,
+    iterations: 32,
     width: 960,
     height: 620,
     margin: {
