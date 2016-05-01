@@ -86,6 +86,15 @@ export function draw(graph, options, callback) {
     d3.event.preventDefault();
     callback(d3.selectAll('.node.' + d.type + ':not(#node' + d.meta.id + ')'), d.type, options);
   });
+  nodesEnterSelection.on('mouseover', function(d) {
+  d3.selectAll('.link')
+    .filter(function (o) {
+      return (_.isEqual(d.type, 'source') && _.isEqual(o.meta.source_rank, d.meta.source_rank)) ||
+        (_.isEqual(d.type, 'target') && _.isEqual(o.meta.target_id, d.meta.target_id));
+    }).classed('selected', true);
+  }).on('mouseout', function(d) {
+    d3.selectAll('.selected').classed('selected', false);
+  });
   // Enter + Update
   nodes
     .attr('transform', function(d) {
