@@ -64,14 +64,16 @@ $width: 960px;
     $border: 8px;
     
     margin: 0 auto;
-    width: $questions-select-width;
+    max-width: $questions-select-width;
+    position: relative;
     height: $q-size + $border*2;
     border: $border solid $COLOR__ship;
     
     #questions-q {
       width: $q-size;
       font-family: $FONT__serif;
-      float: left;
+      position: absolute;
+      left: 0;
       height: $q-size + 2;
       border-right: $border solid $COLOR__ship;
       display: inline-block;
@@ -85,10 +87,11 @@ $width: 960px;
       $dropdown-width: $questions-select-width - $q-size - $border*2;
       $dropdown-height: $q-size;
       
-      position: relative;
-      left: 0;
+      position: absolute;
+      left: $q-size;
+      right: 0;
       display: inline-block;
-      width: $dropdown-width;
+      max-width: $dropdown-width;
       height: $dropdown-height;
 
  
@@ -121,7 +124,7 @@ $width: 960px;
         border: 0;
         height: $dropdown-height;
         line-height: $dropdown-height;
-        width: $dropdown-width;
+        width: 100%;
         font-family: $FONT__serif--bold;
         padding: 0 15px;
         font-size: 22px;

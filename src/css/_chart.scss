@@ -1,6 +1,10 @@
 #chart {
   padding-top: 30px;  
   font-family: $FONT__serif;
+  
+  svg {
+    margin: 0 auto;
+  }
 }
 
 .node {
