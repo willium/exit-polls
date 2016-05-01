@@ -22,6 +22,8 @@ PARTIES = ['R', 'D']
 
 REPLACES = [('18-', '17-'), (' Year Olds', ''), (' and older', '+')]
 
+SKIP = ['geocod', 'geocodnh']
+
 def build_url(state, party):
     """generates URL for given state and party"""
     return SOURCE.format(state, party)
@@ -116,6 +118,9 @@ def main():
             questions = result['polls']
             for question in questions:
                 poll_name = clean_poll_name(question['pollname'])
+                
+                if poll_name in SKIP:
+                  break
 
                 if poll_name not in data[party]:
                     data[party][poll_name] = {
