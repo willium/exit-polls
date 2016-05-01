@@ -1,6 +1,8 @@
 @import "chart";
 
-$width: 700px;
+$full-width: 1200px;
+$margin: 250px;
+$width: $full-width - ($margin*2);
 
 #header {
   font-family: $FONT__sans--bold;
@@ -134,7 +136,7 @@ $width: 700px;
   
   #bins {
     font-size: 18px;
-    padding: 10px 0;
+    margin-top: 10px;
     
     h3 {
       display: inline;
@@ -182,36 +184,42 @@ $width: 700px;
     }
   }
  
-  #axis-labels {
-    $label-width: 250px;
+  #axis {
+    width: $full-width;
+    margin: 0 auto;
     
-    width: $width;
-    margin: 40px auto 0;
-    font-family: $FONT__sans;
-    text-transform: uppercase;
-    color: $COLOR__mist;
-    overflow: visible;
-    display: block;
-    
-    #right-label, #left-label {
-      display: inline;
-      width: $label-width;
-    }
-    
-    #right-label {
-      float: right;
-      margin-right: -$label-width/2;
-    }
-    
-    #left-label {
-      float: left;
-      margin-left: -$label-width/2;
-    }
-    
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
+    #axis-labels {
+      $label-width: 300px;
+      
+      font-size: 18px;
+      width: $width;
+      margin: 50px auto 0;
+      font-family: $FONT__sans;
+      text-transform: uppercase;
+      color: $COLOR__mist;
+      overflow: visible;
+      display: block;
+      
+      #right-label, #left-label {
+        display: inline;
+        width: $label-width;
+      }
+      
+      #right-label {
+        float: right;
+        margin-right: -$label-width/2;
+      }
+      
+      #left-label {
+        float: left;
+        margin-left: -$label-width/2;
+      }
+      
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
     }
   }
   

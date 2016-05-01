@@ -7,13 +7,13 @@ const config = {
       margin: 10
     },
     iterations: 32,
-    width: 1100,
+    width: 1200,
     height: 620,
     margin: {
       top: 20,
       bottom: 20,
-      left: 200,
-      right: 200
+      left: 250,
+      right: 250
     }
   },
   data: {

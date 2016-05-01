@@ -118,7 +118,8 @@ export function draw(graph, options, callback) {
     })
     .text(function(d) {
       return d.name;
-    });
+    })
+    
   // Exit
   nodes.exit().remove();
   

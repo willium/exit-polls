@@ -1,5 +1,9 @@
 #chart {
   font-family: $FONT__serif;
+  overflow-x: auto;
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: hidden;
   
   svg {
     margin: 0 auto;
@@ -39,7 +43,7 @@
 }
 
 .node text {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .link {
