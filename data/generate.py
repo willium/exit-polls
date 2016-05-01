@@ -49,7 +49,7 @@ def save(data, filename='data.json'):
 
 def clean_source(src):
     """prunes"""
-    return titlecase(src.replace('18-24', '17-24'))
+    return titlecase(src.replace('18-', '17-'))
 
 def clean_poll_name(poll_name):
     """clean up poll name"""
