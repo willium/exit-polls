@@ -2,13 +2,14 @@ import d3 from 'd3';
 import config from './config';
 import { which } from './util';
 
-let filter, shelf, data, render;
+let filter, shelf, data, render, options;
 let questions;
 
 // start the UI render
-export function load(d, r, options) {
+export function load(d, r, o) {
   data = d;
   render = r;
+  options = o;
   filter = !_.isUndefined(options) ? options.filter : _.clone(config.defaultFilter);
   shelf = !_.isUndefined(options) ? options.shelf : _.clone(config.defaultFilter);
   
@@ -57,7 +58,6 @@ function updateQuestion(el, idx, bin) {
   // render shelf with available states without states in filter
     
   let availableCandidates = _.uniq(_.map(data[filter.party][filter.question]['answers'], 'target_id'));
-  
   let candidateIntersect = _.intersection(filter.candidates, availableCandidates);
   filter.candidates = !_.isEqual(candidateIntersect.length, 0) ? candidateIntersect : config.data.currentCandidates; 
   shelf.candidates = _.without(availableCandidates, filter.candidates);
@@ -66,15 +66,20 @@ function updateQuestion(el, idx, bin) {
     return _.includes(filter.candidates, d.target_id);
   });
   
-  let availableStates = _.uniq(_.map(rows, 'state'));
-  
+  // states
+  let availableStates = _.uniq(_.map(rows, 'state'))
   let stateIntersect = _.intersection(availableStates, filter.states);
   filter.states = !_.isEqual(stateIntersect.length, 0) ? stateIntersect : availableStates;
   shelf.states = _.without(availableStates, filter.states); 
   
+  // answers
   let availableAnswers = _.uniq(_.map(rows, 'source_rank'));
-  let answerIntersect = _.intersection(availableAnswers, filter.answers);
-  filter.answers = !_.isEqual(answerIntersect.length, 0) ? answerIntersect : availableAnswers;
+  if (!_.isUndefined(options)) {
+    let answerIntersect = _.intersection(availableAnswers, filter.answers);
+    filter.answers = !_.isEqual(answerIntersect.length, 0) ? answerIntersect : availableAnswers;
+  } else {
+    filter.answers = availableAnswers;
+  }
   shelf.answers = _.without(availableAnswers, filter.answers); 
 
   logger.log('Pre-render', 'Shelf', shelf);
@@ -163,7 +168,7 @@ function renderBins(binsData, fn) {
     
     bin.exit().remove();
     
-    fn(undefined, undefined, false);    
+    fn();    
   }
   
   return binsData;

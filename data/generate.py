@@ -3,6 +3,7 @@
 
 import json
 import os
+import re
 import urllib.request
 import urllib.parse
 from titlecase import titlecase
@@ -18,6 +19,8 @@ STATES = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID'
           'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
 PARTIES = ['R', 'D']
+
+REPLACES = [('18-', '17-'), (' Year Olds', ''), (' and older', '+')]
 
 def build_url(state, party):
     """generates URL for given state and party"""
@@ -47,9 +50,19 @@ def save(data, filename='data.json'):
 
     print('wrote {} to {}'.format(filename, location))
 
+def replaces(original):
+    """does a bunch of replaces"""
+    final = original
+
+    for rep in REPLACES:
+        pattern = re.compile(rep[0], re.IGNORECASE)
+        final = pattern.sub(rep[1], final)
+
+    return final
+
 def clean_source(src):
     """prunes"""
-    return titlecase(src.replace('18-', '17-'))
+    return titlecase(replaces(src))
 
 def clean_poll_name(poll_name):
     """clean up poll name"""
