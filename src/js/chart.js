@@ -25,7 +25,10 @@ var nodesGroup = svg.append('g').attr('class', 'nodes');
 var sankey = Sankey()
   .nodeWidth(config.chart.node.width)
   .nodePadding(config.chart.node.padding)
-  .size([width, height]);
+  .size([width, height])
+  .sort(function ordinal(a, b) {
+    return a.meta.source_rank - b.meta.source_rank;
+  });
 
 // Get path data generator
 var path = sankey.link();

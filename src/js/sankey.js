@@ -6,7 +6,8 @@ export function Sankey() {
       size = [1, 1],
       nodes = [],
       links = [],
-      sinksRight = true;
+      sinksRight = true,
+      sort;
 
   sankey.nodeWidth = function(_) {
     if (!arguments.length) return nodeWidth;
@@ -37,6 +38,12 @@ export function Sankey() {
     size = _;
     return sankey;
   };
+  
+  sankey.sort = function(_) {
+    if(!arguments.length) return sort;
+    sort = _;
+    return sankey;
+  }
 
  sankey.sinksRight = function (_) {
     if (!arguments.length) return sinksRight;
@@ -250,7 +257,8 @@ export function Sankey() {
             i;
 
         // Push any overlapping nodes down.
-        nodes.sort(ascendingDepth);
+        nodes.sort(sort || ascendingDepth);
+        
         for (i = 0; i < n; ++i) {
           node = nodes[i];
           dy = y0 - node.y;
@@ -275,7 +283,7 @@ export function Sankey() {
     }
 
     function ascendingDepth(a, b) {
-      return a.y - b.y;
+      return b.y - a.y;
     }
   }
 
@@ -309,7 +317,7 @@ export function Sankey() {
 
   // Y-position of the middle of a node.
   function center(node) {
-    return node.y + node.dy / 2;
+    return size[1] - (node.y + node.dy / 2);
   }
 
   // Value property accessor.
