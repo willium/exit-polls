@@ -26,6 +26,7 @@ var sankey = Sankey()
   .nodeWidth(config.chart.node.width)
   .nodePadding(config.chart.node.padding)
   .size([width, height])
+  .levelTop(true) // levelTop and ordinalSort are largely mutually beneficial
   .sort(function ordinal(a, b) {
     return a.meta.source_rank - b.meta.source_rank;
   });

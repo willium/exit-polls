@@ -7,6 +7,7 @@ export function Sankey() {
       nodes = [],
       links = [],
       sinksRight = true,
+      levelTop = false,
       sort;
 
   sankey.nodeWidth = function(_) {
@@ -42,6 +43,12 @@ export function Sankey() {
   sankey.sort = function(_) {
     if(!arguments.length) return sort;
     sort = _;
+    return sankey;
+  }
+  
+  sankey.levelTop = function(_) {
+    if(!arguments.length) return levelTop;
+    levelTop = _;
     return sankey;
   }
 
@@ -317,7 +324,12 @@ export function Sankey() {
 
   // Y-position of the middle of a node.
   function center(node) {
-    return size[1] - (node.y + node.dy / 2);
+    var y = (node.y + node.dy / 2);
+    if (levelTop) {
+      return size[1] - y;
+    } else {
+      return y;
+    }
   }
 
   // Value property accessor.
