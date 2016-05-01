@@ -1,5 +1,4 @@
 #chart {
-  padding-top: 30px;  
   font-family: $FONT__serif;
   
   svg {
@@ -7,7 +6,13 @@
   }
 }
 
+.nodes {
+  overflow: visible;
+}
+
 .node {
+  overflow: visible;
+  
   rect {
     fill-opacity: .9;
     shape-rendering: crispEdges;
@@ -34,7 +39,7 @@
 }
 
 .node text {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .link {

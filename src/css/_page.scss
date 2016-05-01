@@ -1,6 +1,6 @@
 @import "chart";
 
-$width: 960px;
+$width: 700px;
 
 #header {
   font-family: $FONT__sans--bold;
@@ -59,12 +59,11 @@ $width: 960px;
   }
   
   #questions {
-    $questions-select-width: 700px;
     $q-size: 50px;
     $border: 8px;
     
     margin: 0 auto;
-    max-width: $questions-select-width;
+    max-width: $width;
     position: relative;
     height: $q-size + $border*2;
     border: $border solid $COLOR__ship;
@@ -84,7 +83,7 @@ $width: 960px;
     }
     
     #questions-dropdown {
-      $dropdown-width: $questions-select-width - $q-size - $border*2;
+      $dropdown-width: $width - $q-size - $border*2;
       $dropdown-height: $q-size;
       
       position: absolute;
@@ -183,6 +182,38 @@ $width: 960px;
     }
   }
  
+  #axis-labels {
+    $label-width: 250px;
+    
+    width: $width;
+    margin: 40px auto 0;
+    font-family: $FONT__sans;
+    text-transform: uppercase;
+    color: $COLOR__mist;
+    overflow: visible;
+    display: block;
+    
+    #right-label, #left-label {
+      display: inline;
+      width: $label-width;
+    }
+    
+    #right-label {
+      float: right;
+      margin-right: -$label-width/2;
+    }
+    
+    #left-label {
+      float: left;
+      margin-left: -$label-width/2;
+    }
+    
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
   
   #states {
     
