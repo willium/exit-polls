@@ -39,7 +39,7 @@
   @include transition(all 0.1s linear);
 }
 
-.link:hover {
+.link:hover, .selected {
   stroke: $COLOR__wine;
   stroke-opacity: .60;
 }
