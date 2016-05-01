@@ -16,6 +16,7 @@ window.logger = logger;
 // import _, { myFunc } from 'lib'; // _ default, { each } named, default is also named
 
 import * as UI from 'js/ui';
+import * as util from 'js/util';
 import * as chart from 'js/chart';
 import { process } from 'js/process';
 
