@@ -74,7 +74,7 @@ function updateQuestion(el, idx, bin) {
   
   // answers
   let availableAnswers = _.uniq(_.map(rows, 'source_rank'));
-  if (!_.isUndefined(options)) {
+  if (!_.isUndefined(options) && _.isUndefined(el)) {
     let answerIntersect = _.intersection(availableAnswers, filter.answers);
     filter.answers = !_.isEqual(answerIntersect.length, 0) ? answerIntersect : availableAnswers;
   } else {
