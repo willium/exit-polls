@@ -84,13 +84,13 @@ export function draw(graph, options, callback) {
         return 'link-label hidden label-' + d.meta.id + ' link-label-source-' + 
           d.meta.source_rank + ' link-label-target-' + d.meta.target_id;
       })
-      .attr('data-type', function(d, i) {
-         return (i < graph.links.length ? 'source' : 'target')
-      })
       .append('text');
 
   // Enter + Update
   linkLabels
+    .attr('data-type', function(d, i) {
+      return (i < graph.links.length ? 'source' : 'target')
+    })
     .attr('transform', function(d, i) {
       let location = i < graph.links.length ? 0.05 : 0.95;
       let p = svg.append('path').attr('d', function(o){ return path(d); }).style('display', 'none').node();
@@ -149,10 +149,20 @@ export function draw(graph, options, callback) {
   
   nodesEnterSelection.on("contextmenu", function(d, i) {
     d3.event.preventDefault();
-    callback(d3.select('.node.' + d.type + '#node' + d.meta.id), d.type, options);
+    d3.selectAll('.selected').classed('selected', false);
+    d3.selectAll('.link-label').classed('hidden', true);
+    let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
+    if (rm.length > 0) {
+      callback(d3.select('.node.' + d.type + '#' + d.type + d.meta.id), d.type, options);
+    }
   }).on("click", function(d, i) {
     d3.event.preventDefault();
-    callback(d3.selectAll('.node.' + d.type + ':not(#node' + d.meta.id + ')'), d.type, options);
+    d3.selectAll('.selected').classed('selected', false);
+    d3.selectAll('.link-label').classed('hidden', true);
+    let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
+    if (rm.length > 0) {
+      callback(rm, d.type, options);
+    }
   });
   
   nodesEnterSelection.on('mouseover', function(d) {
@@ -165,7 +175,7 @@ export function draw(graph, options, callback) {
     const labelsClass = d.type === 'source' ? '.link-label-source-' + d.meta.source_rank : 
       '.link-label-target-' + d.meta.target_id;
     d3.selectAll(labelsClass).classed('hidden', function(o) {
-      return (o.dy < 10) && _.isEqual(d3.select(this).attr('data-type'), d.type);
+      return o[d.type + 'Percent'] < 10 && _.isEqual(d3.select(this).attr('data-type'), d.type);
     }).moveToFront();
   }).on('mouseout', function(d) {
     d3.selectAll('.selected').classed('selected', false);
