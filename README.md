@@ -26,12 +26,11 @@ npm install -g gulp
 ```
 
 Runs an initial build, listens on your files changes, rebuilds them when necessary
-and automagically reloads the browser!
+and should reload the browser.
 
 ```bash
 gulp watch
 ```
-Open http://localhost:8080/ to access the visualisation
 
 ## Story Board
 
