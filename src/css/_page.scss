@@ -3,6 +3,7 @@
 $full-width: 1200px;
 $margin: 250px;
 $width: $full-width - ($margin*2);
+$box: 50px;
 
 #header {
   font-family: $FONT__sans--bold;
@@ -228,43 +229,51 @@ $width: $full-width - ($margin*2);
   #states {
     display: block;
     margin: 20px auto;
-    width: $width;
+    width: $width + $margin;
     
     h3 {
-      float:left;
-      width: 200;
+      width: $margin;
+      float: left;
+      padding-right: 10px;
       font-family: $FONT__sans;
       text-transform: uppercase;
       color: $COLOR__mist;
       text-align: right;
+      margin-left: -$margin/2;
+      display: inline-block;
     }
     
-    #state-cb {
+    #states-select {
       float: left;
       width: $width;
-      .cb {
-        display: inline-block;
-        margin: 2px;
-        float: left;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      margin-left: -$box/5;
 
-        input {
-          display: none;
-        }
+      .state {
+        flex: 0 0 auto;
+        margin-left: $box/5;
+        margin-bottom: $box/5;
         
         label {
           display: inline-block;
-          width: 60px;
-          height: 60px;
+          width: $box;
+          height: $box;
+          line-height: $box - 8;
           color: $COLOR__ship;
+          background-color: $COLOR__suit;
           margin: auto;
           font-size: 16px;
-          border: solid thin $COLOR__ship;
+          border: solid 4px $COLOR__suit;
           cursor: pointer;
+          @include transition(all 0.2s linear);
         }
         
         input[type="checkbox"]:checked + label {
           color: $COLOR__white;
           background-color: $COLOR__ship;
+          border: solid 4px $COLOR__ship;
         }
       }
     }

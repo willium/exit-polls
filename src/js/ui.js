@@ -69,9 +69,8 @@ function updateQuestion(el, idx, bin) {
   let availableStates = _.uniq(_.map(rows, 'state'))
   let stateIntersect = _.intersection(availableStates, filter.states);
   filter.states = !_.isEqual(stateIntersect.length, 0) ? stateIntersect : availableStates;
-  shelf.states = _.without(availableStates, filter.states); 
   
-  renderStates({'availableStates' : availableStates, 'filterStates' : filter.states}, updateStates);
+  renderStates({ 'availableStates': availableStates, 'filterStates': filter.states }, updateStates);
   
   // answers
   let availableAnswers = _.uniq(_.map(rows, 'source_rank'));
@@ -90,11 +89,14 @@ function updateQuestion(el, idx, bin) {
 
 function updateStates(el) {
   filter.states = [];
-  d3.selectAll('input[name^="statescb"]:checked').each(function(o) {
+  
+  d3.selectAll('.state input:checked').each(function(o) {
     filter.states.push(o);
   });
-  console.log(filter.states);
-  render({'filter': filter, 'shelf': shelf});
+
+  if (!_.isUndefined(el)) {
+    render({'filter': filter, 'shelf': shelf});
+  }
 }
 
 function renderParties(partiesData, fn) {
@@ -184,30 +186,36 @@ function renderBins(binsData, fn) {
   return binsData;
 }
 
-/* statesData : {availableStates, filterStates}
-*/
+
 function renderStates(statesData, fn) {
+  console.log('re-rendering states', statesData);
   
-  var states = d3.select('#state-cb').selectAll('.box')
-    .data(statesData.availableStates, function(d) { return d; });
+  statesData.availableStates.sort();
+
+  var statesSelect = d3.select('#states-select')
   
-  states.enter().append('span').attr('class', 'cb')
-    .append('input')
-    .attr('name', 'statescb')
+  var state = statesSelect.selectAll('.state')
+    .data(statesData.availableStates, function(d) { return d; })
+  
+  var stateEnter = state.enter()
+    .append('div')
+      .attr('class', 'state box')
+      .attr('id', function(d) { return d.toLowerCase(); })
+  
+  var inputs = stateEnter.append('input')
     .attr('type', 'checkbox')
-    .attr('class', '.box')
-    .attr('id', function(d) { return d; })
+    .attr('id', function(d) { return 'state-' + d.toLowerCase(); })
+    .attr('name', function(d) { return 'state-' + d.toLowerCase(); })
     .attr('value', function(d) { return d; })
-    .property('checked', function(d) {
-      return _.indexOf(statesData.filterStates, d) != -1;
-    })
+    .property('checked', function(d, i) { return _.includes(statesData.filterStates, d); })
     .on('change', fn);
   
-  states.append('label')
-    .attr('for', function(d, i) { return d; })
-    .text(function(d) { return d; });
+  stateEnter.append('label')
+    .attr('for', function(d) { return 'state-' + d.toLowerCase(); })
+    .text(function(d) { return d; })
+    
+  state.exit().remove();
   
   fn();
-  
   return statesData;
 }
