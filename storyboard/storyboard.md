@@ -33,3 +33,8 @@ In the fifth stage, we added a concept of a shelf. It would allow us to remove/a
 ![Stage 6](/storyboard/_raw_images/Step-6.jpg)
 
 In the sixth stage, we improved our implementation of shelves by actually drawing two boxes that would allow us to keep the unselected candidates and responses respectively.
+
+## Stage 7
+![Stage 7](/storyboard/_raw_images/Step-7.jpg)
+
+In the last stage, we developed a prototype of the bidirectional Sankey Diagram in Sketch.
