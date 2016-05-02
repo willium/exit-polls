@@ -35,7 +35,7 @@ Open http://localhost:8080/ to access the visualisation
 
 ## Story Board
 
-To help us plan out our process of creating this visulisation we used the process of storyboarding. You can find our storyboard [here](/storyboard/storyboard.pdf)
+To help us plan out our process of creating this visulisation we used the process of storyboarding. You can find our storyboard [here](/storyboard/storyboard.md)
 
 ### Changes between Storyboard and the Final Implementation
 
