@@ -7,9 +7,9 @@
 
 ## Exit Poll Exploration
 
-![Screenshot](screenshot.png)
+![Screenshot](/storyboard/screenshot.png)
 
-(Put your a brief description of your final interactive visualization application and your dataset here.)
+We used the exit polls data collected by CNN available [here](http://www.cnn.com/election/primaries/polls) in tabular form and created a interactive sanky diagram and made exit poll exploration a lot concise and interactive.
 
 ## Running Instructions
 
@@ -35,7 +35,7 @@ Open http://localhost:8080/ to access the visualisation
 
 ## Story Board
 
-[link to your storyboard pdf file](storyboard.pdf?raw=true) here.
+To help us plan out our process of creating this visulisation we used the process of storyboarding. You can find our storyboard [here](/storyboard/storyboard.pdf)
 
 ### Changes between Storyboard and the Final Implementation
 
