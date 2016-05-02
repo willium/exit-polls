@@ -59,7 +59,9 @@ function updateQuestion(el, idx, bin) {
   let availableCandidates = _.uniq(_.map(data[filter.party][filter.question]['answers'], 'target_id'));
   let candidateIntersect = _.intersection(filter.candidates, availableCandidates);
   filter.candidates = !_.isEqual(candidateIntersect.length, 0) ? candidateIntersect : config.data.currentCandidates; 
-  shelf.candidates = _.without(availableCandidates, filter.candidates);
+  shelf.candidates = _.filter(availableCandidates, function(d) {
+     return !_.includes(filter.candidates, d);
+  });
   
   let rows = _.filter(data[filter.party][filter.question]['answers'], function(d) {
     return _.includes(filter.candidates, d.target_id);
@@ -74,16 +76,35 @@ function updateQuestion(el, idx, bin) {
   
   // answers
   let availableAnswers = _.uniq(_.map(rows, 'source_rank'));
-  if (!_.isUndefined(options) && _.isUndefined(el)) {
-    let answerIntersect = _.intersection(availableAnswers, filter.answers);
-    filter.answers = !_.isEqual(answerIntersect.length, 0) ? answerIntersect : availableAnswers;
-  } else {
-    filter.answers = availableAnswers;
-  }
-  shelf.answers = _.without(availableAnswers, filter.answers); 
-
+  
+  // TODO: shelf logic
+  // if (!_.isUndefined(options) && _.isUndefined(el)) {
+  //   let answerIntersect = _.intersection(availableAnswers, filter.answers);
+  //   filter.answers = !_.isEqual(answerIntersect.length, 0) ? answerIntersect : availableAnswers;
+  // } else {
+  //   filter.answers = availableAnswers;
+  // }
+  // shelf.answers = _.filter(availableAnswers, function(d) {
+  //  return !_.includes(filter.answers, d);
+  // }) 
+  
+  filter.answers = availableAnswers;
+  
   logger.log('Pre-render', 'Shelf', shelf);
+  renderShelf(shelf.candidates, data[filter.party][filter.question]['answers'], updateShelf);
+  
   logger.log('Pre-render', 'Filter', filter);
+  render({'filter': filter, 'shelf': shelf});
+}
+
+function updateShelf(el) {
+  let selection = d3.select(this); 
+  let candidate = selection.node().__data__;
+  if(!_.includes(filter.candidates, candidate)) {
+    filter.candidates.push(candidate);
+  }
+  _.remove(shelf.candidates, candidate);
+  selection.remove();
   render({'filter': filter, 'shelf': shelf});
 }
 
@@ -186,11 +207,8 @@ function renderBins(binsData, fn) {
   return binsData;
 }
 
-
-function renderStates(statesData, fn) {
-  console.log('re-rendering states', statesData);
-  
-  statesData.availableStates.sort();
+function renderStates(statesData, fn) {  
+  statesData.availableStates = _.sortBy(statesData.availableStates);
 
   var statesSelect = d3.select('#states-select')
   
@@ -218,4 +236,39 @@ function renderStates(statesData, fn) {
   
   fn();
   return statesData;
+}
+
+function renderShelf(shelf, answers, fn) {
+  var items = []
+  
+  // _.forEach(shelf, function(v1, k) {
+  //   _.forEach(v1, function(v2, i) {
+  //     let copy = _.clone(v2);
+  //     copy.itemType = k;
+  //     copy.index = i;
+  //     items.push(copy);
+  //   }) 
+  // })
+
+  var shelfItems = d3.select('#shelf-items');
+  
+  var item = shelfItems.selectAll('.item')
+    .data(shelf, function(d) { return d; })
+  
+  var itemEnter = item.enter()
+    .append('div')
+      .attr('class', function(d) {
+        return 'item box ' + _.find(answers, ['target_id', d]).party.toLowerCase();
+        // return 'item box ' + d.itemType;
+      })
+      .attr('data-id', function(d, i) { 
+        return d;
+        // return 'item' + d.index; 
+      })
+      .text(function(d) { 
+        return _.find(answers, ['target_id', d]).target;
+      })
+      .on('click', fn);
+  
+  item.exit().remove();
 }
