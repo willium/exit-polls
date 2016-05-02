@@ -221,6 +221,7 @@ function renderStates(statesData, fn) {
   var stateEnter = state.enter()
     .append('div')
       .attr('class', 'state box')
+      .attr('title', 'Black = On\nGray = Off')
       .attr('id', function(d) { return d.toLowerCase(); })
   
   var inputs = stateEnter.append('input')
@@ -264,6 +265,7 @@ function renderShelf(shelf, answers, fn) {
         return d;
         // return 'item' + d.index; 
       })
+      .attr('title', 'Click to Add to Visualization')
       .text(function(d) { 
         return _.find(answers, ['target_id', d]).target;
       })
