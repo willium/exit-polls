@@ -62,6 +62,22 @@ This would be broken by making the diagram bi-directional.
 
 ## Development Process
 
+### Time breakdown
+- Collecting, parsing, manipulating, and aggregating data (6 hours)
+- Storyboarding and ideation (3 hours)
+- Original version of the code (11 hours)
+- Creation of UI and (4 hours)
+- Rewrite, conversion to browserify, build tools (10 hours)
+- Implementation of labels (1 hour)
+- Implementation of shelf (2 hours)
+- Implementation of UI toggles for question, bin, states, and party (3 hours)
+
+**Total**: 6+3+10+4+10+1+2+3 = 40 hours.
+
+The writing and architecting of the codebase overall deffinitely took the most time. Creating the diagram was relatively easy once we got the right data to be in the right place at the right time to best utilize d3's data binding methods.
+
+### Division of labor
+
 Include:
 - Breakdown of how the work was split among the group members.
 - A commentary on the development process, including answers to the following questions:
