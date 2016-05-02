@@ -72,7 +72,7 @@ export function draw(graph, options, callback) {
   
   var linkLabels = linksGroup.selectAll('.link-label')
     .data(duplicate(graph.links), function(d, i) { 
-      return d.version + d.meta.id; 
+      return d.meta.id + '' + d.version;
     })
     
   // Enter
@@ -86,7 +86,7 @@ export function draw(graph, options, callback) {
       })
       .append('text')
         .text(function(d, i) {
-          return (_.isEqual(d.version, 'a') ? d.sourcePercent : d.targetPercent) + '%';
+          return (d.version ? d.sourcePercent : d.targetPercent) + '%';
         })
         .attr('text-anchor', 'middle')
         .attr('dy', 6);
@@ -94,10 +94,10 @@ export function draw(graph, options, callback) {
   // Enter + Update
   linkLabels
     .attr('data-type', function(d, i) {
-      return (_.isEqual(d.version, 'a') ? 'source' : 'target')
+      return (d.version ? 'source' : 'target')
     })
     .attr('transform', function(d, i) {
-      let location = _.isEqual(d.version, 'a') ? 0.05 : 0.95;
+
       let p = svg.append('path').attr('d', function(o){ return path(d); }).style('display', 'none').node();
       let length = p.getTotalLength();
       let point = p.getPointAtLength(location * length);
@@ -249,10 +249,10 @@ function duplicate(arr) {
   
   _.forEach(arr, function(v, i) {
     let item1 = _.clone(v);
-    item1.version = 'a';
+    item1.version = 0;
     
     let item2 = _.clone(v);
-    item2.version = 'b';
+    item2.version = 1;
     
     newArr.push(item1);
     newArr.push(item2);
