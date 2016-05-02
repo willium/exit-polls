@@ -188,7 +188,7 @@ export function draw(graph, options, callback) {
   
   nodes.select('rect').select('title')
     .text(function(d) {
-      return d.name;
+      return 'Click to Focus\nRight Click to Remove';
     });
   
   nodeTitles.attr('y', function(d) {
