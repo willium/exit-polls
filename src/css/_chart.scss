@@ -18,44 +18,57 @@
   overflow: visible;
   
   rect {
-    fill-opacity: .9;
+    fill-opacity: 1;
     shape-rendering: crispEdges;
     cursor: pointer;
   }
   
+  .nodeTitle {
+    font-size: 20px;
+  }
+  
+  .nodeSubtitle {
+    font-size: 17px;
+    opacity: 0.7;
+    font-family: $FONT__sans;
+  }
+  
   &.source {
-    rect {
+    rect, .nodeSubtitle {
       fill: $COLOR__royal;
     }
   }
   &.target {
     &.r {
-      rect {
+      rect, .nodeSubtitle {
         fill: $COLOR__chestnut;
       }
     }
     &.d {
-      rect {
+      rect, .nodeSubtitle {
         fill: $COLOR__marino;
       }
     }
   }
 }
 
-.node text {
-  font-size: 20px;
-}
-
 .link {
   fill: none;
   stroke: $COLOR__royal;
-  stroke-opacity: .20;
+  stroke-opacity: .25;
   @include transition(all 0.1s linear);
 }
 
-.link:hover, .selected {
+.link-label {
+  text {
+    font-family: $FONT__sans--bold;
+    font-size: 19px;
+  }
+}
+
+.selected {
   stroke: $COLOR__wine;
-  stroke-opacity: .60;
+  stroke-opacity: .75;
 }
 
 label {

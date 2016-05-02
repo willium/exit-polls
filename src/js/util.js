@@ -1,8 +1,9 @@
 import d3 from 'd3';
+import _ from 'lodash';
 
 // https://github.com/wbkd/d3-extended
 d3.selection.prototype.moveToFront = function() {  
-  return this.each(function(){
+  return this.each(function() {
     this.parentNode.appendChild(this);
   });
 };

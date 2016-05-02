@@ -3,7 +3,7 @@ const config = {
   chart: {
     node: {
       width: 50,
-      padding: 30,
+      padding: 40,
       margin: 10
     },
     iterations: 32,
