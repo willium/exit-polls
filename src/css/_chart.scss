@@ -62,13 +62,15 @@
 .link-label {
   text {
     font-family: $FONT__sans--bold;
-    font-size: 19px;
+    font-size: 17px;
+    fill: $COLOR__ship;
+    pointer-events: none;
   }
 }
 
 .selected {
   stroke: $COLOR__wine;
-  stroke-opacity: .75;
+  stroke-opacity: .70;
 }
 
 label {
