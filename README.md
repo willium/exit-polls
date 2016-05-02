@@ -7,15 +7,13 @@
 
 ## Exit Poll Exploration
 
-<!--
-![Thumbnail](thumbnail.png)
+![Screenshot](/storyboard/screenshot.png)
 
-(Put your a brief description of your final interactive visualization application and your dataset here.)
--->
+We used the exit polls data collected by CNN available [here](http://www.cnn.com/election/primaries/polls) in tabular form and created a interactive sanky diagram and made exit poll exploration a lot concise and interactive.
 
 ## Running Instructions
 
-Live here: http://example.com
+Live here: http://cse512-16s.github.io/a3-willium-ayush29feb/
 
 #### Run Locally
 
@@ -27,29 +25,25 @@ npm install
 npm install -g gulp
 ```
 
-#### Running in the browser
 Runs an initial build, listens on your files changes, rebuilds them when necessary
 and automagically reloads the browser!
 
 ```bash
 gulp watch
 ```
-
-Put your running instructions here. (Tell us how to run your visualization.)
-
-If your visualization is web-based,  it would be great if your submission can be opened online. [Github Pages](http://pages.github.com/) is a good and easy way to put your visualization online so you can put your link here.  For example:
-
-Access our visualization at http://cse512-16s.github.io/a3-jheer-mcorrell-jhoffs/ or download this repository and run `python -m SimpleHTTPServer 9000` and access this from http://localhost:9000/.
-
-If you put your work online, please also write a [one-line description and add a link to your final work](http://note.io/1n3u46s) so people can access it directly from the CSE512-16S page.
+Open http://localhost:8080/ to access the visualisation
 
 ## Story Board
 
-Put either your storyboard content or a [link to your storyboard pdf file](storyboard.pdf?raw=true) here. Just like A2, you can use any software to create a *reasonable* pdf storyboard.
+To help us plan out our process of creating this visulisation we used the process of storyboarding. You can find our storyboard [here](/storyboard/storyboard.md)
 
 ### Changes between Storyboard and the Final Implementation
 
-A paragraph explaining changes between the storyboard and the final implementation.
+Compared to the final implementation and the initial storyboard design, we had a couple of changes. Most of the features were implemented but just in a different way from what we planned before.
+- We decided to remove the threshold bar because its motive could be achieved by just removing the nodes with minimal value.
+- Instead of using a map to represent states we just decided to use checkboxes because the geographical location of these states did not add much value to what we were trying to represent. Also, it would distract the user from the main visualization that is the Sankey diagram.
+- We also eliminated the shelves for responses
+- Instead of using a heavy tooltip with redundant information we used % labels that help a user understand the ratios of links better.
 
 ## Development Process
 
