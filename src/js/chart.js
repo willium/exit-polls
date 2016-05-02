@@ -97,7 +97,7 @@ export function draw(graph, options, callback) {
       return (d.version ? 'source' : 'target')
     })
     .attr('transform', function(d, i) {
-      let location = d.version ? 0.05 : 0.95;
+
       let p = svg.append('path').attr('d', function(o){ return path(d); }).style('display', 'none').node();
       let length = p.getTotalLength();
       let point = p.getPointAtLength(location * length);
@@ -147,20 +147,24 @@ export function draw(graph, options, callback) {
     .attr('transform', null);
   
   nodesEnterSelection.on("contextmenu", function(d, i) {
-    d3.event.preventDefault();
-    d3.selectAll('.selected').classed('selected', false);
-    d3.selectAll('.link-label').classed('hidden', true);
-    let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
-    if (rm.length > 0) {
-      callback(d3.select('.node.' + d.type + '#' + d.type + d.meta.id), d.type, options);
+    if (_.isEqual(d.type, 'target')) {
+      d3.event.preventDefault();
+      d3.selectAll('.selected').classed('selected', false);
+      d3.selectAll('.link-label').classed('hidden', true);
+      let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
+      if (rm.length > 0) {
+        callback(d3.select('.node.' + d.type + '#' + d.type + d.meta.id), d.type, options);
+      }
     }
   }).on("click", function(d, i) {
-    d3.event.preventDefault();
-    d3.selectAll('.selected').classed('selected', false);
-    d3.selectAll('.link-label').classed('hidden', true);
-    let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
-    if (rm.length > 0) {
-      callback(rm, d.type, options);
+    if (_.isEqual(d.type, 'target')) {
+      d3.event.preventDefault();
+      d3.selectAll('.selected').classed('selected', false);
+      d3.selectAll('.link-label').classed('hidden', true);
+      let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
+      if (rm.length > 0) {
+        callback(rm, d.type, options);
+      }
     }
   });
   
@@ -197,7 +201,11 @@ export function draw(graph, options, callback) {
   
   nodes.select('rect').select('title')
     .text(function(d) {
-      return 'Click to Focus\nRight Click to Remove';
+      if (_.isEqual(d.type, 'target')) {
+        return 'Click to Focus\nRight Click to Remove';
+      } else {
+        return d.name;
+      }
     });
   
   nodeTitles.attr('y', function(d) {

@@ -3,6 +3,7 @@
 $full-width: 1200px;
 $margin: 250px;
 $width: $full-width - ($margin*2);
+$box: 50px;
 
 #header {
   font-family: $FONT__sans--bold;
@@ -225,8 +226,100 @@ $width: $full-width - ($margin*2);
     }
   }
   
-  #states {
+  #states, #shelf {
+    display: block;
+    margin: 30px auto;
+    width: $width + $margin;
     
+    h3 {
+      width: $margin;
+      float: left;
+      padding-right: 10px;
+      font-family: $FONT__sans;
+      text-transform: uppercase;
+      color: $COLOR__mist;
+      text-align: right;
+      margin-left: -$margin/2;
+      display: inline-block;
+    }
+    
+    #states-select, #shelf-items {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      
+      > * {
+        flex: 0 0 auto;
+        margin-right: $box/5;
+        margin-bottom: $box/5;
+      }
+    }
+    
+    #states-select {
+      float: left;
+      width: $width;
+
+      .state {
+        label {
+          display: inline-block;
+          width: $box;
+          height: $box;
+          line-height: $box - 8;
+          color: $COLOR__ship;
+          font-family: $FONT__serif;
+          background-color: $COLOR__suit;
+          margin: auto;
+          font-size: 16px;
+          border: solid 4px $COLOR__suit;
+          cursor: pointer;
+          @include transition(all 0.2s linear);
+        }
+        
+        input[type="checkbox"]:checked + label {
+          color: $COLOR__white;
+          background-color: $COLOR__ship;
+          border: solid 4px $COLOR__ship;
+        }
+      }
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+    
+    #shelf-items {
+      float: left;
+      width: $width;
+      padding: 10px;
+      border: 4px dashed $COLOR__suit;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      
+      .item {
+        height: $box;
+        line-height: $box;
+        padding: 0 20px;
+        color: $COLOR__white;
+        font-family: $FONT__serif;
+        cursor: pointer;
+        
+        &.r {
+          background-color: $COLOR__chestnut;
+        } 
+        &.d {
+          background-color: $COLOR__marino;
+        }
+      }
+    }
+    
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
   }
   
   #shelf {
