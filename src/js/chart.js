@@ -71,9 +71,9 @@ export function draw(graph, options, callback) {
   links.exit().remove();
   
   var linkLabels = linksGroup.selectAll('.link-label')
-    .data(_.concat(graph.links, graph.links), function(d, i) { 
-      return i < graph.links.length ? 'source-' + d.meta.id : 'target-' + d.meta.id; 
-    });
+    .data(duplicate(graph.links), function(d, i) { 
+      return d.meta.id + '' + d.version;
+    })
     
   // Enter
   var linkLabelEnterSelection = linkLabels.enter();
@@ -84,27 +84,26 @@ export function draw(graph, options, callback) {
         return 'link-label hidden label-' + d.meta.id + ' link-label-source-' + 
           d.meta.source_rank + ' link-label-target-' + d.meta.target_id;
       })
-      .append('text');
+      .append('text')
+        .text(function(d, i) {
+          return (d.version ? d.sourcePercent : d.targetPercent) + '%';
+        })
+        .attr('text-anchor', 'middle')
+        .attr('dy', 6);
 
   // Enter + Update
   linkLabels
     .attr('data-type', function(d, i) {
-      return (i < graph.links.length ? 'source' : 'target')
+      return (d.version ? 'source' : 'target')
     })
     .attr('transform', function(d, i) {
-      let location = i < graph.links.length ? 0.05 : 0.95;
+      let location = d.version ? 0.05 : 0.95;
       let p = svg.append('path').attr('d', function(o){ return path(d); }).style('display', 'none').node();
       let length = p.getTotalLength();
       let point = p.getPointAtLength(location * length);
       p.remove();
       return 'translate(' + point.x + ',' + point.y + ')';
     })
-    .select('text')
-      .text(function(d, i) {
-        return (i < graph.links.length ? d.sourcePercent : d.targetPercent) + '%';
-      })
-      .attr('text-anchor', 'middle')
-      .attr('dy', 6);
 
   // Exit
   linkLabels.exit().remove();
@@ -235,6 +234,21 @@ function appendPercent(graph) {
     d.sourcePercent = Math.round(d.value / d.source.value * 100);
     d.targetPercent = Math.round(d.value / d.target.value * 100);
   });
+}
+
+function duplicate(arr) {
+  let newArr = [];
   
-  console.log(graph);
+  _.forEach(arr, function(v, i) {
+    let item1 = _.clone(v);
+    item1.version = 0;
+    
+    let item2 = _.clone(v);
+    item2.version = 1;
+    
+    newArr.push(item1);
+    newArr.push(item2);
+  });
+  
+  return newArr;
 }
