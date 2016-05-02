@@ -119,7 +119,7 @@ export function draw(graph, options, callback) {
     .attr('class', function(d) {
       return 'node ' + d.type + ' ' + d.meta.party.toLowerCase();
     })
-    .attr('id', function(d) { return 'node' + d.meta.id; })
+    .attr('id', function(d) { return d.type + d.meta.id; })
   
   nodesEnterSelection.append('rect')
     .attr('width', sankey.nodeWidth())
