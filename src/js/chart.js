@@ -178,11 +178,10 @@ export function draw(graph, options, callback) {
     const labelsClass = d.type === 'source' ? '.link-label-source-' + d.meta.source_rank : 
       '.link-label-target-' + d.meta.target_id;
     d3.selectAll(labelsClass).classed('hidden', function(o) {
-      return o[d.type + 'Percent'] < 10 && _.isEqual(d3.select(this).attr('data-type'), d.type);
+      return o.dy < 10 && _.isEqual(d3.select(this).attr('data-type'), d.type);
     }).moveToFront();
   }).on('mouseout', function(d) {
     d3.selectAll('.selected').classed('selected', false);
-    
     const labelsClass = d.type === 'source' ? '.link-label-source-' + d.meta.source_rank : 
       '.link-label-target-' + d.meta.target_id;
     d3.selectAll(labelsClass).classed('hidden', true);
