@@ -226,7 +226,48 @@ $width: $full-width - ($margin*2);
   }
   
   #states {
+    display: block;
+    margin: 20px auto;
+    width: $width;
     
+    h3 {
+      float:left;
+      width: 200;
+      font-family: $FONT__sans;
+      text-transform: uppercase;
+      color: $COLOR__mist;
+      text-align: right;
+    }
+    
+    #state-cb {
+      float: left;
+      width: $width;
+      .cb {
+        display: inline-block;
+        margin: 2px;
+        float: left;
+
+        input {
+          display: none;
+        }
+        
+        label {
+          display: inline-block;
+          width: 60px;
+          height: 60px;
+          color: $COLOR__ship;
+          margin: auto;
+          font-size: 16px;
+          border: solid thin $COLOR__ship;
+          cursor: pointer;
+        }
+        
+        input[type="checkbox"]:checked + label {
+          color: $COLOR__white;
+          background-color: $COLOR__ship;
+        }
+      }
+    }
   }
   
   #shelf {

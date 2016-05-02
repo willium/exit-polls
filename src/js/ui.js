@@ -71,6 +71,8 @@ function updateQuestion(el, idx, bin) {
   filter.states = !_.isEqual(stateIntersect.length, 0) ? stateIntersect : availableStates;
   shelf.states = _.without(availableStates, filter.states); 
   
+  renderStates({'availableStates' : availableStates, 'filterStates' : filter.states}, updateStates);
+  
   // answers
   let availableAnswers = _.uniq(_.map(rows, 'source_rank'));
   if (!_.isUndefined(options) && _.isUndefined(el)) {
@@ -83,6 +85,15 @@ function updateQuestion(el, idx, bin) {
 
   logger.log('Pre-render', 'Shelf', shelf);
   logger.log('Pre-render', 'Filter', filter);
+  render({'filter': filter, 'shelf': shelf});
+}
+
+function updateStates(el) {
+  filter.states = [];
+  d3.selectAll('input[name^="statescb"]:checked').each(function(o) {
+    filter.states.push(o);
+  });
+  console.log(filter.states);
   render({'filter': filter, 'shelf': shelf});
 }
 
@@ -171,4 +182,32 @@ function renderBins(binsData, fn) {
   }
   
   return binsData;
+}
+
+/* statesData : {availableStates, filterStates}
+*/
+function renderStates(statesData, fn) {
+  
+  var states = d3.select('#state-cb').selectAll('.box')
+    .data(statesData.availableStates, function(d) { return d; });
+  
+  states.enter().append('span').attr('class', 'cb')
+    .append('input')
+    .attr('name', 'statescb')
+    .attr('type', 'checkbox')
+    .attr('class', '.box')
+    .attr('id', function(d) { return d; })
+    .attr('value', function(d) { return d; })
+    .property('checked', function(d) {
+      return _.indexOf(statesData.filterStates, d) != -1;
+    })
+    .on('change', fn);
+  
+  states.append('label')
+    .attr('for', function(d, i) { return d; })
+    .text(function(d) { return d; });
+  
+  fn();
+  
+  return statesData;
 }
