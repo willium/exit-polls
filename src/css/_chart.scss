@@ -36,6 +36,7 @@
   &.source {
     rect, .nodeSubtitle {
       fill: $COLOR__royal;
+      cursor: default;
     }
   }
   &.target {
