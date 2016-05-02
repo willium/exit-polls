@@ -57,8 +57,11 @@ function updateQuestion(el, idx, bin) {
   // render shelf with available states without states in filter
     
   let availableCandidates = _.uniq(_.map(data[filter.party][filter.question]['answers'], 'target_id'));
+  let defaultCandidates = _.filter(config.data.currentCandidates, function(d) {
+     return _.includes(availableCandidates, d);
+  });
   let candidateIntersect = _.intersection(filter.candidates, availableCandidates);
-  filter.candidates = !_.isEqual(candidateIntersect.length, 0) ? candidateIntersect : config.data.currentCandidates; 
+  filter.candidates = !_.isEqual(candidateIntersect.length, 0) ? candidateIntersect : defaultCandidates;
   shelf.candidates = _.filter(availableCandidates, function(d) {
      return !_.includes(filter.candidates, d);
   });
@@ -257,10 +260,6 @@ function renderShelf(shelf, answers, fn) {
   
   var itemEnter = item.enter()
     .append('div')
-      .attr('class', function(d) {
-        return 'item box ' + _.find(answers, ['target_id', d]).party.toLowerCase();
-        // return 'item box ' + d.itemType;
-      })
       .attr('data-id', function(d, i) { 
         return d;
         // return 'item' + d.index; 
@@ -269,6 +268,12 @@ function renderShelf(shelf, answers, fn) {
         return _.find(answers, ['target_id', d]).target;
       })
       .on('click', fn);
+      
+  item
+    .attr('class', function(d) {
+      return 'item box ' + _.find(answers, ['target_id', d]).party.toLowerCase();
+      // return 'item box ' + d.itemType;
+    })
   
   item.exit().remove();
 }
