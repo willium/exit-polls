@@ -7,11 +7,9 @@
 
 ## Exit Poll Exploration
 
-<!--
-![Thumbnail](thumbnail.png)
+![Screenshot](screenshot.png)
 
 (Put your a brief description of your final interactive visualization application and your dataset here.)
--->
 
 ## Running Instructions
 
@@ -27,14 +25,13 @@ npm install
 npm install -g gulp
 ```
 
-#### Running in the browser
 Runs an initial build, listens on your files changes, rebuilds them when necessary
 and automagically reloads the browser!
 
 ```bash
 gulp watch
 ```
-Open http://localhost8080/ to access the visualisation
+Open http://localhost:8080/ to access the visualisation
 
 ## Story Board
 
