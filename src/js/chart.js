@@ -146,7 +146,7 @@ export function draw(graph, options, callback) {
     })
     .attr('transform', null);
   
-  nodesEnterSelection.on("contextmenu", function(d, i) {
+  nodesEnterSelection.on('contextmenu', function(d, i) {
     if (_.isEqual(d.type, 'target')) {
       d3.event.preventDefault();
       d3.selectAll('.selected').classed('selected', false);
@@ -156,7 +156,7 @@ export function draw(graph, options, callback) {
         callback(d3.select('.node.' + d.type + '#' + d.type + d.meta.id), d.type, options);
       }
     }
-  }).on("click", function(d, i) {
+  }).on('click', function(d, i) {
     if (_.isEqual(d.type, 'target')) {
       d3.event.preventDefault();
       d3.selectAll('.selected').classed('selected', false);
