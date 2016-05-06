@@ -1,26 +1,10 @@
-# a3-willium-ayush29feb
-
-## Team Members
-
-1. Will Strimling (willium)
-2. Ayush Saraf (ayush29f)
-
-## Exit Poll Exploration
+# Exit Poll Exploration
 
 ![Screenshot](/storyboard/screenshot.png)
 
-This exploration makes use of a Sankey diagram, which is used to show 'flow'. Though they're often used for systems and other purposes, we decided it was a great representation of proportionality, cause and effect, and segmentation, without losing any information.
-They can be hard to read, but using interactivity and highlighting, we made it very simple to learn from the data in a meaningful way. At the top of the visualization, you can toggle by party. Some questions were asked to only one of the two parties, so this helps filter the possible questions.
-Next, you can choose a question. These questions were asked to voters at their polling places. It utilized statistical sampling methods to make the data as representative of the population as possible.
-Sometimes, CNN provided the data with multiple bin choices, so if you choose the question 'Age', you can further explore by different binning. By default, we show all answers and all the currently running candidates.
-If you want to focus on a specific candidate you can click the node, and all the others will return to the shelf. Similarly, if you want to remove a candidate, you can right-click on the node and just that one will return to the shelf.
-To add candidates back from the shelf, simply click them. Because some questions were asked in many states, you can toggle which states are visible in the visualization. Black is active and gray is inactive. We chose to encode the party to color, as is common with
-election data. Viewers are accustomed to red being Republican and blue being Democrat. We chose purple as a neutral color for the answer nodes and the links because its the color between blue and red on a color scale. The height of the nodes
-show the percent of the voters per the answer or per the candidate (given the current states selected). Similarly, the size of the link represents the % of the total number of people represented in the visualization.
-
 ## Running Instructions
 
-Live here: http://cse512-16s.github.io/a3-willium-ayush29feb/
+Live here: http://hologr.am/exit-polls
 
 #### Run Locally
 
@@ -40,9 +24,10 @@ gulp watch
 ```
 ## Data
 
-We noticed that while many news sites provide exit poll data, they do so in a minimally interactive tabluar form: [NyTimes](http://www.nytimes.com/interactive/2016/02/09/us/elections/new-hampshire-democrat-poll.html?_r=0), [CNN](http://www.cnn.com/election/primaries/polls). 
-While everyone seems to talk about exit polls, and reference it in their writing, they're hard to read and reason about, considering their form. We decided that if we could represent the data in a more intuitive, interactive manner, one could learn more from it. 
-In its current form, its relatively difficult to compare the polls across states or per candidate. We wanted to enable a richer form of exploration. We utilized the data provided on [CNN](http://www.cnn.com/election/primaries/polls) and cleaned, aggregated, and manipulated it to our needs in [data/generate.py](data/generate.py).
+We noticed that while many news sites provide exit poll data, they do so in a minimally interactive, often tabluar form (see [NYTimes](http://www.nytimes.com/interactive/2016/02/09/us/elections/new-hampshire-democrat-poll.html?_r=0), [CNN](http://www.cnn.com/election/primaries/polls)). 
+While everyone seems to talk about exit polls and reference them in their commentary, we've found that the polls themselves are difficult to read and reason about in their current form. We decided that if we could represent the data in a more intuitive, interactive manner, one could learn more from it. 
+
+Exit Poll data was provided by Edison Media Research to [CNN](http://www.cnn.com/election/primaries/polls). We then transposed, cleaned, aggregated, and manipulated it for our needs.
 
 
 ## Story Board
@@ -59,27 +44,3 @@ Compared to the final implementation and the initial storyboard design, we had a
 - We decided to not use a bi-directional diagram. This was for two reasons. First, some questions existed for only one party, and it would be confusing to show that and not the other direction. 
 And secondly (and more importantly), it's unnatural to read a snakey diagram from the middle out. Traditionally, it's left to right, with the middle representing filters or sub-processes.
 This would be broken by making the diagram bi-directional.
-
-## Development Process
-
-### Time breakdown
-- Collecting, parsing, manipulating, and aggregating data (6 hours)
-- Storyboarding and ideation (3 hours)
-- Original version of the code (11 hours)
-- Creation of UI and (4 hours)
-- Rewrite, conversion to browserify, build tools (10 hours)
-- Implementation of labels (1 hour)
-- Implementation of shelf (2 hours)
-- Implementation of UI toggles for question, bin, states, and party (3 hours)
-
-**Total**: 6+3+10+4+10+1+2+3 = 40 hours.
-
-The writing and architecting of the codebase overall deffinitely took the most time. Creating the diagram was relatively easy once we got the right data to be in the right place at the right time to best utilize d3's data binding methods.
-
-### Division of labor
-
-Include:
-- Breakdown of how the work was split among the group members.
-- A commentary on the development process, including answers to the following questions:
-  - Roughly how much time did you spend developing your application?
-  - What aspects took the most time?
