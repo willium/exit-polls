@@ -1,9 +1,0 @@
-.DS_Store
-*.pyb
-parts
-node_modules
-build
-.idea
-fonts
-.publish
-data/scripts
