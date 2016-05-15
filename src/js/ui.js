@@ -239,7 +239,7 @@ function renderShelf(shelf, answers, fn) {
   const shelfItems = d3.select('#shelf-items');
   
   const item = shelfItems.selectAll('.item')
-    .data(items, function(d) { return d.itemType + d.index; })
+    .data(items, function(d) { return d.itemType + d.value })
   
   const itemEnter = item.enter()
     .append('div')

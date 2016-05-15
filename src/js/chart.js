@@ -123,7 +123,7 @@ export function draw(graph, options, callback) {
   
   // Draw the nodes
   const nodes = nodesGroup.selectAll('.node').data(graph.nodes, function(d) { 
-    return d.meta.target_id + '.' + d.meta.source_rank + '.' + d.value; 
+    return d.meta.target_id + '.' + d.meta.source_rank + '.' + d.value + '.' + d.dy; 
   });
   // Enter
   const nodesEnterSelection = nodes.enter()
@@ -142,30 +142,21 @@ export function draw(graph, options, callback) {
     .attr('x', function(d) {
       return _.isEqual(d.type, 'source') ? -config.chart.node.margin : (sankey.nodeWidth() + config.chart.node.margin);
     })
-    .attr('dy', '.35em')
-    .attr('text-anchor', function(d) {
-      return _.isEqual(d.type, 'source') ? 'end' : 'start';
-    })
-    .attr('transform', null);
     
   const nodeSubtitles = nodesEnterSelection.append('text')
     .attr('class', 'nodeSubtitle')
     .attr('x', function(d) {
       return _.isEqual(d.type, 'source') ? -config.chart.node.margin : (sankey.nodeWidth() + config.chart.node.margin);
     })
-    .attr('dy', '.35em')
-    .attr('text-anchor', function(d) {
-      return _.isEqual(d.type, 'source') ? 'end' : 'start';
-    })
-    .attr('transform', null);
   
   nodesEnterSelection.on('click', function(d, i) {
+    console.log('click', d);
     d3.event.preventDefault();
     d3.selectAll('.selected').classed('selected', false);
     d3.selectAll('.link-label').classed('hidden', true);
     let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
     if (rm.length > 0) {
-      callback(rm, d.type, options);
+      callback(d3.select('.node.' + d.type + '#' + d.type + d.meta.id), d.type, options);
     }
   });
   
@@ -201,25 +192,32 @@ export function draw(graph, options, callback) {
   
   nodes.select('rect').select('title')
     .text(function(d) {
-      if (_.isEqual(d.type, 'target')) {
-        return 'Click to Focus\nRight Click to Remove';
-      } else {
-        return d.name;
-      }
+      return d.name;
     });
   
   nodeTitles.attr('y', function(d) {
+      console.log(d.name, d.dy);
       return d.dy / 2 - 11;
     })
     .text(function(d) {
       return d.name;
     })
+    .attr('dy', '.35em')
+    .attr('text-anchor', function(d) {
+      return _.isEqual(d.type, 'source') ? 'end' : 'start';
+    })
+    .attr('transform', null);
   
   nodeSubtitles.attr('y', function(d) {
       return d.dy / 2 + 11;
     }).text(function(d) {
       return d.percent + '%';
     })
+    .attr('dy', '.35em')
+    .attr('text-anchor', function(d) {
+      return _.isEqual(d.type, 'source') ? 'end' : 'start';
+    })
+    .attr('transform', null);
   // Exit
   nodes.exit().remove();
   
