@@ -330,10 +330,10 @@ label {
         width: 300px; }
       #canvas #axis #axis-labels #right-label {
         float: right;
-        margin-right: -150px; }
+        margin-right: -50px; }
       #canvas #axis #axis-labels #left-label {
         float: left;
-        margin-left: -150px; }
+        margin-left: -50px; }
       #canvas #axis #axis-labels:after {
         content: "";
         display: table;
