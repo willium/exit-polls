@@ -130,6 +130,9 @@ body, html {
 html {
   box-sizing: border-box; }
 
+body {
+  margin: 0 auto; }
+
 *, *:before, *:after {
   box-sizing: inherit; }
 
@@ -165,31 +168,30 @@ select {
 
 #chart {
   font-family: "charterregular", "Georgia", serif;
-  overflow-x: auto;
-  width: 100%;
   margin: 0 auto;
-  overflow-y: hidden; }
+  padding-bottom: 20px; }
   #chart svg {
     margin: 0 auto; }
+  #chart #sankey-legend {
+    text-align: center; }
 
 .nodes {
   overflow: visible; }
 
 .node {
-  overflow: visible; }
+  overflow: visible;
+  cursor: pointer; }
   .node rect {
     fill-opacity: 1;
-    shape-rendering: crispEdges;
-    cursor: pointer; }
+    shape-rendering: crispEdges; }
   .node .nodeTitle {
-    font-size: 20px; }
+    font-size: 18px; }
   .node .nodeSubtitle {
-    font-size: 17px;
+    font-size: 15px;
     opacity: 0.7;
     font-family: "gothambookregular", "Georgia", sans-serif; }
   .node.source rect, .node.source .nodeSubtitle {
-    fill: #836BA2;
-    cursor: default; }
+    fill: #836BA2; }
   .node.target.r rect, .node.target.r .nodeSubtitle {
     fill: #BB4747; }
   .node.target.d rect, .node.target.d .nodeSubtitle {
@@ -214,21 +216,33 @@ select {
 label {
   display: block; }
 
+#container {
+  margin: 0 auto; }
+
 #header {
-  font-family: "gothamboldregular", "Georgia", sans-serif;
+  font-family: "charterregular", "Georgia", serif;
   text-align: center;
   padding: 40px 0; }
   #header #title {
-    font-family: "gothamboldregular", "Georgia", sans-serif;
+    font-family: "charterbold", "Georgia", serif;
     color: #333136;
     font-size: 58px;
     padding: 10px 0;
-    text-transform: uppercase;
     letter-spacing: -2px; }
   #header #subtitle {
-    color: #D5D4DB;
+    color: #9B979F;
     padding-top: 20px;
-    font-size: 24px; }
+    font-size: 18px;
+    text-decoration: underline; }
+
+#footer {
+  width: 700px;
+  display: block;
+  margin: 100px auto 0;
+  height: 80px;
+  font-size: 18px;
+  text-align: center;
+  color: #333136; }
 
 #canvas {
   text-align: center; }
@@ -257,98 +271,53 @@ label {
       #canvas #parties-switch .party#d > input[type="radio"]:checked + label {
         background-color: #476FBB; }
   #canvas #questions {
+    height: 50px;
     margin: 0 auto;
     max-width: 700px;
     position: relative;
-    height: 66px;
-    border: 8px solid #333136; }
-    #canvas #questions #questions-q {
-      width: 50px;
-      font-family: "charterregular", "Georgia", serif;
+    display: inline-block;
+    color: #333136; }
+    #canvas #questions .arr {
+      background: #fff;
       position: absolute;
-      left: 0;
-      height: 52px;
-      border-right: 8px solid #333136;
-      display: inline-block;
-      background-color: #333136;
-      line-height: 50px;
-      color: #fff;
-      font-size: 32px; }
-    #canvas #questions #questions-dropdown {
-      position: absolute;
-      left: 50px;
       right: 0;
-      display: inline-block;
-      max-width: 634px;
-      height: 50px; }
-      #canvas #questions #questions-dropdown .arr {
-        background: #fff;
-        bottom: 5px;
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        width: 50px;
-        pointer-events: none; }
-        #canvas #questions #questions-dropdown .arr:before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          right: 15px;
-          margin-top: -5px;
-          pointer-events: none;
-          border-top: 8px solid #333136;
-          border-left: 8px solid transparent;
-          border-right: 8px solid transparent; }
-      #canvas #questions #questions-dropdown select#questions-select {
+      top: 50%;
+      margin-top: -7px;
+      width: 35px;
+      pointer-events: none; }
+      #canvas #questions .arr:before {
+        border-style: solid;
+        border-width: 2px 2px 0 0;
+        content: '';
         display: inline-block;
-        background: #fff;
-        color: #333136;
-        border: 0;
-        height: 50px;
-        line-height: 50px;
-        width: 100%;
-        font-family: "charterbold", "Georgia", serif;
-        padding: 0 15px;
-        font-size: 22px; }
-  #canvas #bins {
-    font-size: 18px;
-    margin-top: 10px; }
-    #canvas #bins h3 {
-      display: inline;
-      padding-right: 10px;
-      font-family: "gothambookregular", "Georgia", sans-serif;
-      text-transform: uppercase;
-      color: #9B979F; }
-    #canvas #bins #bins-switch {
-      display: inline; }
-      #canvas #bins #bins-switch .bin {
-        display: inline-block;
-        height: 40px;
-        line-height: 40px;
-        margin: 0;
-        color: #9B979F;
-        font-family: "gothambookregular", "Georgia", sans-serif;
-        text-align: center; }
-        #canvas #bins #bins-switch .bin label {
-          cursor: pointer;
-          height: 100%;
-          width: 100%;
-          display: inline; }
-        #canvas #bins #bins-switch .bin:after {
-          content: '|';
-          padding: 0 5px;
-          display: inline; }
-        #canvas #bins #bins-switch .bin:last-child:after {
-          content: '';
-          display: none; }
-        #canvas #bins #bins-switch .bin input[type="radio"]:checked + label {
-          color: #333136;
-          font-family: "gothamboldregular", "Georgia", sans-serif; }
+        height: 14px;
+        left: 1px;
+        position: relative;
+        vertical-align: top;
+        width: 14px;
+        top: 0;
+        -ms-transform: rotate(135deg);
+            transform: rotate(135deg); }
+    #canvas #questions select.questions-select {
+      background: #fff;
+      border: 0;
+      border-bottom: 2px solid #D5D4DB;
+      border-radius: 0;
+      cursor: pointer;
+      height: 50px;
+      line-height: 50px;
+      font-family: "charterregular", "Georgia", serif;
+      padding-right: 35px;
+      font-size: 28px; }
+    #canvas #questions:after {
+      content: "";
+      display: table;
+      clear: both; }
   #canvas #axis {
     width: 1200px;
     margin: 0 auto; }
     #canvas #axis #axis-labels {
-      font-size: 18px;
+      font-size: 16px;
       width: 700px;
       margin: 50px auto 2px;
       font-family: "gothambookregular", "Georgia", sans-serif;
@@ -357,7 +326,7 @@ label {
       overflow: visible;
       display: block; }
       #canvas #axis #axis-labels #right-label, #canvas #axis #axis-labels #left-label {
-        display: inline;
+        display: inline-block;
         width: 300px; }
       #canvas #axis #axis-labels #right-label {
         float: right;
@@ -371,7 +340,7 @@ label {
         clear: both; }
   #canvas #states, #canvas #shelf {
     display: block;
-    margin: 30px auto;
+    margin: 40px auto;
     width: 950px; }
     #canvas #states h3, #canvas #shelf h3 {
       width: 250px;
@@ -391,39 +360,34 @@ label {
       -ms-flex-pack: start;
           justify-content: flex-start;
       -ms-flex-align: start;
-          align-items: flex-start; }
+          align-items: flex-start;
+      width: 700px; }
       #canvas #states #states-select > *, #canvas #states #shelf-items > *, #canvas #shelf #states-select > *, #canvas #shelf #shelf-items > * {
         -ms-flex: 0 0 auto;
             flex: 0 0 auto;
-        margin-right: 10px;
-        margin-bottom: 10px; }
-    #canvas #states #states-select, #canvas #shelf #states-select {
-      float: left;
-      width: 700px; }
-      #canvas #states #states-select .state label, #canvas #shelf #states-select .state label {
-        display: inline-block;
-        width: 50px;
-        height: 50px;
-        line-height: 42px;
-        color: #fff;
-        font-family: "charterregular", "Georgia", serif;
-        background-color: #D5D4DB;
-        margin: auto;
-        font-size: 16px;
-        border: solid 4px #D5D4DB;
-        cursor: pointer;
-        transition: all 0.2s linear; }
-      #canvas #states #states-select .state input[type="checkbox"]:checked + label, #canvas #shelf #states-select .state input[type="checkbox"]:checked + label {
-        color: #fff;
-        background-color: #333136;
-        border: solid 4px #333136; }
-      #canvas #states #states-select:after, #canvas #shelf #states-select:after {
-        content: "";
-        display: table;
-        clear: both; }
+        margin: 5px; }
+    #canvas #states #states-select .state label, #canvas #shelf #states-select .state label {
+      display: inline-block;
+      width: 60px;
+      height: 50px;
+      line-height: 42px;
+      color: #fff;
+      font-family: "charterregular", "Georgia", serif;
+      background-color: #D5D4DB;
+      margin: auto;
+      font-size: 16px;
+      border: solid 4px #D5D4DB;
+      cursor: pointer;
+      transition: all 0.2s linear; }
+    #canvas #states #states-select .state input[type="checkbox"]:checked + label, #canvas #shelf #states-select .state input[type="checkbox"]:checked + label {
+      color: #fff;
+      background-color: #4D4D53;
+      border: solid 4px #4D4D53; }
+    #canvas #states #states-select:after, #canvas #shelf #states-select:after {
+      content: "";
+      display: table;
+      clear: both; }
     #canvas #states #shelf-items, #canvas #shelf #shelf-items {
-      float: left;
-      width: 700px;
       padding: 10px;
       border: 4px dashed #D5D4DB;
       display: -ms-flexbox;
@@ -443,7 +407,44 @@ label {
           background-color: #BB4747; }
         #canvas #states #shelf-items .item.d, #canvas #shelf #shelf-items .item.d {
           background-color: #476FBB; }
+        #canvas #states #shelf-items .item.answers, #canvas #shelf #shelf-items .item.answers {
+          background-color: #836BA2; }
+      #canvas #states #shelf-items:after, #canvas #shelf #shelf-items:after {
+        content: "";
+        display: table;
+        clear: both; }
+    #canvas #states #shelf-legend, #canvas #shelf #shelf-legend {
+      padding-top: 10px; }
     #canvas #states:after, #canvas #shelf:after {
       content: "";
       display: table;
       clear: both; }
+  #canvas .legend {
+    display: block;
+    text-align: left;
+    font-family: "gothambookregular", "Georgia", sans-serif;
+    width: 700px;
+    margin: 0 auto;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #9B979F; }
+    #canvas .legend .legend-box {
+      position: relative;
+      padding-left: 18px;
+      margin-top: 5px; }
+      #canvas .legend .legend-box:before {
+        content: ' ';
+        height: 10px;
+        width: 10px;
+        position: absolute;
+        top: 50%;
+        margin-top: -5px;
+        left: 2px;
+        background-color: #D5D4DB; }
+      #canvas .legend .legend-box.selected-state:before {
+        background-color: #4D4D53; }
+    #canvas .legend .legend-text {
+      display: inline-block;
+      padding-right: 30px; }
+      #canvas .legend .legend-text:last-child {
+        padding-right: 0; }
