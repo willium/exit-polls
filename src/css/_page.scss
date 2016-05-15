@@ -157,12 +157,12 @@ $box: 50px;
       
       #right-label {
         float: right;
-        margin-right: -$label-width/2;
+        margin-right: -50px;
       }
       
       #left-label {
         float: left;
-        margin-left: -$label-width/2;
+        margin-left: -50px;
       }
       
       &:after {
