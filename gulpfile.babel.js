@@ -70,7 +70,7 @@ gulp.task('server', function () {
   })
 })
 
-gulp.task('deploy', function() {
+gulp.task('deploy', ['clean', 'remove', 'server', 'js', 'fonts', 'sass', 'data', 'html'], function(){
   return gulp.src(config.outDir + '**/*')
     .pipe(ghPages());
 })
