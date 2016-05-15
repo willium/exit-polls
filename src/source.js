@@ -29,6 +29,10 @@ function app() {
     
     UI.load(data, render);
     
+    window.addEventListener('resize', function() {
+      UI.load(data, render);
+    });
+    
     function render(options) {
       chart.draw(process(data, options.filter), options, changeNodes);
     }

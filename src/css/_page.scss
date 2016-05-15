@@ -5,25 +5,39 @@ $margin: 250px;
 $width: $full-width - ($margin*2);
 $box: 50px;
 
+#container {
+  margin: 0 auto;
+}
+
 #header {
-  font-family: $FONT__sans--bold;
+  font-family: $FONT__serif;
   text-align: center;
   padding: 40px 0;
   
   #title {
-    font-family: $FONT__sans--bold;
+    font-family: $FONT__serif--bold;
     color: $COLOR__ship;
     font-size: 58px;
     padding: 10px 0;
-    text-transform: uppercase;
     letter-spacing: -2px;
   }
   
   #subtitle {
-    color: $COLOR__suit;
+    color: $COLOR__mist;
     padding-top: 20px;
-    font-size: 24px;
+    font-size: 18px;
+    text-decoration: underline;
   }
+}
+
+#footer {
+  width: $width;
+  display: block;
+  margin: 100px auto 0;
+  height: 80px;
+  font-size: 18px;
+  text-align: center;
+  color: $COLOR__ship;
 }
 
 #canvas {  
@@ -64,128 +78,61 @@ $box: 50px;
   }
   
   #questions {
-    $q-size: 50px;
-    $border: 8px;
+    $question-height: 50px;
+    $arrow: 14px;
     
+    height: $question-height;
     margin: 0 auto;
     max-width: $width;
     position: relative;
-    height: $q-size + $border*2;
-    border: $border solid $COLOR__ship;
+    display: inline-block;
+    color: $COLOR__ship;
     
-    #questions-q {
-      width: $q-size;
-      font-family: $FONT__serif;
+    .arr {
+      background: $COLOR__white;
       position: absolute;
-      left: 0;
-      height: $q-size + 2;
-      border-right: $border solid $COLOR__ship;
-      display: inline-block;
-      background-color: $COLOR__ship;
-      line-height: $q-size;
-      color: $COLOR__white;
-      font-size: 32px;
-    }
-    
-    #questions-dropdown {
-      $dropdown-width: $width - $q-size - $border*2;
-      $dropdown-height: $q-size;
-      
-      position: absolute;
-      left: $q-size;
       right: 0;
-      display: inline-block;
-      max-width: $dropdown-width;
-      height: $dropdown-height;
-
- 
-      .arr {
-        background: $COLOR__white;
-        bottom: 5px;
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        width: 50px;
-        pointer-events: none;
-        
-        &:before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          right: 15px;
-          margin-top: -5px;
-          pointer-events: none;
-          border-top: $border solid $COLOR__ship;
-          border-left: $border solid transparent;
-          border-right: $border solid transparent;
-        }
-      }
+      top: 50%;
+      margin-top: -$arrow/2;
+      width: $arrow*2.5;
+      pointer-events: none;
       
-      select#questions-select {
+      &:before {
+        border-style: solid;
+        border-width: 2px 2px 0 0;
+        content: '';
         display: inline-block;
-        background: $COLOR__white;
-        color: $COLOR__ship;
-        border: 0;
-        height: $dropdown-height;
-        line-height: $dropdown-height;
-        width: 100%;
-        font-family: $FONT__serif--bold;
-        padding: 0 15px;
-        font-size: 22px;
+        height: $arrow;
+        left: 1px;
+        position: relative;
+        vertical-align: top;
+        width: $arrow;
+        top: 0;
+        transform: rotate(135deg);
       }
-      
     }
+    
+    
+    select.questions-select {
+      background: $COLOR__white;
+      border: 0;
+      border-bottom: 2px solid $COLOR__suit;
+      border-radius: 0;
+      cursor: pointer;
+      height: $question-height;
+      line-height: $question-height;
+      font-family: $FONT__serif;
+      padding-right: $arrow*2.5;
+      font-size: 28px;
+    }
+    
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+      
   } 
-  
-  #bins {
-    font-size: 18px;
-    margin-top: 10px;
-    
-    h3 {
-      display: inline;
-      padding-right: 10px;
-      font-family: $FONT__sans;
-      text-transform: uppercase;
-      color: $COLOR__mist;
-    }
-    
-    #bins-switch {
-      display: inline;
-      
-      .bin {
-        display: inline-block;
-        height: 40px;
-        line-height: 40px;
-        margin: 0;
-        color: $COLOR__mist;
-        font-family: $FONT__sans;
-        text-align: center;
-        
-        label {
-          cursor: pointer;
-          @include size(100%);
-          display: inline;
-        }
-        
-        &:after {
-            content: '|';
-            padding: 0 5px;
-            display: inline;
-        }        
-        
-        &:last-child:after {
-          content: '';
-          display: none;
-        }
-        
-        input[type="radio"]:checked + label {
-          color: $COLOR__ship;
-          font-family: $FONT__sans--bold;
-        }
-        
-      }
-    }
-  }
  
   #axis {
     width: $full-width;
@@ -194,7 +141,7 @@ $box: 50px;
     #axis-labels {
       $label-width: 300px;
       
-      font-size: 18px;
+      font-size: 16px;
       width: $width;
       margin: 50px auto 2px;
       font-family: $FONT__sans;
@@ -204,7 +151,7 @@ $box: 50px;
       display: block;
       
       #right-label, #left-label {
-        display: inline;
+        display: inline-block;
         width: $label-width;
       }
       
@@ -228,7 +175,7 @@ $box: 50px;
   
   #states, #shelf {
     display: block;
-    margin: 30px auto;
+    margin: 40px auto;
     width: $width + $margin;
     
     h3 {
@@ -248,22 +195,19 @@ $box: 50px;
       flex-flow: row wrap;
       justify-content: flex-start;
       align-items: flex-start;
+      width: $width;
       
       > * {
         flex: 0 0 auto;
-        margin-right: $box/5;
-        margin-bottom: $box/5;
+        margin: $box/10;
       }
     }
     
     #states-select {
-      float: left;
-      width: $width;
-
       .state {
         label {
           display: inline-block;
-          width: $box;
+          width: $box*1.2;
           height: $box;
           line-height: $box - 8;
           color: $COLOR__white;
@@ -278,8 +222,8 @@ $box: 50px;
         
         input[type="checkbox"]:checked + label {
           color: $COLOR__white;
-          background-color: $COLOR__ship;
-          border: solid 4px $COLOR__ship;
+          background-color: $COLOR__dark;
+          border: solid 4px $COLOR__dark;
         }
       }
       &:after {
@@ -290,8 +234,6 @@ $box: 50px;
     }
     
     #shelf-items {
-      float: left;
-      width: $width;
       padding: 10px;
       border: 4px dashed $COLOR__suit;
       display: flex;
@@ -312,7 +254,20 @@ $box: 50px;
         &.d {
           background-color: $COLOR__marino;
         }
+        &.answers {
+          background-color: $COLOR__royal;
+        }
       }
+      
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+    
+    #shelf-legend {
+      padding-top: 10px;
     }
     
     &:after {
@@ -322,7 +277,46 @@ $box: 50px;
     }
   }
   
-  #shelf {
+  .legend {
+    display: block;
+    text-align: left;
+    font-family: $FONT__sans;
+    width: $width;
+    margin: 0 auto;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: $COLOR__mist;
     
+    .legend-box {
+      position: relative;
+      padding-left: 18px;
+      margin-top: 5px;
+      
+      &:before {
+        content: ' ';
+        height: 10px;
+        width: 10px;
+        position: absolute;
+        top: 50%;
+        margin-top: -5px;
+        left: 2px;
+        background-color: $COLOR__suit;
+      }
+      
+      &.selected-state {
+        &:before {
+          background-color: $COLOR__dark;
+        }
+      }
+    }
+    
+    .legend-text {
+      display: inline-block;
+      padding-right: 30px;
+      
+      &:last-child {
+        padding-right: 0;
+      }
+    }
   }
 }

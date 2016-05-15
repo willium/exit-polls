@@ -1,12 +1,14 @@
 #chart {
   font-family: $FONT__serif;
-  overflow-x: auto;
-  width: 100%;
   margin: 0 auto;
-  overflow-y: hidden;
+  padding-bottom: 20px;
   
   svg {
     margin: 0 auto;
+  }
+  
+  #sankey-legend {
+    text-align: center;
   }
 }
 
@@ -16,19 +18,19 @@
 
 .node {
   overflow: visible;
+  cursor: pointer;
   
   rect {
     fill-opacity: 1;
     shape-rendering: crispEdges;
-    cursor: pointer;
   }
   
   .nodeTitle {
-    font-size: 20px;
+    font-size: 18px;
   }
   
   .nodeSubtitle {
-    font-size: 17px;
+    font-size: 15px;
     opacity: 0.7;
     font-family: $FONT__sans;
   }
@@ -36,7 +38,6 @@
   &.source {
     rect, .nodeSubtitle {
       fill: $COLOR__royal;
-      cursor: default;
     }
   }
   &.target {

@@ -32,17 +32,17 @@ function filterData(data, filter) {
  * and also an array of states voted at
 */
 function rollup(data) {
-  var output = [];
+  let output = [];
 
   _.forEach(data, function(row) {
-    var existing = output.filter(function(d){
+    const existing = output.filter(function(d){
       return _.isEqual(d.source, row.source) && _.isEqual(d.target, row.target);
     });
 
     if (existing.length) {
-      var index = output.indexOf(existing[0]);
+      const index = output.indexOf(existing[0]);
       
-      var currentValue = output[index]['value'];
+      const currentValue = output[index]['value'];
       // add values of duplicate links
       output[index]['value'] = parseInt(currentValue + row['value'], 10);
       
@@ -58,7 +58,7 @@ function rollup(data) {
 
 function generateGraph(data) {
   // initialize the graph object
-  var graph = { 'nodes': [], 'links': [] };
+  let graph = { 'nodes': [], 'links': [] };
   
   // Add all the data to graph
   data.forEach(function(d) {

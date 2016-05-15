@@ -1,5 +1,6 @@
 import d3 from 'd3';
 import config from './config';
+import { cloneSelection } from './util';
 
 let filter, shelf, data, render, options;
 let questions;
@@ -12,21 +13,21 @@ export function load(d, r, o) {
   filter = !_.isUndefined(options) ? options.filter : _.clone(config.defaultFilter);
   shelf = !_.isUndefined(options) ? options.shelf : _.clone(config.defaultFilter);
   
-  var parties = d3.keys(data); 
+  const parties = d3.keys(data); 
   renderParties(parties, updateParty);
 }
 
 function updateParty(el) {
-  var party = el || d3.select('input[name^="parties"]:checked').node().value;
+  const party = el || d3.select('input[name^="parties"]:checked').node().value;
   filter.party = party;
   
   questions = loadQuestions(data[party]);
-  renderQuestions(d3.keys(questions), updateBins); 
+  renderQuestions(d3.keys(questions), updateQuestion); 
 }
 
 // returns questions from data in friendly form
 function loadQuestions(data) {
-  var qs = [];
+  let qs = [];
   
   _.forEach(d3.keys(data), function (key, i) {
     qs.push({
@@ -42,15 +43,37 @@ function loadQuestions(data) {
   return qs;
 }
 
-function updateBins(el) {
-  var question = d3.select('#questions-select').property('value');
-  var bins = questions[question];
-  
-  renderBins(bins, updateQuestion);
+function updateBins(el, idx) {
+
 }
 
 function updateQuestion(el, idx, bin) {
-  filter.question = bin || d3.select('input[name^="bins"]:checked').node().value;
+  let dropdown = d3.select('.questions-select');
+  const question = dropdown.property('value');
+  
+  // save a reference to a cloned element that can be measured
+  const $tempWidth = d3.select('#questions').append('select')
+    .attr('class', 'questions-select')
+  $tempWidth.selectAll('option').remove();
+  $tempWidth.append('option').text(question);
+  
+  // calculate the width of the clone
+  const width = $tempWidth.node().getBoundingClientRect().width;
+
+  // remove the clone from the DOM
+  $tempWidth.remove();
+  
+  dropdown.style('width', 20 + width + 'px');
+  
+  let bins = questions[question];
+  
+  bins = _.orderBy(bins, function(b) {
+    let numSources = _.uniqBy(data[filter.party][b['id']]['answers'], function(d) {
+      return d['source'];
+    }).length;
+    return numSources;
+  }, ['desc']);
+  filter.question = bins[0]['id'];
 
   // render shelf with all candidates not checked who are available(default all candidates not still running)
   // update state filter to remove all non available states
@@ -72,42 +95,39 @@ function updateQuestion(el, idx, bin) {
   
   // states
   let availableStates = _.uniq(_.map(rows, 'state'))
-  let stateIntersect = _.intersection(availableStates, filter.states);
-  filter.states = !_.isEqual(stateIntersect.length, 0) ? stateIntersect : availableStates;
+  filter.states = availableStates;
   
-  renderStates({ 'availableStates': availableStates, 'filterStates': filter.states }, updateStates);
+  renderStates(availableStates, updateStates);
   
   // answers
   let availableAnswers = _.uniq(_.map(rows, 'source_rank'));
   
-  // TODO: shelf logic
-  // if (!_.isUndefined(options) && _.isUndefined(el)) {
-  //   let answerIntersect = _.intersection(availableAnswers, filter.answers);
-  //   filter.answers = !_.isEqual(answerIntersect.length, 0) ? answerIntersect : availableAnswers;
-  // } else {
-  //   filter.answers = availableAnswers;
-  // }
-  // shelf.answers = _.filter(availableAnswers, function(d) {
-  //  return !_.includes(filter.answers, d);
-  // }) 
-  
-  filter.answers = availableAnswers;
-  
-  logger.log('Pre-render', 'Shelf', shelf);
-  renderShelf(shelf.candidates, data[filter.party][filter.question]['answers'], updateShelf);
-  
-  logger.log('Pre-render', 'Filter', filter);
+  if (!_.isUndefined(options) && _.isUndefined(el)) {
+    let answerIntersect = _.intersection(availableAnswers, filter.answers);
+    filter.answers = !_.isEqual(answerIntersect.length, 0) ? answerIntersect : availableAnswers;
+  } else {
+    filter.answers = availableAnswers;
+  }
+  shelf.answers = _.filter(availableAnswers, function(d) {
+   return !_.includes(filter.answers, d);
+  }) 
+    
+  renderShelf(shelf, data[filter.party][filter.question]['answers'], updateShelf);
   render({'filter': filter, 'shelf': shelf});
 }
 
 function updateShelf(el) {
-  let selection = d3.select(this); 
-  let candidate = selection.node().__data__;
-  if(!_.includes(filter.candidates, candidate)) {
-    filter.candidates.push(candidate);
+  if(_.isEqual(el.itemType, 'answers') && !_.includes(filter.answers, el.value)) {
+    filter.answers.push(el.value);
+    _.remove(shelf.answers, function(d) { return _.isEqual(d, el.value); });
   }
-  _.remove(shelf.candidates, candidate);
-  selection.remove();
+  
+  if(_.isEqual(el.itemType, 'candidates') && !_.includes(filter.candidates, el.value)) {
+    filter.candidates.push(el.value);
+    _.remove(shelf.candidates, function(d) { return _.isEqual(d, el.value); });
+  }
+  
+  d3.select(this).remove();
   render({'filter': filter, 'shelf': shelf});
 }
 
@@ -126,16 +146,16 @@ function updateStates(el) {
 function renderParties(partiesData, fn) {
   partiesData = _.orderBy(partiesData, ['name']);
 
-  var partiesSwitch = d3.select('#parties-switch')
+  const partiesSwitch = d3.select('#parties-switch')
   
-  var party = partiesSwitch.selectAll('.party')
+  const party = partiesSwitch.selectAll('.party')
     .data(partiesData, function(d) { return d; })
     .enter()
     .append('div')
       .attr('class', 'party')
       .attr('id', function(d) { return d.toLowerCase(); })
   
-  var inputs = party.append('input')
+  const inputs = party.append('input')
     .attr('type', 'radio')
     .attr('id', function(d) { return 'party-' + d.toLowerCase(); })
     .attr('name', 'parties')
@@ -154,9 +174,9 @@ function renderParties(partiesData, fn) {
 function renderQuestions(questionsData, fn) {
   questionsData = questionsData.sort();
   
-  var dropdown = d3.select('#questions-select').on('change', fn);
+  const dropdown = d3.select('.questions-select').on('change', fn);
   
-  var options = dropdown.selectAll('option')
+  const options = dropdown.selectAll('option')
     .data(questionsData, function(d) { return d; })
    
   options.enter()
@@ -171,65 +191,26 @@ function renderQuestions(questionsData, fn) {
   return questionsData;
 }
 
-function renderBins(binsData, fn) {
-  var bins = d3.select('#bins');
-  if (binsData.length <= 1) {
-    bins.attr('class', 'hidden');
-    if (!_.isUndefined(binsData[0])) {
-      fn(undefined, undefined, binsData[0].id);
-    }
-  } else {
-    bins.attr('class', null);
-  
-    var binsSwitch = bins.select('#bins-switch');
-    
-    var bin = binsSwitch.selectAll('.bin')
-      .data(binsData, function(d) { return d.id; })
-    
-    var binEnter = bin.enter()
-      .append('span')
-        .attr('class', 'bin')
-    
-    var inputs = binEnter.append('input')
-      .attr('type', 'radio')
-      .attr('id', function(d, i) { return 'v' + i; })
-      .attr('name', 'bins')
-      .attr('value', function(d) { return d.id; })
-      .property('checked', function(d, i) { return _.isEqual(i, 0); })
-      .on('change', fn);
-    
-    binEnter.append('label')
-      .attr('for', function(d, i) { return 'v' + i; })
-      .text(function(d, i) { return i + 1; });
-    
-    bin.exit().remove();
-    
-    fn();    
-  }
-  
-  return binsData;
-}
+function renderStates(states, fn) {  
+  states = _.sortBy(states);
 
-function renderStates(statesData, fn) {  
-  statesData.availableStates = _.sortBy(statesData.availableStates);
-
-  var statesSelect = d3.select('#states-select')
+  const statesSelect = d3.select('#states-select')
   
-  var state = statesSelect.selectAll('.state')
-    .data(statesData.availableStates, function(d) { return d; })
+  const state = statesSelect.selectAll('.state')
+    .data(states, function(d) { return d; })
   
-  var stateEnter = state.enter()
+  const stateEnter = state.enter()
     .append('div')
       .attr('class', 'state box')
       .attr('title', 'Black = On\nGray = Off')
       .attr('id', function(d) { return d.toLowerCase(); })
   
-  var inputs = stateEnter.append('input')
+  const inputs = stateEnter.append('input')
     .attr('type', 'checkbox')
     .attr('id', function(d) { return 'state-' + d.toLowerCase(); })
     .attr('name', function(d) { return 'state-' + d.toLowerCase(); })
     .attr('value', function(d) { return d; })
-    .property('checked', function(d, i) { return _.includes(statesData.filterStates, d); })
+    .property('checked', function(d, i) { return true; })
     .on('change', fn);
   
   stateEnter.append('label')
@@ -239,42 +220,44 @@ function renderStates(statesData, fn) {
   state.exit().remove();
   
   fn();
-  return statesData;
+  return states;
 }
 
 function renderShelf(shelf, answers, fn) {
-  var items = []
+  let items = []
   
-  // _.forEach(shelf, function(v1, k) {
-  //   _.forEach(v1, function(v2, i) {
-  //     let copy = _.clone(v2);
-  //     copy.itemType = k;
-  //     copy.index = i;
-  //     items.push(copy);
-  //   }) 
-  // })
-
-  var shelfItems = d3.select('#shelf-items');
+  _.forEach(shelf, function(v1, k) {
+    _.forEach(v1, function(v2, i) {
+      let shelfItem = {};
+      shelfItem.itemType = k;
+      shelfItem.value = v2;
+      shelfItem.index = i;
+      items.push(shelfItem);
+    }) 
+  })
   
-  var item = shelfItems.selectAll('.item')
-    .data(shelf, function(d) { return d; })
+  const shelfItems = d3.select('#shelf-items');
   
-  var itemEnter = item.enter()
+  const item = shelfItems.selectAll('.item')
+    .data(items, function(d) { return d.itemType + d.index; })
+  
+  const itemEnter = item.enter()
     .append('div')
       .attr('data-id', function(d, i) { 
-        return d;
-        // return 'item' + d.index; 
+        return d.index; 
+      })
+      .attr('data-type', function(d, i) { 
+        return d.itemType; 
       })
       .attr('title', 'Click to Add to Visualization')
       .text(function(d) { 
-        return _.find(answers, ['target_id', d]).target;
+        return _.isEqual(d.itemType, 'candidates') ? _.find(answers, ['target_id', d.value]).target : _.find(answers, ['source_rank', d.value]).source;
       })
       .on('click', fn);
       
   item
     .attr('class', function(d) {
-      return 'item box ' + _.find(answers, ['target_id', d]).party.toLowerCase();
-      // return 'item box ' + d.itemType;
+      return 'item box ' + d.itemType + (_.isEqual(d.itemType, 'candidates') ? ' ' + _.find(answers, ['target_id', d.value]).party.toLowerCase() : '');
     })
   
   item.exit().remove();
