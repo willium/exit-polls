@@ -150,7 +150,6 @@ export function draw(graph, options, callback) {
     })
   
   nodesEnterSelection.on('click', function(d, i) {
-    console.log('click', d);
     d3.event.preventDefault();
     d3.selectAll('.selected').classed('selected', false);
     d3.selectAll('.link-label').classed('hidden', true);
@@ -196,7 +195,6 @@ export function draw(graph, options, callback) {
     });
   
   nodeTitles.attr('y', function(d) {
-      console.log(d.name, d.dy);
       return d.dy / 2 - 11;
     })
     .text(function(d) {
