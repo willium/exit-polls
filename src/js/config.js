@@ -8,7 +8,6 @@ const config = {
     },
     iterations: 32,
     width: 1200,
-    height: 620,
     margin: {
       top: 20,
       bottom: 20,
@@ -20,6 +19,7 @@ const config = {
     currentCandidates: [
       61815, // cruz
       36679, // kasich
+      53044, // rubio
       8639, // trump
       1746, // clinton
       1445 // sanders

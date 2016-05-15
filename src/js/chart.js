@@ -4,26 +4,39 @@ import UI from './ui';
 import { Sankey } from './sankey';
 import _ from 'lodash';
 
+let w = _.min([config.chart.width, _.max([window.innerWidth, 960])])
+let ratio = w/config.chart.width;
+
 // Basic chart constants
-var margin = { top: config.chart.margin.top, right: config.chart.margin.right, bottom: config.chart.margin.bottom, left: config.chart.margin.left },
-  width = config.chart.width - margin.left - margin.right,
-  height = config.chart.height - margin.top - margin.bottom;
+const margin = { top: config.chart.margin.top, right: config.chart.margin.right * ratio, bottom: config.chart.margin.bottom, left: config.chart.margin.left * ratio },
+  width = w - margin.left - margin.right,
+  height = w/2 - margin.top - margin.bottom;
+  
+d3.selectAll('.full').style('width', w + 'px');
+d3.selectAll('.margin').style('width', margin.left + 'px');
+d3.selectAll('.fullmargin').style('width', (w - margin.left) + 'px');
+d3.selectAll('.full2margin').style('width', (w - margin.left - margin.roght) + 'px');
 
 // Select and initialize the size of the chart
-var svg = d3.select('#chart').append('svg')
+const svgWidth = width + margin.left + margin.right;
+const svgHeight = height + margin.top + margin.bottom;
+const svg = d3.select('#chart').insert('svg', '.legend')
   .attr({
-    width: width + margin.left + margin.right,
-    height: height + margin.top + margin.bottom
+    width: svgWidth,
+    height: svgHeight,
+    viewBox: '0 0 ' + svgWidth + ' ' + svgHeight,
+    preserveAspectRatio: 'xMidYMid meet'
   })
   .append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+
 // create groups for links and nodes
-var linksGroup = svg.append('g').attr('class', 'links');
-var nodesGroup = svg.append('g').attr('class', 'nodes');
+const linksGroup = svg.append('g').attr('class', 'links');
+const nodesGroup = svg.append('g').attr('class', 'nodes');
 
 // Create a sanky diagram with these properties
-var sankey = Sankey()
+const sankey = Sankey()
   .nodeWidth(config.chart.node.width)
   .nodePadding(config.chart.node.padding)
   .size([width, height])
@@ -33,7 +46,7 @@ var sankey = Sankey()
   });
 
 // Get path data generator
-var path = sankey.link();
+const path = sankey.link();
 
 // draw chart
 export function draw(graph, options, callback) {
@@ -45,7 +58,7 @@ export function draw(graph, options, callback) {
   appendPercent(graph);
 
   // Draw the links
-  var links = linksGroup.selectAll('.link').data(graph.links, function(d) { return d.meta.id; });
+  const links = linksGroup.selectAll('.link').data(graph.links, function(d) { return d.meta.id; });
   // Enter
   links.enter()
     .append('path')
@@ -70,13 +83,13 @@ export function draw(graph, options, callback) {
   // Exit
   links.exit().remove();
   
-  var linkLabels = linksGroup.selectAll('.link-label')
+  const linkLabels = linksGroup.selectAll('.link-label')
     .data(duplicate(graph.links), function(d, i) { 
       return d.meta.id + '' + d.version;
     })
     
   // Enter
-  var linkLabelEnterSelection = linkLabels.enter();
+  const linkLabelEnterSelection = linkLabels.enter();
   
   linkLabelEnterSelection
     .append('g')
@@ -109,11 +122,11 @@ export function draw(graph, options, callback) {
   linkLabels.exit().remove();
   
   // Draw the nodes
-  var nodes = nodesGroup.selectAll('.node').data(graph.nodes, function(d) { 
-    return d.meta.target_id + '.' + d.meta.source_rank + '.' + d.value; 
+  const nodes = nodesGroup.selectAll('.node').data(graph.nodes, function(d) { 
+    return d.meta.target_id + '.' + d.meta.source_rank + '.' + d.value + '.' + d.dy; 
   });
   // Enter
-  var nodesEnterSelection = nodes.enter()
+  const nodesEnterSelection = nodes.enter()
     .append('g')
     .attr('class', function(d) {
       return 'node ' + d.type + ' ' + d.meta.party.toLowerCase();
@@ -124,47 +137,25 @@ export function draw(graph, options, callback) {
     .attr('width', sankey.nodeWidth())
     .append('title');
   
-  var nodeTitles = nodesEnterSelection.append('text')
+  const nodeTitles = nodesEnterSelection.append('text')
     .attr('class', 'nodeTitle')
     .attr('x', function(d) {
       return _.isEqual(d.type, 'source') ? -config.chart.node.margin : (sankey.nodeWidth() + config.chart.node.margin);
     })
-    .attr('dy', '.35em')
-    .attr('text-anchor', function(d) {
-      return _.isEqual(d.type, 'source') ? 'end' : 'start';
-    })
-    .attr('transform', null);
     
-  var nodeSubtitles = nodesEnterSelection.append('text')
+  const nodeSubtitles = nodesEnterSelection.append('text')
     .attr('class', 'nodeSubtitle')
     .attr('x', function(d) {
       return _.isEqual(d.type, 'source') ? -config.chart.node.margin : (sankey.nodeWidth() + config.chart.node.margin);
     })
-    .attr('dy', '.35em')
-    .attr('text-anchor', function(d) {
-      return _.isEqual(d.type, 'source') ? 'end' : 'start';
-    })
-    .attr('transform', null);
   
-  nodesEnterSelection.on('contextmenu', function(d, i) {
-    if (_.isEqual(d.type, 'target')) {
-      d3.event.preventDefault();
-      d3.selectAll('.selected').classed('selected', false);
-      d3.selectAll('.link-label').classed('hidden', true);
-      let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
-      if (rm.length > 0) {
-        callback(d3.select('.node.' + d.type + '#' + d.type + d.meta.id), d.type, options);
-      }
-    }
-  }).on('click', function(d, i) {
-    if (_.isEqual(d.type, 'target')) {
-      d3.event.preventDefault();
-      d3.selectAll('.selected').classed('selected', false);
-      d3.selectAll('.link-label').classed('hidden', true);
-      let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
-      if (rm.length > 0) {
-        callback(rm, d.type, options);
-      }
+  nodesEnterSelection.on('click', function(d, i) {
+    d3.event.preventDefault();
+    d3.selectAll('.selected').classed('selected', false);
+    d3.selectAll('.link-label').classed('hidden', true);
+    let rm = d3.selectAll('.node.' + d.type + ':not(#' + d.type + d.meta.id + ')');
+    if (rm.length > 0) {
+      callback(d3.select('.node.' + d.type + '#' + d.type + d.meta.id), d.type, options);
     }
   });
   
@@ -175,14 +166,14 @@ export function draw(graph, options, callback) {
           (_.isEqual(d.type, 'target') && _.isEqual(o.meta.target_id, d.meta.target_id));
       }).classed('selected', true);
     
-    const labelsClass = d.type === 'source' ? '.link-label-source-' + d.meta.source_rank : 
+    const labelsClass =  _.isEqual(d.type, 'source') ? '.link-label-source-' + d.meta.source_rank : 
       '.link-label-target-' + d.meta.target_id;
     d3.selectAll(labelsClass).classed('hidden', function(o) {
       return o.dy < 10 && _.isEqual(d3.select(this).attr('data-type'), d.type);
     }).moveToFront();
   }).on('mouseout', function(d) {
     d3.selectAll('.selected').classed('selected', false);
-    const labelsClass = d.type === 'source' ? '.link-label-source-' + d.meta.source_rank : 
+    const labelsClass = _.isEqual(d.type, 'source') ? '.link-label-source-' + d.meta.source_rank : 
       '.link-label-target-' + d.meta.target_id;
     d3.selectAll(labelsClass).classed('hidden', true);
   });
@@ -200,11 +191,7 @@ export function draw(graph, options, callback) {
   
   nodes.select('rect').select('title')
     .text(function(d) {
-      if (_.isEqual(d.type, 'target')) {
-        return 'Click to Focus\nRight Click to Remove';
-      } else {
-        return d.name;
-      }
+      return d.name;
     });
   
   nodeTitles.attr('y', function(d) {
@@ -213,12 +200,22 @@ export function draw(graph, options, callback) {
     .text(function(d) {
       return d.name;
     })
+    .attr('dy', '.35em')
+    .attr('text-anchor', function(d) {
+      return _.isEqual(d.type, 'source') ? 'end' : 'start';
+    })
+    .attr('transform', null);
   
   nodeSubtitles.attr('y', function(d) {
       return d.dy / 2 + 11;
     }).text(function(d) {
       return d.percent + '%';
     })
+    .attr('dy', '.35em')
+    .attr('text-anchor', function(d) {
+      return _.isEqual(d.type, 'source') ? 'end' : 'start';
+    })
+    .attr('transform', null);
   // Exit
   nodes.exit().remove();
   

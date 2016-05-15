@@ -29,13 +29,15 @@ function app() {
     
     UI.load(data, render);
     
+    window.addEventListener('resize', function() {
+      UI.load(data, render);
+    });
+    
     function render(options) {
       chart.draw(process(data, options.filter), options, changeNodes);
     }
     
-    function changeNodes(removed, type, options) {
-      console.log(removed);
-      
+    function changeNodes(removed, type, options) {      
       if (_.isEqual(type, 'target')) {
         options.shelf.candidates = _.remove(options.filter.candidates, function(d) {
           return !_.isUndefined(_.find(removed[0], function(o) {
@@ -51,7 +53,6 @@ function app() {
         });
       }
       
-      console.log(options);
       UI.load(data, render, options);
     }
   });

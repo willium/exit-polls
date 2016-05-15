@@ -8,34 +8,28 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="mobile-web-app-capable" content="yes">
-  
+  <meta name="viewport" content="user-scalable=yes" />
+
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+  <div id="container" class="full">
     <header id="header">
       <h1 id="title">Exit Polls Visualized</h1>
-      <h2 id="subtitle">By <a href="http://willium.com/">Will Strimling</a> and <a href="http://www.ayush.xyz/">Ayush Saraf</a></h2>
+      <a id="subtitle">Read About This Visualization</a>
     </header>
     <div id="canvas">
       <div id="parties-switch"></div>
       
       <div id="questions">
-          <div id="questions-q">Q</div>
-          <div id="questions-dropdown">
-            <span class="arr"></span>
-            <select id="questions-select">
-            </select>
-          </div>
+        <span class="arr"></span>
+        <select name="qs" class="questions-select">
+        </select>
       </div>
       
-      <div id="bins" class="hidden">
-        <h3>Version</h3>
-        <div id="bins-switch"></div>
-      </div>
-      
-      <div id="chart">
-        <div id="axis">
-          <div id="axis-labels">
+      <div id="chart" class="full">
+        <div id="axis" class="full">
+          <div id="axis-labels" class="full2margin">
             <div id="left-label">
               What Voters Answered
             </div>
@@ -44,22 +38,32 @@
             </div>
           </div>
         </div>
+        <div id="sankey-legend" class="legend">
+          <div class="legend-text">Click A Node To Remove</div>
+        </div>
       </div>
-      <div id="states">
-        <h3>States</h3>
-        <div id="states-select"></div>
+
+      <div id="states" class="fullmargin">
+        <h3 class="margin">States</h3>
+        <div id="states-select" class="full2margin"></div>
+        <div id="states-legend" class="full2margin legend">
+          <div class="legend-box selected-state">Selected</div>
+          <div class="legend-box">Hidden</div>
+        </div>
       </div>
-      
-      <ul id="shelf">
-        <h3>Shelf</h3>
-        <div id="shelf-items"></div>
-        <!-- <li class="box source">Professor</li>
-        <li class="box target r">Ben Carson</li>
-        <li class="box target d">Martin O'Malley</li>
-        <li class="box state">WY</li>
-        <li class="box state">MI</li> -->
+
+      <ul id="shelf" class="fullmargin">
+        <h3 class="margin">Shelf</h3>
+        <div id="shelf-items" class="full2margin"></div>
+        <div id="shelf-legend" class="legend">
+          <div class="legend-text">Click To Add Items To Visualization</div>
+        </div>
       </ul>
+      
     </div>
-    <script src="main.js"></script>
+    <footer id="footer" class="full2margin">Created By <a href="http://willium.com" class="footer-link">Will Strimling</a> and <a href="http://www.ayush.xyz/" class="footer-link">Ayush Saraf</a></footer>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
