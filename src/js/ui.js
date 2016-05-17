@@ -200,7 +200,7 @@ function renderStates(states, fn) {
     .data(states, function(d) { return d; })
   
   const stateEnter = state.enter()
-    .append('div')
+    .insert('div', '.legend')
       .attr('class', 'state box')
       .attr('title', 'Black = On\nGray = Off')
       .attr('id', function(d) { return d.toLowerCase(); })
@@ -242,7 +242,7 @@ function renderShelf(shelf, answers, fn) {
     .data(items, function(d) { return d.itemType + d.value })
   
   const itemEnter = item.enter()
-    .append('div')
+    .insert('div', '.legend')
       .attr('data-id', function(d, i) { 
         return d.index; 
       })

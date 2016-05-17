@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div id="container" class="full">
+  <div id="exit-polls" class="full">
     <header id="header">
       <h1 id="title">Exit Polls Visualized</h1>
       <a id="subtitle">Read About This Visualization</a>
@@ -45,25 +45,28 @@
 
       <div id="states" class="fullmargin">
         <h3 class="margin">States</h3>
-        <div id="states-select" class="full2margin"></div>
-        <div id="states-legend" class="full2margin legend">
-          <div class="legend-box selected-state">Selected</div>
-          <div class="legend-box">Hidden</div>
+        <div id="states-select" class="full2margin">
+          
+          <div id="states-legend" class="fullmargin legend">
+            <div class="legend-box selected-state">Selected</div>
+            <div class="legend-box">Hidden</div>
+          </div>
         </div>
       </div>
 
       <ul id="shelf" class="fullmargin">
         <h3 class="margin">Shelf</h3>
-        <div id="shelf-items" class="full2margin"></div>
-        <div id="shelf-legend" class="legend">
-          <div class="legend-text">Click To Add Items To Visualization</div>
+        <div id="shelf-items" class="full2margin">
+          <div id="shelf-legend" class="legend">
+            <div class="legend-text">Click To Add Items To Visualization</div>
+          </div>
         </div>
       </ul>
       
     </div>
     <footer id="footer" class="full2margin">Created By <a href="http://willium.com" class="footer-link">Will Strimling</a> and <a href="http://www.ayush.xyz/" class="footer-link">Ayush Saraf</a></footer>
   </div>
-
+  <script>var DATA = 'data.json'</script>
   <script src="main.js"></script>
 </body>
 </html>

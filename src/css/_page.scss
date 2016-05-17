@@ -1,262 +1,271 @@
-@import "chart";
-
 $full-width: 1200px;
 $margin: 250px;
 $width: $full-width - ($margin*2);
 $box: 50px;
 
-#container {
+#exit-polls {
   margin: 0 auto;
-}
 
-#header {
-  font-family: $FONT__serif;
-  text-align: center;
-  padding: 40px 0;
-  
-  #title {
-    font-family: $FONT__serif--bold;
-    color: $COLOR__ship;
-    font-size: 58px;
-    padding: 10px 0;
-    letter-spacing: -2px;
-  }
-  
-  #subtitle {
-    color: $COLOR__mist;
-    padding-top: 20px;
-    font-size: 18px;
-    text-decoration: underline;
-  }
-}
-
-#footer {
-  width: $width;
-  display: block;
-  margin: 100px auto 0;
-  height: 80px;
-  font-size: 18px;
-  text-align: center;
-  color: $COLOR__ship;
-}
-
-#canvas {  
-  text-align: center;
-  
-  #parties-switch {
-    padding: 20px 0 50px;
-    font-family: $FONT__sans;
-   
-    .party {
-      display: inline-block;
-      font-family: $FONT__sans;
-      height: 40px;
-      line-height: 40px;
-      margin: 0;
-      color: $COLOR__white;
-      text-align: center;
-      width: 150px;
-      
-      label {
-        cursor: pointer;
-        background-color: $COLOR__suit;
-        font-size: 17px;
-        @include size(100%);
-        display: block;
-        @include transition(all 0.2s linear);
-      }
-      
-      &#r > input[type="radio"]:checked + label {
-        background-color: $COLOR__chestnut;
-      }
-      
-      &#d > input[type="radio"]:checked + label {
-        background-color: $COLOR__marino;
-      }
-      
-    }
-  }
-  
-  #questions {
-    $question-height: 50px;
-    $arrow: 14px;
+  #header {
+    font-family: $FONT__serif;
+    text-align: center;
+    padding: 40px 0;
     
-    height: $question-height;
-    margin: 0 auto;
-    max-width: $width;
-    position: relative;
-    display: inline-block;
-    color: $COLOR__ship;
-    
-    .arr {
-      background: $COLOR__white;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      margin-top: -$arrow/2;
-      width: $arrow*2.5;
-      pointer-events: none;
-      
-      &:before {
-        border-style: solid;
-        border-width: 2px 2px 0 0;
-        content: '';
-        display: inline-block;
-        height: $arrow;
-        left: 1px;
-        position: relative;
-        vertical-align: top;
-        width: $arrow;
-        top: 0;
-        transform: rotate(135deg);
-      }
+    #title {
+      font-family: $FONT__serif--bold;
+      color: $COLOR__ship;
+      font-size: 58px;
+      padding: 10px 0;
+      letter-spacing: -2px;
     }
     
-    
-    select.questions-select {
-      background: $COLOR__white;
-      border: 0;
-      border-bottom: 2px solid $COLOR__suit;
-      border-radius: 0;
-      cursor: pointer;
-      height: $question-height;
-      line-height: $question-height;
-      font-family: $FONT__serif;
-      padding-right: $arrow*2.5;
-      font-size: 28px;
-    }
-    
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-      
-  } 
- 
-  #axis {
-    width: $full-width;
-    margin: 0 auto;
-    
-    #axis-labels {
-      $label-width: 300px;
-      
-      font-size: 16px;
-      width: $width;
-      margin: 50px auto 2px;
-      font-family: $FONT__sans;
-      text-transform: uppercase;
+    #subtitle {
       color: $COLOR__mist;
-      overflow: visible;
-      display: block;
-      
-      #right-label, #left-label {
-        display: inline-block;
-        width: $label-width;
-      }
-      
-      #right-label {
-        float: right;
-        margin-right: -50px;
-      }
-      
-      #left-label {
-        float: left;
-        margin-left: -50px;
-      }
-      
-      &:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
+      padding-top: 20px;
+      font-size: 18px;
+      text-decoration: underline;
     }
   }
-  
-  #states, #shelf {
+
+  #footer {
+    width: $width;
     display: block;
-    margin: 40px auto;
-    width: $width + $margin;
+    margin: 100px auto 0;
+    height: 80px;
+    font-size: 18px;
+    text-align: center;
+    color: $COLOR__ship;
+  }
+
+  #canvas {
+    text-align: center;
     
-    h3 {
-      width: $margin;
-      float: left;
-      padding-right: 10px;
+    #parties-switch {
+      padding-bottom: 40px;
       font-family: $FONT__sans;
-      text-transform: uppercase;
-      color: $COLOR__mist;
-      text-align: right;
-      margin-left: -$margin/2;
-      display: inline-block;
-    }
     
-    #states-select, #shelf-items {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-      width: $width;
-      
-      > * {
-        flex: 0 0 auto;
-        margin: $box/10;
-      }
-    }
-    
-    #states-select {
-      .state {
+      .party {
+        display: inline-block;
+        font-family: $FONT__sans;
+        height: 40px;
+        line-height: 40px;
+        margin: 0;
+        color: $COLOR__white;
+        text-align: center;
+        width: 150px;
+        
         label {
-          display: inline-block;
-          width: $box*1.2;
-          height: $box;
-          line-height: $box - 8;
-          color: $COLOR__white;
-          font-family: $FONT__serif;
-          background-color: $COLOR__suit;
-          margin: auto;
-          font-size: 16px;
-          border: solid 4px $COLOR__suit;
           cursor: pointer;
+          background-color: $COLOR__suit;
+          font-size: 17px;
+          @include size(100%);
+          display: block;
           @include transition(all 0.2s linear);
         }
         
-        input[type="checkbox"]:checked + label {
-          color: $COLOR__white;
-          background-color: $COLOR__dark;
-          border: solid 4px $COLOR__dark;
-        }
-      }
-      &:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-    }
-    
-    #shelf-items {
-      padding: 10px;
-      border: 4px dashed $COLOR__suit;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-start;
-      
-      .item {
-        height: $box;
-        line-height: $box;
-        padding: 0 20px;
-        color: $COLOR__white;
-        font-family: $FONT__serif;
-        cursor: pointer;
-        
-        &.r {
+        &#r > input[type="radio"]:checked + label {
           background-color: $COLOR__chestnut;
-        } 
-        &.d {
+        }
+        
+        &#d > input[type="radio"]:checked + label {
           background-color: $COLOR__marino;
         }
-        &.answers {
-          background-color: $COLOR__royal;
+        
+      }
+    }
+    
+    #questions {
+      $question-height: 50px;
+      $arrow: 14px;
+      
+      height: $question-height;
+      margin: 0 auto;
+      max-width: $width;
+      position: relative;
+      display: inline-block;
+      color: $COLOR__ship;
+      
+      .arr {
+        background: $COLOR__white;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        margin-top: -$arrow/2;
+        width: $arrow*2.5;
+        pointer-events: none;
+        
+        &:before {
+          border-style: solid;
+          border-width: 2px 2px 0 0;
+          content: '';
+          display: inline-block;
+          height: $arrow;
+          left: 1px;
+          position: relative;
+          vertical-align: top;
+          width: $arrow;
+          top: 0;
+          transform: rotate(135deg);
         }
+      }
+      
+      
+      select.questions-select {
+        background: $COLOR__white;
+        border: 0;
+        border-bottom: 2px solid $COLOR__suit;
+        border-radius: 0;
+        cursor: pointer;
+        height: $question-height;
+        line-height: $question-height;
+        font-family: $FONT__serif;
+        padding-right: $arrow*2.5;
+        font-size: 28px;
+      }
+      
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+        
+    } 
+  
+    #axis {
+      width: $full-width;
+      margin: 0 auto;
+      
+      #axis-labels {
+        $label-width: 300px;
+        
+        font-size: 16px;
+        width: $width;
+        margin: 50px auto 2px;
+        font-family: $FONT__sans;
+        text-transform: uppercase;
+        color: $COLOR__mist;
+        overflow: visible;
+        display: block;
+        
+        #right-label, #left-label {
+          display: inline-block;
+          width: $label-width;
+        }
+        
+        #right-label {
+          float: right;
+          margin-right: -50px;
+        }
+        
+        #left-label {
+          float: left;
+          margin-left: -50px;
+        }
+        
+        &:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+      }
+    }
+    
+    #states, #shelf {
+      display: block;
+      margin: 40px auto;
+      width: $width + $margin;
+      
+      h3 {
+        width: $margin;
+        float: left;
+        padding-right: 10px;
+        font-family: $FONT__sans;
+        text-transform: uppercase;
+        color: $COLOR__mist;
+        text-align: right;
+        margin-left: -$margin/2;
+        display: inline-block;
+      }
+      
+      #states-select, #shelf-items {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: $width;
+        
+        > * {
+          flex: 0 0 auto;
+          margin: $box/10;
+        }
+      }
+      
+      #states-select {
+        .state {
+          label {
+            display: inline-block;
+            width: $box*1.2;
+            height: $box;
+            line-height: $box - 8;
+            color: $COLOR__white;
+            font-family: $FONT__serif;
+            background-color: $COLOR__suit;
+            margin: auto;
+            font-size: 16px;
+            border: solid 4px $COLOR__suit;
+            cursor: pointer;
+            @include transition(all 0.2s linear);
+          }
+          
+          input[type="checkbox"]:checked + label {
+            color: $COLOR__white;
+            background-color: $COLOR__dark;
+            border: solid 4px $COLOR__dark;
+          }
+        }
+        &:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+      }
+      
+      #shelf-items {
+        padding: 10px;
+        border: 4px dashed $COLOR__suit;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        
+        .item {
+          height: $box;
+          line-height: $box;
+          padding: 0 20px;
+          color: $COLOR__white;
+          font-family: $FONT__serif;
+          cursor: pointer;
+          
+          &.r {
+            background-color: $COLOR__chestnut;
+          } 
+          &.d {
+            background-color: $COLOR__marino;
+          }
+          &.answers {
+            background-color: $COLOR__royal;
+          }
+        }
+        
+        &:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+      }
+      
+      #shelf-legend {
+        text-align: center;
+        width: 100%;
       }
       
       &:after {
@@ -266,56 +275,127 @@ $box: 50px;
       }
     }
     
-    #shelf-legend {
-      padding-top: 10px;
-    }
-    
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-  }
-  
-  .legend {
-    display: block;
-    text-align: left;
-    font-family: $FONT__sans;
-    width: $width;
-    margin: 0 auto;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: $COLOR__mist;
-    
-    .legend-box {
-      position: relative;
-      padding-left: 18px;
-      margin-top: 5px;
+    .legend {
+      display: block;
+      text-align: left;
+      font-family: $FONT__sans;
+      width: $width;
+      margin: 0 auto;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: $COLOR__mist;
       
-      &:before {
-        content: ' ';
-        height: 10px;
-        width: 10px;
-        position: absolute;
-        top: 50%;
-        margin-top: -5px;
-        left: 2px;
-        background-color: $COLOR__suit;
+      .legend-box {
+        position: relative;
+        padding-left: 18px;
+        margin-top: 5px;
+        
+        &:before {
+          content: ' ';
+          height: 10px;
+          width: 10px;
+          position: absolute;
+          top: 50%;
+          margin-top: -5px;
+          left: 2px;
+          background-color: $COLOR__suit;
+        }
+        
+        &.selected-state {
+          &:before {
+            background-color: $COLOR__dark;
+          }
+        }
       }
       
-      &.selected-state {
-        &:before {
-          background-color: $COLOR__dark;
+      .legend-text {
+        display: inline-block;
+        padding-right: 30px;
+        
+        &:last-child {
+          padding-right: 0;
         }
       }
     }
     
-    .legend-text {
-      display: inline-block;
-      padding-right: 30px;
+    #chart {
+      font-family: $FONT__serif;
+      margin: 0 auto;
+      padding-bottom: 20px;
       
-      &:last-child {
-        padding-right: 0;
+      svg {
+        margin: 0 auto;
+      }
+      
+      #sankey-legend {
+        text-align: center;
+      }
+
+      .nodes {
+        overflow: visible;
+      }
+
+      .node {
+        overflow: visible;
+        cursor: pointer;
+        
+        rect {
+          fill-opacity: 1;
+          shape-rendering: crispEdges;
+        }
+        
+        .nodeTitle {
+          font-size: 18px;
+        }
+        
+        .nodeSubtitle {
+          font-size: 15px;
+          opacity: 0.7;
+          font-family: $FONT__sans;
+        }
+        
+        &.source {
+          rect, .nodeSubtitle {
+            fill: $COLOR__royal;
+          }
+        }
+        &.target {
+          &.r {
+            rect, .nodeSubtitle {
+              fill: $COLOR__chestnut;
+            }
+          }
+          &.d {
+            rect, .nodeSubtitle {
+              fill: $COLOR__marino;
+            }
+          }
+        }
+      }
+
+      .link {
+        fill: none;
+        stroke: $COLOR__royal;
+        stroke-opacity: .25;
+        @include transition(all 0.1s linear);
+      }
+
+      .link-label {
+        text {
+          font-family: $FONT__sans--bold;
+          font-size: 17px;
+          fill: $COLOR__ship;
+          pointer-events: none;
+        }
+      }
+
+      .selected {
+        stroke: $COLOR__wine;
+        stroke-opacity: .70;
+      }
+
+      label {
+        display: block;
       }
     }
   }

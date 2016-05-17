@@ -24,7 +24,7 @@ import { process } from 'js/process';
 function app() {
   logger.log('app', 'Loaded');
   
-  d3.json('data.json', function(error, data) {
+  d3.json(DATA, function(error, data) {
     if (error) return console.warn(error);
     
     UI.load(data, render);

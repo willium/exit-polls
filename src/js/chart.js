@@ -15,7 +15,7 @@ const margin = { top: config.chart.margin.top, right: config.chart.margin.right 
 d3.selectAll('.full').style('width', w + 'px');
 d3.selectAll('.margin').style('width', margin.left + 'px');
 d3.selectAll('.fullmargin').style('width', (w - margin.left) + 'px');
-d3.selectAll('.full2margin').style('width', (w - margin.left - margin.roght) + 'px');
+d3.selectAll('.full2margin').style('width', (w - margin.left - margin.right) + 'px');
 
 // Select and initialize the size of the chart
 const svgWidth = width + margin.left + margin.right;
