@@ -203,6 +203,9 @@ $box: 50px;
       #states-select {
         .state {
           label {
+            user-select: none;
+            tap-highlight-color: transparent;
+            outline-style: none;
             display: inline-block;
             width: $box*1.2;
             height: $box;
@@ -215,6 +218,8 @@ $box: 50px;
             border: solid 4px $COLOR__suit;
             cursor: pointer;
             @include transition(all 0.2s linear);
+            
+            &:selection { background:transparent; }
           }
           
           input[type="checkbox"]:checked + label {
