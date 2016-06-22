@@ -56,10 +56,6 @@ gulp.task('clean', function (cb) {
   return rimraf(config.outDir, cb)
 })
 
-gulp.task('remove', shell.task([
-  'rm -r build'
-]))
-
 gulp.task('server', function () {
   return browserSync.init({
     server: {baseDir: config.outDir},
@@ -70,7 +66,7 @@ gulp.task('server', function () {
   })
 })
 
-gulp.task('deploy', ['clean', 'remove', 'server', 'js', 'fonts', 'sass', 'data', 'html'], function(){
+gulp.task('deploy', ['clean', 'server', 'js', 'fonts', 'sass', 'data', 'html'], function(){
   return gulp.src(config.outDir + '**/*')
     .pipe(ghPages());
 })
@@ -110,7 +106,7 @@ gulp.task('html', function () {
     .pipe(browserSync.stream())
 })
 
-gulp.task('watch', ['clean', 'remove', 'server', 'js', 'fonts', 'sass', 'data', 'html'], function () {
+gulp.task('watch', ['clean', 'server', 'js', 'fonts', 'sass', 'data', 'html'], function () {
   // FIXME: initial build is done two times
   getBundler().on('update', () => gulp.start('js'))
   gulp.watch(config.inFiles.data, ['data'])
